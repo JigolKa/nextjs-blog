@@ -1,0 +1,14 @@
+{
+ "extends": ["next", "next/core-web-vitals"],
+
+ "rules": {
+  "no-unused-vars": "error",
+  "no-console": "error",
+  "react-hooks/exhaustive-deps": "off"
+ },
+
+ "parserOptions": {
+  "sourceType": "module",
+  "ecmaVersion": 2020
+ }
+}

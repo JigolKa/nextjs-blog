@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
+}
+
+model User {
+  userId         String   @id @default(auto()) @map("_id") @db.ObjectId
+  username       String   @unique
+  email          String   @unique
+  password       String
+  createdAt      DateTime @default(now())
+  permissions    String[]
+  profilePicture String   @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y")
+  posts          Post[]
+  followedBy     User[]   @relation(name: "UserFollows", fields: [followedByIDs], references: [userId])
+  followedByIDs  String[] @db.ObjectId
+  following      User[]   @relation(name: "UserFollows", fields: [followingIDs], references: [userId])
+  followingIDs   String[] @db.ObjectId
+  activated      Boolean  @default(false)
+  likedIDs       String[] @db.ObjectId
+  liked          Post[]   @relation(name: "likedPosts", fields: [likedIDs], references: [postId])
+  dislikedIDs    String[] @db.ObjectId
+  disliked       Post[]   @relation(name: "dislikedPosts", fields: [dislikedIDs], references: [postId])
+}
+
+model Post {
+  postId        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content       String
+  title         String
+  createdAt     DateTime @default(now())
+  images        String[]
+  video         String?
+  quotedWebsite String?
+  city          String
+  region        String
+  regionName    String
+  country       String
+  lat           Float
+  lon           Float
+  timezone      String
+  slug          String   @unique
+  likedByIDs    String[] @db.ObjectId
+  likedBy       User[]   @relation(name: "likedPosts", fields: [likedByIDs], references: [userId])
+  dislikedByIDs String[] @db.ObjectId
+  dislikedBy    User[]   @relation(name: "dislikedPosts", fields: [dislikedByIDs], references: [userId])
+  topicIDs      String[] @db.ObjectId
+  topics        Topic[]  @relation(fields: [topicIDs], references: [topicId])
+  author        User     @relation(fields: [authorId], references: [userId])
+  authorId      String   @db.ObjectId
+}
+
+model Topic {
+  topicId     String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  posts       Post[]   @relation(fields: [postIDs], references: [postId])
+  postIDs     String[] @db.ObjectId
+}
+
+model Activation {
+  activationId String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}

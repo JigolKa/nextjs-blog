@@ -1,0 +1,9 @@
+node_modules
+trash
+.vscode
+logs
+.next
+.env
+tsconfig.tsbuildinfo
+.svn
+package-lock.json
