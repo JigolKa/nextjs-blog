@@ -6,4 +6,3 @@ logs
 .env
 tsconfig.tsbuildinfo
 .svn
-package-lock.json
