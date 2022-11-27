@@ -6,3 +6,5 @@ logs
 .env
 tsconfig.tsbuildinfo
 .svn
+# Local Netlify folder
+.netlify
