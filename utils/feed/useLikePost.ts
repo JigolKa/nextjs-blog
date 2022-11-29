@@ -1,33 +1,22 @@
 import { Post, Topic, User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/router";
-import {
- Dispatch,
- SetStateAction,
- useContext,
- useEffect,
- useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FullPost } from "../..";
-import { PostsContext } from "../../contexts/PostsContext";
 import { useAppSelector } from "../../state/hooks";
 import { ActionType } from "../../";
 
 export default function useLikePost(
  _post: Post & { author: User; topics: Topic[] },
- refreshFeed: boolean = true,
  // eslint-disable-next-line
- callback?: (post: FullPost, index: number) => any
+ callback?: (post: FullPost) => any
 ) {
  const [liked, setLiked] = useState(false);
  const [disliked, setDisliked] = useState(false);
  const { user } = useAppSelector((s) => s.user);
  const [post, setPost] = useState<typeof _post>();
  const router = useRouter();
- const {
-  feed: { posts, setPosts },
- } = useContext(PostsContext);
 
  useEffect(() => setPost(_post), [_post]);
 
@@ -81,23 +70,12 @@ export default function useLikePost(
     userId: user.userId,
    });
    if (response.status === 200) {
-    const index = posts.findIndex((p) => p.postId === post.postId);
-
     setPost(response.data.post);
 
-    callback && callback(response.data.post, index);
-
-    if (refreshFeed && setPosts) {
-     setPosts((p) => {
-      const arr = [...p];
-      arr[index] = response.data.post;
-
-      return arr;
-     });
-    }
+    callback && callback(response.data.post);
    }
   } catch (error: any) {
-   toast(error ? error.response.data.error : error);
+   console.log(error);
   }
  };
 

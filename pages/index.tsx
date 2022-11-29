@@ -2,10 +2,10 @@ import { createStyles } from "@mantine/core";
 import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { FullPost, PostsFetching } from "..";
+import { PostsFetching } from "..";
 import Post from "../components/Home/Post";
 import getPosts from "../utils/feed";
-import useStringData from "../utils/strings/useStringData";
+import { serializeArray } from "../utils/json";
 
 const useStyles = createStyles(() => ({
  postContainer: {
@@ -27,8 +27,7 @@ const useStyles = createStyles(() => ({
  },
 }));
 
-const Home: NextPage<PostsFetching> = ({ _posts }) => {
- const posts = useStringData<FullPost[]>(_posts);
+const Home: NextPage<PostsFetching> = ({ posts }) => {
  const { classes } = useStyles();
 
  return (
@@ -68,9 +67,10 @@ const Home: NextPage<PostsFetching> = ({ _posts }) => {
 export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+ const posts = await getPosts({ context: context });
  return {
   props: {
-   _posts: JSON.stringify(await getPosts({ context: context })),
+   posts: serializeArray(posts),
   },
  };
 }

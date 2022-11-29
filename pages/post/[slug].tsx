@@ -1,17 +1,16 @@
 import { createStyles, Divider } from "@mantine/core";
-import { Post, Topic, User } from "@prisma/client";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import { AiOutlineLink } from "react-icons/ai";
-import { FullPost, PostFetching } from "../..";
+import { FullPost } from "../..";
 import PostOverlay from "../../components/Post/PostOverlay";
 import prisma from "../../prisma/instance";
 import useLikePost from "../../utils/feed/useLikePost";
-import useStringData from "../../utils/strings/useStringData";
 import PostComponent from "../../components/Home/Post";
 import Head from "next/head";
 import getPosts from "../../utils/feed";
+import { serializeArray, serializeJSON } from "../../utils/json";
 
 const useStyles = createStyles((theme) => ({
  description: {
@@ -41,26 +40,15 @@ const useStyles = createStyles((theme) => ({
  },
 }));
 
-const Post: NextPage<PostFetching & { _otherPosts: string; _feed: string }> = ({
- _post,
- _otherPosts,
- _feed,
-}) => {
+interface Props {
+ post: FullPost;
+ otherPosts: FullPost[];
+ feed: FullPost[];
+}
+
+const Post: NextPage<Props> = ({ post, otherPosts, feed }) => {
  const { classes } = useStyles();
- const __post = useStringData<
-  Post & {
-   author: User;
-   topics: Topic[];
-  }
- >(_post);
- const feed = useStringData<FullPost[]>(_feed);
- const otherPosts = useStringData<
-  (Post & {
-   author: User;
-   topics: Topic[];
-  })[]
- >(_otherPosts);
- const { likePost, liked, disliked, post } = useLikePost(__post);
+ const { likePost, liked, disliked } = useLikePost(post);
 
  if (post) {
   return (
@@ -163,9 +151,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
  return {
   props: {
-   _post: JSON.stringify(post),
-   _otherPosts: JSON.stringify(otherPosts),
-   _feed: JSON.stringify(await getPosts({ context: context })),
+   post: serializeJSON(post),
+   otherPosts: serializeArray(otherPosts),
+   feed: serializeArray(await getPosts({ context: context })),
   },
  };
 }

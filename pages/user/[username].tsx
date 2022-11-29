@@ -1,5 +1,5 @@
 import { Avatar, createStyles, Tooltip } from "@mantine/core";
-import { User } from "@prisma/client";
+import { Post, Topic, User } from "@prisma/client";
 import axios from "axios";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
@@ -13,11 +13,18 @@ import Button from "../../components/Button";
 import PostComponent from "../../components/Home/Post";
 import prisma from "../../prisma/instance";
 import { useAppSelector } from "../../state/hooks";
+import { serializeJSON } from "../../utils/json";
 import membership from "../../utils/strings/membership";
-import useStringData from "../../utils/strings/useStringData";
 
 interface Props {
- _user: string;
+ user: User & {
+  posts: (Post & {
+   author: User;
+   topics: Topic[];
+  })[];
+  following: User[];
+  followedBy: User[];
+ };
 }
 
 const useStyles = createStyles(() => ({
@@ -70,18 +77,10 @@ const useStyles = createStyles(() => ({
  },
 }));
 
-const User: NextPage<Props> = ({ _user }) => {
- const __user = useStringData<
-  User & {
-   posts: Omit<FullPost, "likedBy" | "dislikedBy">[];
-   following: User[];
-   followedBy: User[];
-  }
- >(_user);
+const Account: NextPage<Props> = ({ user }) => {
  const { classes } = useStyles();
  const { user: cachedUser } = useAppSelector((s) => s.user);
  const [isFollowed, setFollowed] = useState(false);
- const [user, setUser] = useState<typeof __user>(__user);
  const router = useRouter();
 
  useEffect(() => {
@@ -89,8 +88,6 @@ const User: NextPage<Props> = ({ _user }) => {
    setFollowed(user.followedByIDs.includes(cachedUser.userId));
   }
  }, [cachedUser, user]);
-
- useEffect(() => setUser(__user), [__user]);
 
  const follow = async () => {
   if (!user || !cachedUser) {
@@ -102,8 +99,6 @@ const User: NextPage<Props> = ({ _user }) => {
   const response = await axios.post(`/api/user/${user.userId}/follow`, {
    userId: cachedUser.userId,
   });
-
-  setUser(response.data.targetUser);
  };
 
  if (user) {
@@ -223,7 +218,7 @@ const User: NextPage<Props> = ({ _user }) => {
  return null;
 };
 
-export default User;
+export default Account;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
  const { username } = context.params as ParsedUrlQuery;
@@ -252,7 +247,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
    following: true,
    followedBy: true,
   },
- })
+ });
 
  if (!user) {
   return {
@@ -266,7 +261,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
  return {
   props: {
-   _user: JSON.stringify(user),
+   user: serializeJSON(user),
   },
  };
 }

@@ -9,7 +9,6 @@ import SearchProvider from "../contexts/SearchContext";
 import { ToastContainer } from "react-toastify";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import PostsContextProvider from "../contexts/PostsContext";
 
 function App({ Component, pageProps }: AppProps) {
  return (
@@ -22,25 +21,23 @@ function App({ Component, pageProps }: AppProps) {
    </Head>
    <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-     <PostsContextProvider>
-      <SearchProvider>
-       <Layout excludedRoutes={["/404", "/_error"]}>
-        <Component {...pageProps} />
-       </Layout>
-       <ToastContainer
-        position="bottom-right"
-        autoClose={3500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        draggable
-        pauseOnHover
-        theme="light"
-        progressClassName="toast-progress-bar"
-       />
-      </SearchProvider>
-     </PostsContextProvider>
+     <SearchProvider>
+      <Layout excludedRoutes={["/404", "/_error"]}>
+       <Component {...pageProps} />
+      </Layout>
+      <ToastContainer
+       position="bottom-right"
+       autoClose={3500}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       draggable
+       pauseOnHover
+       theme="light"
+       progressClassName="toast-progress-bar"
+      />
+     </SearchProvider>
     </PersistGate>
    </Provider>
   </>

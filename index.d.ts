@@ -29,7 +29,7 @@ export interface SignUpValues {
 export type ActionType = "like" | "dislike";
 
 export interface PostsFetching {
- _posts: string;
+ posts: FullPost[];
 }
 export interface PostFetching {
  _post: string;
