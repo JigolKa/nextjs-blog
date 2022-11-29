@@ -8,7 +8,7 @@ const config = {
  },
  BASE_URL:
   process.env.NODE_ENV === "production"
-   ? "https://jigolka.github.io/nextjs-blog"
+   ? "https://awesome-nextjs-blog.netlify.app"
    : "http://127.0.0.1:3000",
 };
 
