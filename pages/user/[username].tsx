@@ -96,7 +96,7 @@ const Account: NextPage<Props> = ({ user }) => {
   }
 
   setFollowed((p) => !p);
-  const response = await axios.post(`/api/user/${user.userId}/follow`, {
+  await axios.post(`/api/user/${user.userId}/follow`, {
    userId: cachedUser.userId,
   });
  };
@@ -201,12 +201,7 @@ const Account: NextPage<Props> = ({ user }) => {
       <h2>Posts from {user.username}</h2>
       <div className="container">
        {user.posts.map((post) => (
-        <PostComponent
-         dontShowMeta
-         dontRefreshFeed
-         post={post}
-         key={post.postId}
-        />
+        <PostComponent dontShowMeta post={post} key={post.postId} />
        ))}
       </div>
      </div>

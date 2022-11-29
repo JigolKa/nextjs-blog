@@ -63,5 +63,6 @@ export const updateSchema = {
 
  delete: Yup.object().shape({
   password: Yup.string().min(8, "Password should be of 8 characters minimum"),
+  checked: Yup.boolean().required("Please confirm your account's deletion"),
  }),
 };

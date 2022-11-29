@@ -17,10 +17,7 @@ export default function useUpdateAccount() {
 
   user: user,
 
-  update: async (
-   { password, ...rest }: { [key: string]: string },
-   userId: string
-  ) => {
+  update: async (values: { [key: string]: string }, userId: string) => {
    setLoading(true);
 
    if (!user) {
@@ -28,13 +25,25 @@ export default function useUpdateAccount() {
     return;
    }
 
+   const filteredValues: { [key: string]: any } = {};
+
+   for (let i = 0; i < Object.keys(values).length; i++) {
+    const key = Object.keys(values)[i];
+
+    if (key === "password") {
+     const password = Buffer.from(key, "base64").toString("ascii");
+     filteredValues[key] = password;
+    } else {
+     filteredValues[key] = values[key];
+    }
+   }
+
+   console.log(filteredValues);
+
    try {
     const response = await axios.patch(
      `/api/user/${userId}/edit`,
-     {
-      password: Buffer.from(password).toString("base64"),
-      ...rest,
-     },
+     filteredValues,
      setAuthorization(cookies.get("token") || "")
     );
 
@@ -48,11 +57,12 @@ export default function useUpdateAccount() {
     }
    } catch (error: any) {
     setLoading(false);
-    toast(
-     error.response.data.error
-      ? `Account creation failed, ${error.response.data.error}`
-      : "Please try again later"
-    );
+    console.log(error);
+    // toast(
+    //  error.response.data.error
+    //   ? `Account modification failed, ${error.response.data.error}`
+    //   : "Please try again later"
+    // );
    }
   },
  };

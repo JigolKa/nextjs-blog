@@ -18,7 +18,7 @@ export type IPCache = {
  [key: string]: Request[];
 };
 
-const cache = new NodeCache<any>({ stdTTL: 15 });
+const cache = new NodeCache({ stdTTL: 15 });
 
 export default async function handler(
  req: NextApiRequest,
@@ -38,7 +38,7 @@ export default async function handler(
   case "POST": {
    const { login, password } = req.body;
 
-   const ipCache = cache.get(ip);
+   const ipCache = cache.get<any>(ip);
 
    if (ipCache) {
     if (ipCache.length > 5) {
@@ -123,7 +123,7 @@ export default async function handler(
    );
 
    cache.set(ip, [
-    ...(cache.get(ip) || []),
+    ...(cache.get<any>(ip) || []),
     {
      requestedAt: new Date(),
      status: "success",

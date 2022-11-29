@@ -3,7 +3,8 @@ import { Post, Topic, User } from "@prisma/client";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef, MutableRefObject } from "react";
+import NodeCache from "node-cache";
+import { forwardRef, MutableRefObject, useEffect } from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
@@ -94,6 +95,8 @@ const useStyles = createStyles((theme) => ({
 const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
  const { classes } = useStyles();
  const { likePost, liked, disliked, post } = useLikePost(_post);
+
+ useEffect(() => console.log(post), [post]);
 
  if (post) {
   return (

@@ -46,9 +46,9 @@ interface Props {
  feed: FullPost[];
 }
 
-const Post: NextPage<Props> = ({ post, otherPosts, feed }) => {
+const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
  const { classes } = useStyles();
- const { likePost, liked, disliked } = useLikePost(post);
+ const { likePost, liked, disliked, post } = useLikePost(_post);
 
  if (post) {
   return (
@@ -153,7 +153,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   props: {
    post: serializeJSON(post),
    otherPosts: serializeArray(otherPosts),
-   feed: serializeArray(await getPosts({ context: context })),
+   feed: serializeArray(
+    await getPosts({ context: context }, undefined, undefined, post.postId)
+   ),
   },
  };
 }

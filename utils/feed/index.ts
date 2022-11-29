@@ -3,8 +3,17 @@ import prisma from "../../prisma/instance";
 import { jwtMiddleware } from "../api";
 import _ from "underscore";
 
-async function _getPostsWithoutUser(pass: number = 0, limit: number = 15) {
+async function _getPostsWithoutUser(
+ pass: number = 0,
+ limit: number = 15,
+ not?: string
+) {
  return await prisma.post.findMany({
+  where: {
+   NOT: {
+    postId: not || undefined,
+   },
+  },
   include: {
    author: true,
    likedBy: true,
@@ -24,7 +33,8 @@ export interface getPostsParams {
 export default async function getPosts(
  cookie: getPostsParams,
  pass: number = 0,
- limit: number = 15
+ limit: number = 15,
+ not?: string
 ) {
  const token = cookie.context
   ? cookie.context.req.cookies["token"]
@@ -43,7 +53,7 @@ export default async function getPosts(
    },
   });
 
-  if (!user) return await _getPostsWithoutUser(pass, limit);
+  if (!user) return await _getPostsWithoutUser(pass, limit, not);
 
   if (!_.isEmpty(user.following)) {
    const posts = await prisma.post.findMany({
@@ -52,6 +62,9 @@ export default async function getPosts(
       userId: {
        in: [...user.following.map((user) => user.userId), userId],
       },
+     },
+     NOT: {
+      postId: not || undefined,
      },
     },
     take: limit,
@@ -64,11 +77,11 @@ export default async function getPosts(
     },
    });
 
-   return posts || (await _getPostsWithoutUser(pass, limit));
+   return posts || (await _getPostsWithoutUser(pass, limit, not));
   }
 
-  return await _getPostsWithoutUser(pass, limit);
+  return await _getPostsWithoutUser(pass, limit, not);
  }
 
- return await _getPostsWithoutUser(pass, limit);
+ return await _getPostsWithoutUser(pass, limit, not);
 }

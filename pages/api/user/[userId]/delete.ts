@@ -39,6 +39,12 @@ export default async function handler(
    const valid = await bcrypt.compare(_password, user.password);
 
    if (valid) {
+    await prisma.post.deleteMany({
+     where: {
+      authorId: userId as string,
+     },
+    });
+
     const deletion = await prisma.user.delete({
      where: {
       userId: userId as string,

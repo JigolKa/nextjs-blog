@@ -1,7 +1,7 @@
 export default function randomString(length: number, chars?: string) {
  var result = "";
  var characters = chars
-  ? chars
+  ? chars + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
   : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
  var charactersLength = characters.length;

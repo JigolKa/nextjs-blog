@@ -1,14 +1,15 @@
+import randomString from "./strings/randomString";
 import { ONE_HOUR } from "./time";
 
 const config = {
  jwt: {
-  secret: "PnT-8gAq8&",
+  secret: "^E::k_!p`'8,}nvHD6WNlt[O9]H3Zz2)gfBC#25c1J4d@I-_%7PJ#~",
   expires: Date.now() + ONE_HOUR * 2,
  },
- paths: {
-  userPath: "usr",
- },
- BASE_URL: "https://jigolka.github.io/blog",
+ BASE_URL:
+  process.env.NODE_ENV === "production"
+   ? "https://jigolka.github.io/nextjs-blog"
+   : "http://127.0.0.1:3000",
 };
 
 export const MIN_PASSWORD_LENGTH = 8;

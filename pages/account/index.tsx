@@ -1,22 +1,16 @@
-import { createStyles, Input, PasswordInput } from "@mantine/core";
+import { createStyles, Modal } from "@mantine/core";
 import { useRouter } from "next/router";
 import { createRef, MutableRefObject, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { useAppSelector } from "../../state/hooks";
 import { SignUpValues } from "../..";
 import Button from "../../components/Button";
-import { MdAlternateEmail, MdEmail } from "react-icons/md";
-import { Field, FieldProps, Form, Formik } from "formik";
-import { updateSchema } from "../../utils/validators";
-import useUpdateAccount from "../../utils/authentification/useUpdateAccount";
 import { User } from "@prisma/client";
-import axios from "axios";
-import setAuthorization from "../../utils/api/auth/setAuthorization";
-import cookies from "../../utils/cookies";
-import { toast } from "react-toastify";
-import { resetUser } from "../../state/reducers/userSlice";
 import useRefresh from "../../utils/authentification/useRefresh";
 import Head from "next/head";
-import config from "../../utils/config";
+import NotActivated from "../../components/Account/NotActivated";
+import InformationsForm from "../../components/Account/Forms/InformationsForm";
+import PasswordForm from "../../components/Account/Forms/PasswordForm";
+import DeletionForm from "../../components/Account/Forms/DeletionForm";
 
 const useStyles = createStyles((theme) => ({
  form: {
@@ -73,28 +67,10 @@ type AltProps = { user: User };
 export default function Account() {
  const { user } = useAppSelector((s) => s.user);
  const { classes } = useStyles();
- const { update, loading } = useUpdateAccount();
  const router = useRouter();
- const dispatch = useAppDispatch();
  const emailInputRef = createRef() as MutableRefObject<null>;
  const [isDeleting, setDeleting] = useState(false);
  useRefresh();
-
- const deleteAccount = async (password: string) => {
-  if (!user) return;
-
-  const response = await axios.post(
-   `/api/user/${user.userId}/delete`,
-   { password: Buffer.from(password).toString("base64") },
-   setAuthorization(cookies.get("token") || "")
-  );
-
-  if (response.status === 200) {
-   toast("Account deleted successfully");
-   dispatch((resetUser as any)());
-   router.push("/");
-  }
- };
 
  if (user) {
   return (
@@ -103,57 +79,17 @@ export default function Account() {
      <title>Your account - Blog</title>
     </Head>
 
-    <NotActivated user={user} emailInputRef={emailInputRef} />
+    <NotActivated user={user} emailInputRef={emailInputRef} classes={classes} />
 
     <h2>Your informations</h2>
-
-    <Formik<Omit<Values, "password" | "passwordVerification">>
-     initialValues={{
-      email: user.email,
-      username: user.username.substring(1),
-     }}
-     validationSchema={updateSchema["informations"]}
-     onSubmit={async (values) => update(values, user.userId)}
-    >
-     <Form className={classes.form}>
-      <Field name="email">
-       {({ field, meta }: FieldProps) => (
-        <Input.Wrapper error={meta.touched && meta.error} label="Your email">
-         <Input
-          icon={<MdEmail />}
-          placeholder="Enter your email"
-          ref={emailInputRef}
-          {...field}
-         />
-        </Input.Wrapper>
-       )}
-      </Field>
-
-      <Field name="username">
-       {({ field, meta }: FieldProps) => (
-        <Input.Wrapper error={meta.touched && meta.error} label="Your username">
-         <Input
-          placeholder="Enter your username"
-          icon={<MdAlternateEmail />}
-          {...field}
-         />
-        </Input.Wrapper>
-       )}
-      </Field>
-
-      <Button
-       type="submit"
-       style={{ alignSelf: "end", letterSpacing: 0.2 }}
-       loading={loading}
-       color="green"
-      >
-       Update your account
-      </Button>
-     </Form>
-    </Formik>
+    <InformationsForm
+     emailInputRef={emailInputRef}
+     user={user}
+     classes={classes}
+    />
 
     <h2>Change your password</h2>
-    <PasswordForm user={user} />
+    <PasswordForm user={user} classes={classes} />
 
     <div className={classes.danger}>
      <h2>Danger zone</h2>
@@ -163,31 +99,15 @@ export default function Account() {
        Delete
       </Button>
      </div>
-     {isDeleting && (
-      <Formik
-       initialValues={{
-        password: "",
-       }}
-       validationSchema={updateSchema["delete"]}
-       onSubmit={async (values) => deleteAccount(values.password)}
-      >
-       <Form className={classes.form}>
-        <Field name="password">
-         {({ field, meta }: FieldProps) => (
-          <Input.Wrapper
-           error={meta.touched && meta.error}
-           label="Confirm your account deletion"
-          >
-           <PasswordInput placeholder="Enter your password" {...field} />
-          </Input.Wrapper>
-         )}
-        </Field>
-        <Button type="submit" color="orange" style={{ alignSelf: "end" }}>
-         Confirm
-        </Button>
-       </Form>
-      </Formik>
-     )}
+
+     <Modal
+      size="lg"
+      opened={isDeleting}
+      onClose={() => setDeleting((p) => !p)}
+      title="Deleting your account"
+     >
+      <DeletionForm user={user} classes={classes} />
+     </Modal>
     </div>
    </>
   );
@@ -195,92 +115,4 @@ export default function Account() {
 
  router.push("/login");
  return null;
-}
-
-function NotActivated({
- user,
- emailInputRef,
-}: AltProps & {
- emailInputRef: MutableRefObject<null>;
-}) {
- const { classes } = useStyles();
-
- const sendVerification = async () => {
-  await axios.post(`${config.BASE_URL}/api/verify/activate`, {
-   userId: user.userId,
-  });
-
-  toast("Email verification sent");
- };
-
- if (!user.activated) {
-  return (
-   <div className={classes.notActivated}>
-    <h3>Activate your account!</h3>
-    <p>
-     You should activate your account as soon as possible to enjoy all the
-     functionalities of the Blog!
-    </p>
-    <div className="buttons">
-     <Button color="green" onClick={async () => sendVerification()}>
-      Resend activation link
-     </Button>
-     <Button
-      color="cyan"
-      onClick={() => (emailInputRef.current as any).focus()}
-     >
-      Change email address
-     </Button>
-    </div>
-   </div>
-  );
- }
-
- return null;
-}
-
-function PasswordForm({ user }: AltProps) {
- const { classes } = useStyles();
- const { update, loading } = useUpdateAccount();
-
- return (
-  <Formik<Omit<Values, "username" | "email">>
-   initialValues={{
-    password: "",
-    passwordVerification: "",
-   }}
-   validationSchema={updateSchema["credentials"]}
-   onSubmit={async ({ password }) => update({ password }, user.userId)}
-  >
-   <Form className={classes.form}>
-    <Field name="password">
-     {({ field, meta }: FieldProps) => (
-      <Input.Wrapper error={meta.touched && meta.error} label="Your password">
-       <PasswordInput placeholder="Enter your password" {...field} />
-      </Input.Wrapper>
-     )}
-    </Field>
-
-    <Field name="passwordVerification">
-     {({ field, meta }: FieldProps) => (
-      <Input.Wrapper
-       error={meta.touched && meta.error}
-       label="Password confirmation"
-      >
-       <PasswordInput placeholder="Re-enter your password" {...field} />
-      </Input.Wrapper>
-     )}
-    </Field>
-
-    <Button
-     type="submit"
-     style={{ alignSelf: "end", letterSpacing: 0.2 }}
-     loading={loading}
-     color="orange"
-    >
-     Change your password
-    </Button>
-   </Form>
-  </Formik>
- );
 }
