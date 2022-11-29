@@ -7,8 +7,7 @@ export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- createLogs(req);
- res.setHeader("Access-Control-Allow-Origin", "*");
+ if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
  switch (req.method) {
   case "POST": {

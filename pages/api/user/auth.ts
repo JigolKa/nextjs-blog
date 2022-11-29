@@ -24,7 +24,7 @@ export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- createLogs(req);
+  if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
 
  const ip = getIP(req);
