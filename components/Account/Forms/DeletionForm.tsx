@@ -7,7 +7,7 @@ import { updateSchema } from "../../../utils/validators";
 import Button from "../../Button";
 import cookies from "../../../utils/cookies";
 import setAuthorization from "../../../utils/api/auth/setAuthorization";
-import { useAppDispatch,  } from "../../../state/hooks";
+import { useAppDispatch } from "../../../state/hooks";
 import { useRouter } from "next/router";
 import { resetUser } from "../../../state/reducers/userSlice";
 
@@ -58,7 +58,7 @@ export default function DeletionForm({ user, classes }: AltProps) {
      {({ field, meta }: FieldProps) => (
       <Input.Wrapper error={meta.touched && meta.error}>
        <Checkbox
-        label="I know that deleting my account cannot be undone"
+        label="I understand that deleting my account cannot be undone"
         {...field}
        />
       </Input.Wrapper>

@@ -50,9 +50,7 @@ export default function createLogs(
 
  try {
   if (!fs.existsSync(`logs/${dirIP}.log`)) {
-   fs.writeFile(`logs/${dirIP}.log`, out + "\r\n", (err) => {
-    if (err) throw err;
-   });
+   fs.writeFileSync(`logs/${dirIP}.log`, out + "\r\n");
    return;
   }
 

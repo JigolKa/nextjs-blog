@@ -59,13 +59,6 @@ export default async function handler(
    return res.status(200).json(posts);
   }
 
-  case "DELETE": {
-   //! dev method
-   const posts = await prisma.post.deleteMany();
-
-   return res.status(200).json(posts);
-  }
-
   default: {
    return res.status(405).json({ error: "Method Not Allowed" });
   }

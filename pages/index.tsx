@@ -68,6 +68,7 @@ export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
  const posts = await getPosts({ context: context });
+
  return {
   props: {
    posts: serializeArray(posts),

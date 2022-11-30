@@ -102,22 +102,6 @@ export default async function handler(
      return res.status(403).json({ error: "Bad token" });
     }
    }
-
-   //! dev method
-   const users = await prisma.user.findMany({
-    include: {
-     posts: true,
-    },
-   });
-
-   return res.status(200).json(users);
-  }
-
-  case "DELETE": {
-   //! dev method
-   const users = await prisma.user.deleteMany();
-
-   return res.status(200).json(users);
   }
 
   default: {

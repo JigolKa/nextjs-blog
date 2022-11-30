@@ -3,7 +3,7 @@ import prisma from "../../../prisma/instance";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../../../utils/config";
-import { ONE_HOUR, ONE_MINUTE } from "../../../utils/time";
+import { ONE_DAY, ONE_HOUR, ONE_MINUTE } from "../../../utils/time";
 import createLogs from "../../../utils/logs";
 import { getIP } from "../../../utils/ip";
 import sleep from "../../../utils/sleep";
@@ -18,13 +18,13 @@ export type IPCache = {
  [key: string]: Request[];
 };
 
-const cache = new NodeCache({ stdTTL: 15 });
+const cache = new NodeCache({ stdTTL: ONE_DAY * 3 });
 
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
-  if (process.env.NODE_ENV !== "production") createLogs(req);
+ if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
 
  const ip = getIP(req);
@@ -131,15 +131,6 @@ export default async function handler(
    ]);
 
    return res.status(200).json(token);
-  }
-
-  case "DELETE": {
-   if (process.env.NODE_ENV === "development") {
-    cache.del(ip);
-    return res.status(200).json(cache.get(ip));
-   }
-
-   return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   default: {
