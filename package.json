@@ -8,7 +8,8 @@
   "start": "next start",
   "lint": "next lint",
   "format": "npx prettier --write .",
-  "prisma": "npx prisma format && npx prisma generate"
+  "prisma": "npx prisma format && npx prisma generate",
+  "cypress": "cypress open"
  },
  "dependencies": {
   "@emotion/react": "^11.10.4",
@@ -50,6 +51,7 @@
   "@types/react-dom": "18.0.6",
   "@types/underscore": "^1.11.4",
   "babel-loader": "^8.2.5",
+  "cypress": "^11.2.0",
   "eslint": "8.25.0",
   "eslint-config-next": "^13.0.3",
   "eslint-plugin-import": "^2.26.0",
