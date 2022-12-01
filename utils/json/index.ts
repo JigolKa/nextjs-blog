@@ -2,7 +2,6 @@ export function serializeJSON(obj: { [key: string]: any }) {
  if (typeof obj !== "object") return obj;
 
  let newObj: typeof obj = {};
- console.log("serializeJSON", obj);
 
  Object.keys(obj).forEach((key) => {
   let value = obj[key];
@@ -17,13 +16,12 @@ export function serializeJSON(obj: { [key: string]: any }) {
     value = JSON.parse(JSON.stringify(value));
    } else if (typeof value === "object") {
     value = serializeJSON(value);
-   } else {
-    value = value;
    }
   }
 
   newObj[key] = value;
  });
+
  return newObj;
 }
 

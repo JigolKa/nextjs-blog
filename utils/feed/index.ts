@@ -1,17 +1,19 @@
 import { GetServerSidePropsContext } from "next";
 import prisma from "../../prisma/instance";
-import { jwtMiddleware } from "../api";
+import decodeToken, { DecodeTokenSuccess } from "../api/auth/decodeToken";
 import _ from "underscore";
 
 async function _getPostsWithoutUser(
  pass: number = 0,
  limit: number = 15,
- not?: string
+ not?: string[]
 ) {
  return await prisma.post.findMany({
   where: {
    NOT: {
-    postId: not || undefined,
+    postId: {
+     in: not || undefined,
+    },
    },
   },
   include: {
@@ -34,16 +36,18 @@ export default async function getPosts(
  cookie: getPostsParams,
  pass: number = 0,
  limit: number = 15,
- not?: string
+ not?: string[]
 ) {
  const token = cookie.context
   ? cookie.context.req.cookies["token"]
   : cookie.token;
 
- const jwtObject = jwtMiddleware(null, token);
+ const result = decodeToken({ token: token });
 
- if (jwtObject) {
-  const { userId } = jwtObject.decoded.data;
+ if (Object.keys(result).includes("token")) {
+  const { decoded } = result as DecodeTokenSuccess;
+  const { userId } = decoded.data;
+
   const user = await prisma.user.findFirst({
    where: {
     userId: userId,
@@ -64,7 +68,9 @@ export default async function getPosts(
       },
      },
      NOT: {
-      postId: not || undefined,
+      postId: {
+       in: not || undefined,
+      },
      },
     },
     take: limit,

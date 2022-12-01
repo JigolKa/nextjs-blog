@@ -70,7 +70,7 @@ export default function useAuthentificationFlow() {
 
     if (response.status === 200) {
      cookies.set("token", response.data);
-
+     console.log("before request", response.data, cookies.get("token"));
      const user = await axios.get("/api/user", setAuthorization(response.data));
 
      dispatch(setUser(user.data));

@@ -43,3 +43,14 @@ export type FullPost = Post & {
 };
 
 export type Booleanish = "true" | "false";
+
+export type HTTPMethod =
+ | "GET"
+ | "OPTIONS"
+ | "POST"
+ | "PUT"
+ | "PATCH"
+ | "DELETE"
+ | "HEAD"
+ | "CONNECT"
+ | "TRACE";

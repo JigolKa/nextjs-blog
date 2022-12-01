@@ -1,21 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { restrictAccess } from "../../../../utils/api";
+import restrictAccess from "../../../../utils/api/auth/restrictAccess";
 import prisma from "../../../../prisma/instance";
 import bcrypt from "bcryptjs";
 import createLogs from "../../../../utils/logs";
+import { use } from "next-api-route-middleware";
 
-export default async function handler(
- req: NextApiRequest,
- res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
  if (process.env.NODE_ENV !== "production") createLogs(req);
- res.setHeader("Access-Control-Allow-Origin", "*");
+
  switch (req.method) {
   case "POST": {
-   const status = await restrictAccess(req, res);
-
-   if (status !== 200) return;
-
    const { userId } = req.query;
    const { password } = req.body;
 
@@ -63,3 +57,5 @@ export default async function handler(
   }
  }
 }
+
+export default use(restrictAccess(["POST", "GET"]), handler);

@@ -1,34 +1,35 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import jwtMiddleware from "./jwtMiddleware";
+import decodeToken, { DecodeTokenSuccess } from "./decodeToken";
 import prisma from "../../../prisma/instance";
+import { Middleware } from "next-api-route-middleware";
 
-export default async function restrictAccess(
- req: NextApiRequest,
- res: NextApiResponse
-) {
- const bearer = req.headers["authorization"];
+const restrictAccess = (methods: string[]): Middleware => {
+ return async (req, res, next) => {
+  if (!methods.includes(req.method!)) next();
 
- if (bearer) {
-  const jwtObject = jwtMiddleware(req);
+  const bearer = req.headers["authorization"];
 
-  if (jwtObject) {
-   const { decoded } = jwtObject;
-
-   const user = await prisma.user.findFirst({
-    where: {
-     userId: decoded.data.userId,
-    },
+  if (bearer) {
+   const result = decodeToken({
+    request: req,
    });
 
-   if (user) {
-    return 200;
+   if (Object.keys(result).includes("token")) {
+    const { decoded } = result as DecodeTokenSuccess;
+
+    const user = await prisma.user.findFirst({
+     where: {
+      userId: decoded.data.userId,
+     },
+    });
+
+    if (user) next();
+
+    res.status(401).json({ error: "User not logged in" });
    }
-
-   res.status(401).json({ error: "User not logged in" });
-   return 401;
   }
- }
 
- res.status(401).json({ error: "User not logged in" });
- return 401;
-}
+  res.status(401).json({ error: "User not logged in" });
+ };
+};
+
+export default restrictAccess;

@@ -2,9 +2,7 @@ import { createStyles, Modal } from "@mantine/core";
 import { useRouter } from "next/router";
 import { createRef, MutableRefObject, useState } from "react";
 import { useAppSelector } from "../../state/hooks";
-import { SignUpValues } from "../..";
 import Button from "../../components/Button";
-import { User } from "@prisma/client";
 import useRefresh from "../../utils/authentification/useRefresh";
 import Head from "next/head";
 import NotActivated from "../../components/Account/NotActivated";
@@ -59,10 +57,6 @@ const useStyles = createStyles((theme) => ({
   },
  },
 }));
-
-type Values = SignUpValues;
-
-type AltProps = { user: User };
 
 export default function Account() {
  const { user } = useAppSelector((s) => s.user);

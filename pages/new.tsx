@@ -1,5 +1,6 @@
 import { createStyles, Input, Textarea } from "@mantine/core";
 import { Field, FieldProps, Form, Formik } from "formik";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -51,6 +52,9 @@ export default function New() {
 
  return (
   <>
+   <Head>
+    <title>Create a post - Blog</title>
+   </Head>
    <h1>Create a new post</h1>
    <Formik<PostValues>
     initialValues={{

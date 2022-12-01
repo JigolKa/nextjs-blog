@@ -1,4 +1,3 @@
-import { MantineTheme, UseStylesOptions } from "@mantine/core";
 import { User } from "@prisma/client";
 
 export type AltProps = {

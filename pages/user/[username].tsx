@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { useEffect, useState } from "react";
-import { FullPost } from "../..";
 import Button from "../../components/Button";
 import PostComponent from "../../components/Home/Post";
 import prisma from "../../prisma/instance";

@@ -3,8 +3,7 @@ import { Post, Topic, User } from "@prisma/client";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import NodeCache from "node-cache";
-import { forwardRef, MutableRefObject, useEffect } from "react";
+import { forwardRef, MutableRefObject } from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
@@ -13,6 +12,7 @@ import {
 import { Booleanish } from "../..";
 import { ellipsis } from "../../utils/css";
 import useLikePost from "../../utils/feed/useLikePost";
+import nl2br from "../../utils/strings/nl2br";
 import TransitionalButton from "./TransitionalButton";
 
 export interface PostProps {
@@ -96,8 +96,6 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
  const { classes } = useStyles();
  const { likePost, liked, disliked, post } = useLikePost(_post);
 
- useEffect(() => console.log(post), [post]);
-
  if (post) {
   return (
    <div className={classes.container} ref={ref as MutableRefObject<null>}>
@@ -136,7 +134,7 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
       <span className="title">{post.title}</span>
      </Link>
      <Link className="fix-width" href={`/post/${post.slug}`}>
-      <p className="description">{post.content}</p>
+      <p className="description">{nl2br(post.content)}</p>
      </Link>
     </div>
     <div className="actions">

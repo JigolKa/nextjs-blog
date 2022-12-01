@@ -11,6 +11,7 @@ import PostComponent from "../../components/Home/Post";
 import Head from "next/head";
 import getPosts from "../../utils/feed";
 import { serializeArray, serializeJSON } from "../../utils/json";
+import nl2br from "../../utils/strings/nl2br";
 
 const useStyles = createStyles((theme) => ({
  description: {
@@ -59,7 +60,7 @@ const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
      </title>
     </Head>
     <h1>{post.title}</h1>
-    <p className={classes.description}>{post.content}</p>
+    <p className={classes.description}>{nl2br(post.content)}</p>
     {post.quotedWebsite && (
      <Link href={post.quotedWebsite}>
       <span className={classes.quotedWebsite}>
@@ -149,13 +150,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   },
  });
 
+ const feed = await getPosts({ context: context }, undefined, undefined, [
+  post.postId,
+  ...otherPosts.map((p) => p.postId),
+ ]);
+
  return {
   props: {
    post: serializeJSON(post),
    otherPosts: serializeArray(otherPosts),
-   feed: serializeArray(
-    await getPosts({ context: context }, undefined, undefined, post.postId)
-   ),
+   feed: serializeArray(feed),
   },
  };
 }

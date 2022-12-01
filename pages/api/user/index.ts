@@ -2,7 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/instance";
 import bcrypt from "bcryptjs";
 import createLogs from "../../../utils/logs";
-import { jwtMiddleware } from "../../../utils/api";
+import decodeToken, {
+ DecodeTokenSuccess,
+} from "../../../utils/api/auth/decodeToken";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import { ONE_HOUR } from "../../../utils/time";
@@ -75,10 +77,12 @@ export default async function handler(
 
   case "GET": {
    if (req.headers["authorization"]) {
-    const jwtObject = jwtMiddleware(req);
+    const result = decodeToken({
+     request: req,
+    });
 
-    if (jwtObject) {
-     const { decoded } = jwtObject;
+    if (Object.keys(result).includes("token")) {
+     const { decoded } = result as DecodeTokenSuccess;
 
      const user = await prisma.user.findFirst({
       where: {
