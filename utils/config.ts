@@ -1,4 +1,3 @@
-import randomString from "./strings/randomString";
 import { ONE_HOUR } from "./time";
 
 const config = {

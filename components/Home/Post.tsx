@@ -99,7 +99,6 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
  if (post) {
   return (
    <div className={classes.container} ref={ref as MutableRefObject<null>}>
-    {process.env.NODE_ENV !== "production" && JSON.stringify(post.likedByIDs)}
     {!dontShowMeta && (
      <div className="flex:post">
       <Link href={`/user/${post.author.username}`} className="author">

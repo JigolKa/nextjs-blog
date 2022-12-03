@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../../../utils/config";
 import { ONE_DAY, ONE_HOUR, ONE_MINUTE } from "../../../utils/time";
-import createLogs from "../../../utils/logs";
+
 import { getIP } from "../../../utils/ip";
 import sleep from "../../../utils/sleep";
 import NodeCache from "node-cache";
@@ -24,7 +24,6 @@ export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
 
  const ip = getIP(req);
@@ -41,14 +40,13 @@ export default async function handler(
    const ipCache = cache.get<any>(ip);
 
    if (ipCache) {
-    if (ipCache.length > 5) {
+    if (ipCache.length >= 5) {
      const lastRequestDiffMS = Math.abs(
-      ipCache[ipCache.length - 1 - 5].requestedAt.getTime() -
-       new Date().getTime()
+      ipCache[ipCache.length - 5].requestedAt.getTime() - new Date().getTime()
      );
 
      if (lastRequestDiffMS <= TIMEOUT) {
-      return res.status(403).json({
+      return res.status(429).json({
        error: `Request timeout: ${(
         (TIMEOUT - lastRequestDiffMS) /
         1000
@@ -108,6 +106,7 @@ export default async function handler(
     await sleep(Math.floor(Math.random() * 500) + 500, () => {
      res.status(403).json({ error: "Bad password" });
     });
+    console.log(cache.get(ip));
 
     return;
    }
@@ -129,6 +128,8 @@ export default async function handler(
      status: "success",
     },
    ]);
+
+   console.log(cache.get(ip));
 
    return res.status(200).json(token);
   }

@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../prisma/instance";
-import createLogs from "../../../../utils/logs";
+import { userWithoutPassword } from "../../../../utils/api/db/post";
 
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
  switch (req.method) {
   case "GET": {
@@ -16,8 +15,8 @@ export default async function handler(
     where: {
      userId: userId as string,
     },
-    include: {
-     posts: true,
+    select: {
+     ...userWithoutPassword,
     },
    });
 

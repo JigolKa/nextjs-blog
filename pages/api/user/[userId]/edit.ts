@@ -4,12 +4,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ONE_HOUR } from "../../../../utils/time";
 import config from "../../../../utils/config";
-import createLogs from "../../../../utils/logs";
+
 import { use } from "next-api-route-middleware";
 import restrictAccess from "../../../../utils/api/auth/restrictAccess";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
  switch (req.method) {
   case "PATCH": {

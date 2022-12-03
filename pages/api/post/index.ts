@@ -1,22 +1,31 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
+import { use } from "next-api-route-middleware";
+import { NextApiRequestWithMiddlewareObject } from "../../..";
 import prisma from "../../../prisma/instance";
-import createLogs from "../../../utils/logs";
+import restrictAccess from "../../../utils/api/auth/restrictAccess";
+import { userWithoutPassword } from "../../../utils/api/db/post";
+
 import { getUniqueSlug } from "../../../utils/strings/toSlug";
 
-export default async function handler(
- req: NextApiRequest,
+async function handler(
+ req: NextApiRequestWithMiddlewareObject,
  res: NextApiResponse
 ) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
+
  switch (req.method) {
   case "POST": {
-   const { authorId, description, title, quotedWebsite, images, video } =
-    req.body;
+   const { description, title, quotedWebsite, images, video } = req.body;
 
-   if (!(authorId || description || title) || authorId === "null") {
+   if (!(description || title)) {
     return res.status(400).json({ error: "Missing required fields" });
    }
+
+   if (!req.middlewareData)
+    return res.status(401).json({ error: "Not authorized" });
+
+   const { decoded } = req.middlewareData;
+   console.log("POST", "/api/post", decoded);
 
    const slug = await getUniqueSlug(title);
 
@@ -35,11 +44,18 @@ export default async function handler(
      lon: 7,
      author: {
       connect: {
-       userId: authorId,
+       userId: decoded.data.userId,
       },
      },
      timezone: "Europe/France",
      slug: slug,
+    },
+    include: {
+     author: {
+      select: {
+       ...userWithoutPassword,
+      },
+     },
     },
    });
 
@@ -49,7 +65,11 @@ export default async function handler(
   case "GET": {
    const posts = await prisma.post.findMany({
     include: {
-     author: true,
+     author: {
+      select: {
+       ...userWithoutPassword,
+      },
+     },
      likedBy: true,
      dislikedBy: true,
      topics: true,
@@ -64,3 +84,5 @@ export default async function handler(
   }
  }
 }
+
+export default use(restrictAccess(["POST"]), handler);

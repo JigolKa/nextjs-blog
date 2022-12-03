@@ -7,6 +7,8 @@ export default defineConfig({
   specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
  },
 
+ chromeWebSecurity: false,
+
  component: {
   devServer() {
    return {

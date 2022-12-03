@@ -1,10 +1,17 @@
-import decodeToken, { DecodeTokenSuccess } from "./decodeToken";
+import decodeToken, {
+ DecodeTokenFailure,
+ DecodeTokenSuccess,
+} from "./decodeToken";
 import prisma from "../../../prisma/instance";
 import { Middleware } from "next-api-route-middleware";
+import { NextApiRequestWithMiddlewareObject } from "../../..";
 
-const restrictAccess = (methods: string[]): Middleware => {
+const restrictAccess = (
+ methods: string[]
+): Middleware<NextApiRequestWithMiddlewareObject> => {
  return async (req, res, next) => {
-  if (!methods.includes(req.method!)) next();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  if (!methods.includes(req.method!)) return next();
 
   const bearer = req.headers["authorization"];
 
@@ -22,13 +29,24 @@ const restrictAccess = (methods: string[]): Middleware => {
      },
     });
 
-    if (user) next();
+    if (user) {
+     req.middlewareData = {
+      decoded: decoded,
+     };
+     return next();
+    }
 
-    res.status(401).json({ error: "User not logged in" });
+    return res.status(401).json({ error: "Not authorized" });
    }
+
+   console.log(result);
+
+   return res
+    .status((result as DecodeTokenFailure).status)
+    .json({ error: (result as DecodeTokenFailure).error });
   }
 
-  res.status(401).json({ error: "User not logged in" });
+  return res.status(401).json({ error: "Not authorized" });
  };
 };
 

@@ -1,5 +1,6 @@
 import prisma from "../../../../prisma/instance";
 import { addToArray, removeFromArray } from "../../../arrays";
+import { userWithoutPassword } from "../post";
 
 //? QUESTION: do request to db to grab user/post
 //? OR pass only necessary user's/post's data through post body
@@ -49,10 +50,8 @@ export async function followUser(userIdToFollow: string, sourceUserId: string) {
      : addToArray(userToFollow.followedByIDs, sourceUser.userId),
    },
   },
-  include: {
-   followedBy: true,
-   following: true,
-   posts: true,
+  select: {
+   ...userWithoutPassword,
   },
  });
 

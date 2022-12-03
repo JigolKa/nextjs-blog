@@ -2,13 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/instance";
 import sendMail from "../../../utils/api/mail";
 import config from "../../../utils/config";
-import createLogs from "../../../utils/logs";
 
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
  switch (req.method) {
   case "GET": {

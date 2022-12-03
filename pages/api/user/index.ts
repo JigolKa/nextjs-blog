@@ -1,20 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/instance";
 import bcrypt from "bcryptjs";
-import createLogs from "../../../utils/logs";
 import decodeToken, {
+ DecodeTokenFailure,
  DecodeTokenSuccess,
 } from "../../../utils/api/auth/decodeToken";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import { ONE_HOUR } from "../../../utils/time";
 import config from "../../../utils/config";
+import { userWithoutPassword } from "../../../utils/api/db/post";
+import isBase64 from "../../../utils/strings/isBase64";
 
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponse
 ) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
  res.setHeader("Access-Control-Allow-Origin", "*");
 
  switch (req.method) {
@@ -25,7 +26,14 @@ export default async function handler(
     return res.status(400).json({ error: "Missing required fields" });
    }
 
+   if (!isBase64(password)) {
+    return res.status(400).json({ error: "Password not base64 encoded" });
+   }
+
    const _password = Buffer.from(password, "base64").toString("ascii");
+   const _username = (username as string).startsWith("@")
+    ? username
+    : `@${username}`;
 
    const validation = await prisma.user.findFirst({
     where: {
@@ -34,20 +42,20 @@ export default async function handler(
        email: email,
       },
       {
-       username: username,
+       username: _username,
       },
      ],
     },
    });
 
    if (validation !== null)
-    return res.status(400).json({ error: "User already exists" });
+    return res.status(409).json({ error: "User already exists" });
 
    const hash = await bcrypt.hash(_password, 8);
 
    const user = await prisma.user.create({
     data: {
-     username: username,
+     username: _username,
      email: email,
      password: hash,
     },
@@ -88,7 +96,7 @@ export default async function handler(
       where: {
        userId: decoded.data.userId,
       },
-      include: {
+      select: {
        posts: {
         include: {
          dislikedBy: true,
@@ -96,15 +104,38 @@ export default async function handler(
          topics: true,
         },
        },
+       userId: true,
+       username: true,
+       email: true,
+       createdAt: true,
+       permissions: true,
+       profilePicture: true,
        followedBy: true,
+       followedByIDs: true,
        following: true,
+       followingIDs: true,
+       activated: true,
+       likedIDs: true,
+       liked: true,
+       dislikedIDs: true,
+       disliked: true,
       },
      });
 
      return res.status(200).json(user);
-    } else {
-     return res.status(403).json({ error: "Bad token" });
     }
+
+    return res
+     .status((result as DecodeTokenFailure).status)
+     .json({ error: (result as DecodeTokenFailure).error });
+   } else {
+    const users = await prisma.user.findMany({
+     select: {
+      ...userWithoutPassword,
+     },
+    });
+
+    return res.status(200).json(users);
    }
   }
 

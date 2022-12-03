@@ -2,7 +2,6 @@ import { Post, Topic, User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { FullPost } from "../..";
 import { useAppSelector } from "../../state/hooks";
 import { ActionType } from "../../";

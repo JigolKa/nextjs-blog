@@ -2,12 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import restrictAccess from "../../../../utils/api/auth/restrictAccess";
 import prisma from "../../../../prisma/instance";
 import bcrypt from "bcryptjs";
-import createLogs from "../../../../utils/logs";
+
 import { use } from "next-api-route-middleware";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
- if (process.env.NODE_ENV !== "production") createLogs(req);
-
  switch (req.method) {
   case "POST": {
    const { userId } = req.query;
@@ -58,4 +56,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
  }
 }
 
-export default use(restrictAccess(["POST", "GET"]), handler);
+export default use(restrictAccess(["POST"]), handler);

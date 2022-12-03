@@ -1,4 +1,5 @@
 import { Post, User } from "@prisma/client";
+import { NextApiRequest } from "next";
 
 export interface Token {
  iat: number;
@@ -54,3 +55,9 @@ export type HTTPMethod =
  | "HEAD"
  | "CONNECT"
  | "TRACE";
+
+export interface NextApiRequestWithMiddlewareObject extends NextApiRequest {
+ middlewareData?: {
+  decoded: Token;
+ };
+}

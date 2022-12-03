@@ -1,6 +1,25 @@
 import prisma from "../../../../prisma/instance";
 import { addToArray, removeFromArray } from "../../../arrays";
 
+export const userWithoutPassword = {
+ userId: true,
+ username: true,
+ email: true,
+ createdAt: true,
+ permissions: true,
+ profilePicture: true,
+ posts: true,
+ followedBy: true,
+ followedByIDs: true,
+ following: true,
+ followingIDs: true,
+ activated: true,
+ likedIDs: true,
+ liked: true,
+ dislikedIDs: true,
+ disliked: true,
+};
+
 //? QUESTION: do request to db to grab user/post
 //? OR pass only necessary user's/post's data through post body
 
@@ -37,7 +56,11 @@ export async function likePost(userId: string, postId: string) {
    },
   },
   include: {
-   author: true,
+   author: {
+    select: {
+     ...userWithoutPassword,
+    },
+   },
   },
  });
 
@@ -95,7 +118,11 @@ export async function dislikePost(userId: string, postId: string) {
    },
   },
   include: {
-   author: true,
+   author: {
+    select: {
+     ...userWithoutPassword,
+    },
+   },
   },
  });
 
