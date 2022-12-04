@@ -3,12 +3,10 @@ import { ONE_HOUR } from "../../../utils/time";
 import jwt from "jsonwebtoken";
 import config from "../../../utils/config";
 import prisma from "../../../prisma/instance";
+import { use } from "next-api-route-middleware";
+import debugMethod from "../../../utils/middleware/debugMethod";
 
-export default async function handler(
- req: NextApiRequest,
- res: NextApiResponse
-) {
- res.setHeader("Access-Control-Allow-Origin", "*");
+async function handler(req: NextApiRequest, res: NextApiResponse) {
  switch (req.method) {
   case "POST": {
    const user = await prisma.user.findFirst({
@@ -36,3 +34,5 @@ export default async function handler(
   }
  }
 }
+
+export default use(debugMethod, handler);

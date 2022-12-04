@@ -1,26 +1,23 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./reducers/userSlice";
-import storage from "redux-persist/lib/storage";
-import { persistStore, persistReducer } from "redux-persist";
-import thunk from "redux-thunk";
+import create from "zustand";
+import { User } from "@prisma/client";
+import { persist } from "zustand/middleware";
 
-const rootReducer = combineReducers({
- user: userReducer,
-});
+export interface State {
+ user: User | null;
+ // eslint-disable-next-line
+ setUser: (user: User) => void;
+ resetUser: () => void;
+}
 
-const persistConfig = {
- key: "root",
- storage,
-};
+const useStore = create(
+ persist<State>(
+  (set) => ({
+   user: null,
+   setUser: (user) => set({ user: user }),
+   resetUser: () => set({ user: null }),
+  }),
+  { name: "Store" }
+ )
+);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
- reducer: persistedReducer,
- devTools: process.env.NODE_ENV !== "production",
- middleware: [thunk],
-});
-
-export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export default useStore;

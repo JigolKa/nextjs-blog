@@ -4,7 +4,7 @@ import { MutableRefObject } from "react";
 import { MdAlternateEmail, MdEmail } from "react-icons/md";
 import { AltProps } from "..";
 import { SignUpValues } from "../../..";
-import useUpdateAccount from "../../../utils/authentification/useUpdateAccount";
+import useUpdateAccount from "../../../utils/authentication/useUpdateAccount";
 import { updateSchema } from "../../../utils/validators";
 import Button from "../../Button";
 type Values = SignUpValues;

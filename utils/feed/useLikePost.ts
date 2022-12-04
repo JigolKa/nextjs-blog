@@ -3,8 +3,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FullPost } from "../..";
-import { useAppSelector } from "../../state/hooks";
 import { ActionType } from "../../";
+import useStore from "../../state/store";
 
 export default function useLikePost(
  _post: Post & { author: User; topics: Topic[] },
@@ -13,7 +13,7 @@ export default function useLikePost(
 ) {
  const [liked, setLiked] = useState(false);
  const [disliked, setDisliked] = useState(false);
- const { user } = useAppSelector((s) => s.user);
+ const { user } = useStore();
  const [post, setPost] = useState<typeof _post>();
  const router = useRouter();
 
@@ -73,9 +73,7 @@ export default function useLikePost(
 
     callback && callback(response.data.post);
    }
-  } catch (error: any) {
-   console.log(error);
-  }
+  } catch (error: any) {}
  };
 
  return {

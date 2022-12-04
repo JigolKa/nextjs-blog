@@ -1,14 +1,14 @@
 import { createStyles, Modal } from "@mantine/core";
 import { useRouter } from "next/router";
-import { createRef, MutableRefObject, useState } from "react";
-import { useAppSelector } from "../../state/hooks";
+import { createRef, MutableRefObject, useEffect, useState } from "react";
 import Button from "../../components/Button";
-import useRefresh from "../../utils/authentification/useRefresh";
+import useRefresh from "../../utils/authentication/useRefresh";
 import Head from "next/head";
 import NotActivated from "../../components/Account/NotActivated";
 import InformationsForm from "../../components/Account/Forms/InformationsForm";
 import PasswordForm from "../../components/Account/Forms/PasswordForm";
 import DeletionForm from "../../components/Account/Forms/DeletionForm";
+import useStore from "../../state/store";
 
 const useStyles = createStyles((theme) => ({
  form: {
@@ -59,12 +59,16 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Account() {
- const { user } = useAppSelector((s) => s.user);
+ const { user } = useStore();
  const { classes } = useStyles();
  const router = useRouter();
  const emailInputRef = createRef() as MutableRefObject<null>;
  const [isDeleting, setDeleting] = useState(false);
  useRefresh();
+
+ useEffect(() => {
+  if (!user) router.push("/login");
+ }, []);
 
  if (user) {
   return (
@@ -107,6 +111,5 @@ export default function Account() {
   );
  }
 
- router.push("/login");
  return null;
 }

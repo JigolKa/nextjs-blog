@@ -5,7 +5,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { SignUpValues } from "..";
-import useAuthentificationFlow from "../utils/authentification/useAuthentificationFlow";
+import useAuth from "../utils/authentication/useAuth";
 import Button from "../components/Button";
 import { MdAlternateEmail, MdEmail } from "react-icons/md";
 import Head from "next/head";
@@ -89,7 +89,7 @@ const useStyles = createStyles((theme) => ({
 
 const Signup: NextPage = () => {
  const { classes } = useStyles();
- const { loading, signup } = useAuthentificationFlow();
+ const { loading, signup } = useAuth();
 
  return (
   <>

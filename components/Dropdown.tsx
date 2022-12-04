@@ -1,6 +1,7 @@
 import { createStyles } from "@mantine/core";
 import Image from "next/image";
 import { forwardRef, MutableRefObject, useEffect, useState } from "react";
+import useStore from "../state/store";
 import { ellipsis } from "../utils/css";
 
 export interface DropdownProps extends React.ComponentPropsWithRef<"div"> {
@@ -65,6 +66,7 @@ const useStyles = createStyles((theme) => ({
 
 const Dropdown = forwardRef(
  ({ parent, items, active, onHeader, ...rest }: DropdownProps, ref) => {
+  const { user } = useStore();
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const [width, setWidth] = useState(0);
@@ -86,7 +88,7 @@ const Dropdown = forwardRef(
    window.onresize = function () {
     updateCoordinates(parent);
    };
-  }, [parent]);
+  }, [parent, user]);
 
   useEffect(() => {
    if (active) {

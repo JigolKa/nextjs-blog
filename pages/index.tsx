@@ -30,6 +30,8 @@ const useStyles = createStyles(() => ({
 const Home: NextPage<PostsFetching> = ({ posts }) => {
  const { classes } = useStyles();
 
+ //(window.innerHeight + document.documentElement.scrollTop) >= document.body.offsetHeight - 250
+
  return (
   <>
    <Head>

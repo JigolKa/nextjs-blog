@@ -51,11 +51,12 @@ export default function HeaderSearch({
  useEffect(() => {
   if (!inputRef) return;
   window.onkeydown = (e) => {
-   if (active && e.key === "Enter") {
-    router.push(`/search?q=${encodeURIComponent(value)}`);
+   if (active && e.key === "Enter" && value.length < 1) {
+    // router.push(`/search?q=${encodeURIComponent(value)}`);
+    router.push("/501");
    }
   };
- }, []);
+ });
 
  return (
   <div

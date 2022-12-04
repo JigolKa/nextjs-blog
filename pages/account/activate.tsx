@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../state/hooks";
 import getUrlParams from "../../utils/strings/parseUrl";
-import { setUser } from "../../state/reducers/userSlice";
 import { toast } from "react-toastify";
 import { createStyles } from "@mantine/core";
+import useStore from "../../state/store";
 
 const useStyles = createStyles((theme) => ({
  verified: {
@@ -40,9 +39,9 @@ const useStyles = createStyles((theme) => ({
 
 export default function Activate() {
  const [response, setResponse] = useState(220);
- const dispatch = useAppDispatch();
  const router = useRouter();
  const [countdown, setCoundown] = useState(5);
+ const { setUser } = useStore();
  const { classes } = useStyles();
 
  useEffect(() => {
@@ -53,7 +52,7 @@ export default function Activate() {
    .then((res) => {
     setInterval(() => setCoundown((p) => (p >= 0 ? (p -= 1) : p)), 1000);
 
-    dispatch(setUser(res.data));
+    setUser(res.data);
     setResponse(res.status);
     toast("Account verified successfully");
    })
@@ -77,7 +76,13 @@ export default function Activate() {
     <div className={classes.verified}>
      <h1>Account verified!</h1>
      <p>You can now enjoy all the functionnalities of the Blog!</p>
-     <span>Redirecting {countdown === 0 ? "now" : `in ${countdown}`}...</span>
+
+     {countdown === 0 ? (
+      <span>Redirecting now...</span>
+     ) : (
+      countdown > 0 && <span>Redirecting in {countdown}...</span>
+     )}
+
      <svg
       id="visual"
       viewBox="0 0 1800 600"

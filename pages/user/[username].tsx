@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import PostComponent from "../../components/Home/Post";
 import prisma from "../../prisma/instance";
-import { useAppSelector } from "../../state/hooks";
+import useStore from "../../state/store";
 import { serializeJSON } from "../../utils/json";
 import membership from "../../utils/strings/membership";
 
@@ -78,39 +78,39 @@ const useStyles = createStyles(() => ({
 
 const Account: NextPage<Props> = ({ user }) => {
  const { classes } = useStyles();
- const { user: cachedUser } = useAppSelector((s) => s.user);
+ const { user: currentUser } = useStore();
  const [isFollowed, setFollowed] = useState(false);
  const router = useRouter();
 
  useEffect(() => {
-  if (cachedUser && user) {
-   setFollowed(user.followedByIDs.includes(cachedUser.userId));
+  if (currentUser && user) {
+   setFollowed(user.followedByIDs.includes(currentUser.userId));
   }
- }, [cachedUser, user]);
+ }, [currentUser, user]);
 
  const follow = async () => {
-  if (!user || !cachedUser) {
+  if (!user || !currentUser) {
    router.push("/login");
    return;
   }
 
   setFollowed((p) => !p);
   await axios.post(`/api/user/${user.userId}/follow`, {
-   userId: cachedUser.userId,
+   userId: currentUser.userId,
   });
  };
 
  if (user) {
-  const buttonText = cachedUser
-   ? cachedUser.userId === user.userId
+  const buttonText = currentUser
+   ? currentUser.userId === user.userId
      ? "Go to your account"
      : isFollowed
      ? "Unsubscribe"
      : "Subscribe"
    : "Subscribe";
 
-  const buttonVariant = cachedUser
-   ? cachedUser.userId === user.userId
+  const buttonVariant = currentUser
+   ? currentUser.userId === user.userId
      ? "outline"
      : isFollowed
      ? "outline"
@@ -136,8 +136,8 @@ const Account: NextPage<Props> = ({ user }) => {
 
       <div className="infos">
        <h2>{user.username}</h2>
-       {cachedUser ? (
-        cachedUser.userId === user.userId ? (
+       {currentUser ? (
+        currentUser.userId === user.userId ? (
          <Link href="/account">
           <Button variant={buttonVariant}>{buttonText}</Button>
          </Link>

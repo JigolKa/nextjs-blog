@@ -8,6 +8,7 @@ export default async function handler(
  res: NextApiResponse
 ) {
  res.setHeader("Access-Control-Allow-Origin", "*");
+
  switch (req.method) {
   case "GET": {
    const activations = await prisma.activation.findMany();
@@ -29,6 +30,9 @@ export default async function handler(
    });
 
    if (!user) return res.status(404).json({ error: "Not found" });
+
+   if (user.activated)
+    return res.status(409).json({ error: "User already activated" });
 
    const activation = await prisma.activation.create({
     data: {

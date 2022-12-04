@@ -8,7 +8,7 @@ const config = {
  BASE_URL:
   process.env.NODE_ENV === "production"
    ? "https://awesome-nextjs-blog.netlify.app"
-   : "http://127.0.0.1:3000",
+   : "http://localhost:3000",
 };
 
 export const MIN_PASSWORD_LENGTH = 8;

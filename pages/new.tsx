@@ -1,13 +1,16 @@
 import { createStyles, Input, Textarea } from "@mantine/core";
+import axios from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Button from "../components/Button";
-import { useAppSelector } from "../state/hooks";
-import usePost from "../utils/feed/usePost";
+import useStore from "../state/store";
+import setAuthorization from "../utils/api/auth/setAuthorization";
+import cookies from "../utils/cookies";
 
 const useStyles = createStyles(() => ({
  form: {
@@ -31,9 +34,40 @@ export interface PostValues {
 
 export default function New() {
  const { classes } = useStyles();
- const { loading, createPost } = usePost();
- const { user } = useAppSelector((s) => s.user);
+ const { user } = useStore();
+ const [loading, setLoading] = useState(false);
  const router = useRouter();
+
+ const create = async ({ description, title }: PostValues) => {
+  setLoading(true);
+
+  try {
+   const response = await axios.post(
+    "/api/post",
+    {
+     title: title,
+     description: description,
+     authorId: user ? user.userId : null,
+    },
+    setAuthorization(cookies.get("token") || "")
+   );
+
+   if (response.status === 200) {
+    toast("Post successfully created");
+    setLoading(false);
+
+    router.push("/");
+    return;
+   }
+  } catch (error: any) {
+   setLoading(false);
+
+   if (error.response.status === 401 || error.response.status === 403)
+    return router.push("/login");
+
+   toast(`Creation of post failed, ${error.response.data.error}`);
+  }
+ };
 
  const validationSchema = Yup.object().shape({
   title: Yup.string()
@@ -62,7 +96,7 @@ export default function New() {
      description: "",
     }}
     validationSchema={validationSchema}
-    onSubmit={async (v) => createPost(v)}
+    onSubmit={async (v) => await create(v)}
    >
     <Form className={classes.form}>
      <Field name="title">

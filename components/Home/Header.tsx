@@ -1,6 +1,5 @@
 import { createStyles, Tooltip } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
-import { useAppSelector } from "../../state/hooks";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
@@ -11,7 +10,8 @@ import HeaderSearch from "./HeaderSearch";
 import Button from "../Button";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import useAuthentificationFlow from "../../utils/authentification/useAuthentificationFlow";
+import useAuth from "../../utils/authentication/useAuth";
+import useStore from "../../state/store";
 
 const useStyles = createStyles((theme) => ({
  root: {
@@ -92,9 +92,9 @@ export default function Header() {
  const { classes } = useStyles();
  const [search, setSearch] = useState("");
  const { active, setActive, dropdownRef, inputRef } = useContext(SearchContext);
- const { user } = useAppSelector((s) => s.user);
+ const { user } = useStore();
  const router = useRouter();
- const { logout } = useAuthentificationFlow();
+ const { logout } = useAuth();
 
  const links: HeaderLink[] = [
   {
@@ -146,7 +146,11 @@ export default function Header() {
 
    <Dropdown
     active={active}
-    parent={document.querySelector("#search-input")}
+    parent={
+     typeof window !== "undefined"
+      ? document.querySelector("#search-input")
+      : null
+    }
     onHeader
     ref={dropdownRef}
     items={[

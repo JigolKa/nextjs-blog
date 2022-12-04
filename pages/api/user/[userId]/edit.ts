@@ -6,7 +6,7 @@ import { ONE_HOUR } from "../../../../utils/time";
 import config from "../../../../utils/config";
 
 import { use } from "next-api-route-middleware";
-import restrictAccess from "../../../../utils/api/auth/restrictAccess";
+import restrictAccess from "../../../../utils/middleware/restrictAccess";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
  res.setHeader("Access-Control-Allow-Origin", "*");

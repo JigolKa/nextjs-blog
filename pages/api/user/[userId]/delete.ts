@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import restrictAccess from "../../../../utils/api/auth/restrictAccess";
+import restrictAccess from "../../../../utils/middleware/restrictAccess";
 import prisma from "../../../../prisma/instance";
 import bcrypt from "bcryptjs";
 

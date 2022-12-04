@@ -35,7 +35,7 @@ export default async function handler(
     ? username
     : `@${username}`;
 
-   const validation = await prisma.user.findFirst({
+   const userAlreadyExists = await prisma.user.findFirst({
     where: {
      OR: [
       {
@@ -48,7 +48,7 @@ export default async function handler(
     },
    });
 
-   if (validation !== null)
+   if (userAlreadyExists !== null)
     return res.status(409).json({ error: "User already exists" });
 
    const hash = await bcrypt.hash(_password, 8);

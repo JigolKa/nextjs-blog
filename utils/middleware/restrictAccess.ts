@@ -1,10 +1,10 @@
 import decodeToken, {
  DecodeTokenFailure,
  DecodeTokenSuccess,
-} from "./decodeToken";
-import prisma from "../../../prisma/instance";
+} from "../api/auth/decodeToken";
+import prisma from "../../prisma/instance";
 import { Middleware } from "next-api-route-middleware";
-import { NextApiRequestWithMiddlewareObject } from "../../..";
+import { NextApiRequestWithMiddlewareObject } from "../..";
 
 const restrictAccess = (
  methods: string[]
@@ -38,8 +38,6 @@ const restrictAccess = (
 
     return res.status(401).json({ error: "Not authorized" });
    }
-
-   console.log(result);
 
    return res
     .status((result as DecodeTokenFailure).status)

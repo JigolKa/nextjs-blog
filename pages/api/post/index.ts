@@ -2,7 +2,7 @@ import { NextApiResponse } from "next";
 import { use } from "next-api-route-middleware";
 import { NextApiRequestWithMiddlewareObject } from "../../..";
 import prisma from "../../../prisma/instance";
-import restrictAccess from "../../../utils/api/auth/restrictAccess";
+import restrictAccess from "../../../utils/middleware/restrictAccess";
 import { userWithoutPassword } from "../../../utils/api/db/post";
 
 import { getUniqueSlug } from "../../../utils/strings/toSlug";
@@ -25,7 +25,6 @@ async function handler(
     return res.status(401).json({ error: "Not authorized" });
 
    const { decoded } = req.middlewareData;
-   console.log("POST", "/api/post", decoded);
 
    const slug = await getUniqueSlug(title);
 

@@ -7,7 +7,6 @@ describe("User API testing", () => {
   it("Should render a list of users", () => {
    cy.request("/api/user").should((response) => {
     expect(response.body).length.to.be.gt(0);
-    console.log(Object.keys(response.body[0]));
    });
   });
 

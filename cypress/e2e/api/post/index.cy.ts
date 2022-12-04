@@ -15,7 +15,6 @@ describe("Post API testing", () => {
   it("Should render a list of posts", () => {
    cy.request("/api/post").should((response) => {
     expect(response.body).length.to.be.gt(0);
-    console.log(Object.keys(response.body[0]));
    });
   });
   it("Should have the author property", () => {
@@ -92,7 +91,6 @@ describe("Post API testing", () => {
       url: `${config.BASE_URL}/api/token/generate`,
      })
      .should((res) => {
-      console.log(res);
       cy
        .request({
         url: `${config.BASE_URL}/api/post`,

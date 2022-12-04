@@ -25,7 +25,7 @@ function SearchProvider({ children }: ContextProviderProps) {
 
  useEffect(() => {
   setActive(false);
- }, [window.location.pathname]);
+ }, [typeof window !== "undefined" && window.location.href]);
 
  return (
   <SearchContext.Provider

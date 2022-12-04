@@ -1,14 +1,12 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import useStore from "../../state/store";
 import setAuthorization from "../api/auth/setAuthorization";
 import cookies from "../cookies";
-import { setUser } from "../../state/reducers/userSlice";
 
 export default function useRefresh() {
- const { user } = useAppSelector((state) => state.user);
- const dispatch = useAppDispatch();
+ const { user, setUser } = useStore();
  const router = useRouter();
 
  useEffect(() => {
@@ -26,12 +24,12 @@ export default function useRefresh() {
   if (token && !user) {
    axios
     .get("/api/user", setAuthorization(token))
-    .then((res) => dispatch(setUser(res.data)));
+    .then((res) => setUser(res.data));
    return;
   }
 
   axios
    .get("/api/user", setAuthorization(token))
-   .then((res) => dispatch(setUser(res.data)));
+   .then((res) => setUser(res.data));
  }, []);
 }

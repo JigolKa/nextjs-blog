@@ -1,23 +1,20 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { LoginValues, SignUpValues } from "../..";
 import cookies from "../cookies";
-import { resetUser, setUser } from "../../state/reducers/userSlice";
 import setAuthorization from "../api/auth/setAuthorization";
-import { useAppSelector } from "../../state/hooks";
 import getUrlParams from "../strings/parseUrl";
+import useStore from "../../state/store";
 
-export default function useAuthentificationFlow() {
+export default function useAuth() {
  const [loading, setLoading] = useState(false);
  const router = useRouter();
- const dispatch = useDispatch();
- const { user } = useAppSelector((s) => s.user);
  const [url, setUrl] = useState({
   returnUrl: "",
  });
+ const { user, setUser, resetUser } = useStore();
 
  useEffect(() => {
   const params = getUrlParams(window.location.search);
@@ -28,7 +25,7 @@ export default function useAuthentificationFlow() {
  return {
   loading,
 
-  user: user,
+  currentUser: user,
 
   signup: async ({ username, email, password }: SignUpValues) => {
    setLoading(true);
@@ -42,7 +39,7 @@ export default function useAuthentificationFlow() {
 
     if (response.status === 200) {
      cookies.set("token", response.data.token);
-     dispatch(setUser(response.data.user));
+     setUser(response.data.user);
 
      toast("Account created successfully");
 
@@ -70,10 +67,9 @@ export default function useAuthentificationFlow() {
 
     if (response.status === 200) {
      cookies.set("token", response.data);
-     console.log("before request", response.data, cookies.get("token"));
      const user = await axios.get("/api/user", setAuthorization(response.data));
 
-     dispatch(setUser(user.data));
+     setUser(user.data);
 
      toast("Successfully connected");
 
@@ -94,7 +90,7 @@ export default function useAuthentificationFlow() {
 
   logout: () => {
    cookies.delete("token");
-   dispatch((resetUser as any)());
+   resetUser();
 
    toast("Successfully disconnected");
   },

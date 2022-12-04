@@ -7,13 +7,12 @@ import { updateSchema } from "../../../utils/validators";
 import Button from "../../Button";
 import cookies from "../../../utils/cookies";
 import setAuthorization from "../../../utils/api/auth/setAuthorization";
-import { useAppDispatch } from "../../../state/hooks";
 import { useRouter } from "next/router";
-import { resetUser } from "../../../state/reducers/userSlice";
+import useStore from "../../../state/store";
 
 export default function DeletionForm({ user, classes }: AltProps) {
  const router = useRouter();
- const dispatch = useAppDispatch();
+ const { resetUser } = useStore();
 
  const deleteAccount = async (values: {
   checked: boolean;
@@ -29,7 +28,7 @@ export default function DeletionForm({ user, classes }: AltProps) {
 
   if (response.status === 200) {
    toast("Account deleted successfully");
-   dispatch((resetUser as any)());
+   resetUser();
    router.push("/");
   }
  };

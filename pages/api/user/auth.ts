@@ -106,7 +106,6 @@ export default async function handler(
     await sleep(Math.floor(Math.random() * 500) + 500, () => {
      res.status(403).json({ error: "Bad password" });
     });
-    console.log(cache.get(ip));
 
     return;
    }
@@ -128,8 +127,6 @@ export default async function handler(
      status: "success",
     },
    ]);
-
-   console.log(cache.get(ip));
 
    return res.status(200).json(token);
   }
