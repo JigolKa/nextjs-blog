@@ -104,6 +104,7 @@ export default async function handler(
          topics: true,
         },
        },
+       password: false,
        userId: true,
        username: true,
        email: true,

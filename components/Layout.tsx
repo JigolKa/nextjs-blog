@@ -16,18 +16,18 @@ export default function Layout({ children, excludedRoutes }: LayoutProps) {
 
  if (excludedRoutes.includes(router.pathname)) {
   return children;
- } else {
-  return (
-   <>
-    <Header />
-    <Container
-     marginBlock={25}
-     size="70vw"
-     excludedRoutes={["/account/activate"]}
-    >
-     {children}
-    </Container>
-   </>
-  );
  }
+
+ return (
+  <>
+   <Header />
+   <Container
+    marginBlock={25}
+    size="70vw"
+    excludedRoutes={["/account/activate"]}
+   >
+    {children}
+   </Container>
+  </>
+ );
 }

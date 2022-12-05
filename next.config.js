@@ -24,6 +24,10 @@ const headers = [
     key: "X-Frame-Options",
     value: "DENY",
   },
+  {
+    key: "Cache-Control",
+    value: "max-age=120"
+  }
 ];
 
 /** @type {import('next').NextConfig} */
@@ -31,18 +35,19 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   compress: true,
-  // webpack: (config, { dev, isServer }) => {
-  //  if (!dev && !isServer) {
-  //   config.resolve.alias = {
-  //    ...config.resolve.alias,
-  //    "react/jsx-runtime.js": "preact/compat/jsx-runtime",
-  //    react: "preact/compat",
-  //    "react-dom/test-utils": "preact/test-utils",
-  //    "react-dom": "preact/compat",
-  //   };
-  //  }
 
-  //  return config;
+  // webpack: (config, { dev, isServer }) => {
+  //   if (!dev && !isServer) {
+  //     config.resolve.alias = {
+  //       ...config.resolve.alias,
+  //       "react/jsx-runtime.js": "preact/compat/jsx-runtime",
+  //       react: "preact/compat",
+  //       "react-dom/test-utils": "preact/test-utils",
+  //       "react-dom": "preact/compat",
+  //     };
+  //   }
+
+  //   return config;
   // },
 
   images: {

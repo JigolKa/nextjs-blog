@@ -48,13 +48,7 @@ export const updateSchema = {
  }),
 
  credentials: Yup.object().shape({
-  password: Yup.string()
-   .min(8, "Password should be of 8 characters minimum")
-   .test(
-    "one-uppercase character special character and a number",
-    "Password must contain at least one uppercase letter, one special character and one number",
-    (value) => validatePassword(value)
-   ),
+  password: Yup.string().min(8, "Password should be of 8 characters minimum"),
   passwordVerification: Yup.string().oneOf(
    [Yup.ref("password"), null],
    "Passwords must match"

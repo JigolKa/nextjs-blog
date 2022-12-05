@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { MdAlternateEmail, MdEmail } from "react-icons/md";
 import Head from "next/head";
 import { signupSchema } from "../utils/validators";
+import PasswordStrength from "../components/Login/PasswordStrength";
 
 const useStyles = createStyles((theme) => ({
  root: {
@@ -110,60 +111,67 @@ const Signup: NextPage = () => {
       validationSchema={signupSchema}
       onSubmit={async (values) => signup(values)}
      >
-      <Form className={classes.form}>
-       <Field name="email">
-        {({ field, meta }: FieldProps) => (
-         <Input.Wrapper error={meta.touched && meta.error} label="Your email">
-          <Input icon={<MdEmail />} placeholder="Enter your email" {...field} />
-         </Input.Wrapper>
-        )}
-       </Field>
+      {({ values }) => (
+       <Form className={classes.form}>
+        <Field name="email">
+         {({ field, meta }: FieldProps) => (
+          <Input.Wrapper error={meta.touched && meta.error} label="Your email">
+           <Input
+            icon={<MdEmail />}
+            placeholder="Enter your email"
+            {...field}
+           />
+          </Input.Wrapper>
+         )}
+        </Field>
 
-       <Field name="username">
-        {({ field, meta }: FieldProps) => (
-         <Input.Wrapper
-          error={meta.touched && meta.error}
-          label="Your username"
-         >
-          <Input
-           placeholder="Enter your username"
-           icon={<MdAlternateEmail />}
-           {...field}
-          />
-         </Input.Wrapper>
-        )}
-       </Field>
+        <Field name="username">
+         {({ field, meta }: FieldProps) => (
+          <Input.Wrapper
+           error={meta.touched && meta.error}
+           label="Your username"
+          >
+           <Input
+            placeholder="Enter your username"
+            icon={<MdAlternateEmail />}
+            {...field}
+           />
+          </Input.Wrapper>
+         )}
+        </Field>
 
-       <Field name="password">
-        {({ field, meta }: FieldProps) => (
-         <Input.Wrapper
-          error={meta.touched && meta.error}
-          label="Your password"
-         >
-          <PasswordInput placeholder="Enter your password" {...field} />
-         </Input.Wrapper>
-        )}
-       </Field>
+        <Field name="password">
+         {({ field, meta }: FieldProps) => (
+          <Input.Wrapper
+           error={meta.touched && meta.error}
+           label="Your password"
+          >
+           <PasswordInput placeholder="Enter your password" {...field} />
+          </Input.Wrapper>
+         )}
+        </Field>
+        <PasswordStrength value={values.password} />
 
-       <Field name="passwordVerification">
-        {({ field, meta }: FieldProps) => (
-         <Input.Wrapper
-          error={meta.touched && meta.error}
-          label="Password confirmation"
-         >
-          <PasswordInput placeholder="Re-enter your password" {...field} />
-         </Input.Wrapper>
-        )}
-       </Field>
+        <Field name="passwordVerification">
+         {({ field, meta }: FieldProps) => (
+          <Input.Wrapper
+           error={meta.touched && meta.error}
+           label="Password confirmation"
+          >
+           <PasswordInput placeholder="Re-enter your password" {...field} />
+          </Input.Wrapper>
+         )}
+        </Field>
 
-       <Button
-        type="submit"
-        style={{ alignSelf: "end", letterSpacing: 0.2 }}
-        loading={loading}
-       >
-        Sign up
-       </Button>
-      </Form>
+        <Button
+         type="submit"
+         style={{ alignSelf: "end", letterSpacing: 0.2 }}
+         loading={loading}
+        >
+         Sign up
+        </Button>
+       </Form>
+      )}
      </Formik>
     </div>
     <Link href="/login">

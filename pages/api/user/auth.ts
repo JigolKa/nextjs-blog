@@ -8,6 +8,7 @@ import { ONE_DAY, ONE_HOUR, ONE_MINUTE } from "../../../utils/time";
 import { getIP } from "../../../utils/ip";
 import sleep from "../../../utils/sleep";
 import NodeCache from "node-cache";
+import isBase64 from "../../../utils/strings/isBase64";
 
 type Request = {
  requestedAt: Date;
@@ -56,10 +57,11 @@ export default async function handler(
     }
    }
 
-   if (!(login || password)) {
-    res.status(400).json({ error: "Missing required fields" });
-    return;
-   }
+   if (!(login || password))
+    return res.status(400).json({ error: "Missing required fields" });
+
+   if (!(isBase64(login) || isBase64(password)))
+    return res.status(400).json({ error: "Fields not encrypted" });
 
    const _login = Buffer.from(login, "base64").toString("ascii");
    const _password = Buffer.from(password, "base64").toString("ascii");
@@ -129,6 +131,14 @@ export default async function handler(
    ]);
 
    return res.status(200).json(token);
+  }
+
+  case "DELETE": {
+   for (let i = 0; i < cache.keys().length; i++) {
+    const element = cache.keys()[i];
+    cache.del(element);
+   }
+   return res.end();
   }
 
   default: {

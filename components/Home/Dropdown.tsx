@@ -1,11 +1,10 @@
 import { createStyles } from "@mantine/core";
 import Image from "next/image";
 import { forwardRef, MutableRefObject, useEffect, useState } from "react";
-import useStore from "../state/store";
-import { ellipsis } from "../utils/css";
+import useStore from "../../state/store";
+import { ellipsis } from "../../utils/css";
 
 export interface DropdownProps extends React.ComponentPropsWithRef<"div"> {
- parent: HTMLElement | null;
  active: boolean;
  onHeader?: boolean;
  items: DropdownItem[];
@@ -65,13 +64,19 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Dropdown = forwardRef(
- ({ parent, items, active, onHeader, ...rest }: DropdownProps, ref) => {
-  const { user } = useStore();
+ ({ items, active, onHeader, ...rest }: DropdownProps, ref) => {
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const [width, setWidth] = useState(0);
+  const [parent, setParent] = useState<HTMLElement | null>(null);
+  const { user } = useStore();
 
   const { classes, cx } = useStyles();
+
+  useEffect(
+   () => setParent(document.querySelector<HTMLElement>("#search-input")),
+   []
+  );
 
   const updateCoordinates = (parent: HTMLElement) => {
    const rect = parent.getBoundingClientRect();
@@ -80,20 +85,23 @@ const Dropdown = forwardRef(
    setWidth(rect.width);
   };
 
-  useEffect(() => {
-   if (!parent) return;
+  useEffect(
+   () => {
+    if (!parent) return;
 
-   updateCoordinates(parent);
-
-   window.onresize = function () {
     updateCoordinates(parent);
-   };
-  }, [parent, user]);
+
+    window.onresize = function () {
+     updateCoordinates(parent);
+    };
+   },
+   typeof window !== "undefined" ? [parent, user] : [parent]
+  );
 
   useEffect(() => {
-   if (active) {
-    if (!ref) return;
+   if (!ref) return;
 
+   if (active) {
     (
      (ref as MutableRefObject<null>).current as unknown as HTMLElement
     ).scrollTop = 0;

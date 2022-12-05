@@ -4,7 +4,8 @@
  "rules": {
   "no-unused-vars": "error",
   "no-console": "error",
-  "react-hooks/exhaustive-deps": "off"
+  "react-hooks/exhaustive-deps": "off",
+  "@typescript-eslint/camelcase": ["off"]
  },
 
  "parserOptions": {

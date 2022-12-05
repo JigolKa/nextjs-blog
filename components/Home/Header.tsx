@@ -5,7 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { SearchContext } from "../../contexts/SearchContext";
-import Dropdown from "../Dropdown";
+import Dropdown from "./Dropdown";
 import HeaderSearch from "./HeaderSearch";
 import Button from "../Button";
 import Image from "next/image";
@@ -96,6 +96,9 @@ export default function Header() {
  const router = useRouter();
  const { logout } = useAuth();
 
+ //  const [displayedUser, setDisplayedUser] = useState<typeof user>(user);
+ //  useEffect(() => setDisplayedUser(user), [user]);
+
  const links: HeaderLink[] = [
   {
    icon: AiOutlinePlus,
@@ -146,11 +149,6 @@ export default function Header() {
 
    <Dropdown
     active={active}
-    parent={
-     typeof window !== "undefined"
-      ? document.querySelector("#search-input")
-      : null
-    }
     onHeader
     ref={dropdownRef}
     items={[
