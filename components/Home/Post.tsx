@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
  container: {
   width: "100%",
   padding: 12,
-  background: theme.fn.lighten(theme.colors.gray[1], 0.5),
+  background: theme.fn.lighten(theme.colors.gray[1], 0.3),
   boxShadow: theme.shadows.xs,
   borderRadius: 4,
   transition: "all 200ms ease",
