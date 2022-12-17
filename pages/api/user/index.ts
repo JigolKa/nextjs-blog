@@ -9,7 +9,10 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { ONE_HOUR } from "../../../utils/time";
 import config from "../../../utils/config";
-import { userWithoutPassword } from "../../../utils/api/db/post";
+import {
+ userWithoutPassword,
+ userWithoutPasswordAndPosts,
+} from "../../../utils/api/db/user";
 import isBase64 from "../../../utils/strings/isBase64";
 
 export default async function handler(
@@ -101,25 +104,9 @@ export default async function handler(
         include: {
          dislikedBy: true,
          likedBy: true,
-         topics: true,
         },
        },
-       password: false,
-       userId: true,
-       username: true,
-       email: true,
-       createdAt: true,
-       permissions: true,
-       profilePicture: true,
-       followedBy: true,
-       followedByIDs: true,
-       following: true,
-       followingIDs: true,
-       activated: true,
-       likedIDs: true,
-       liked: true,
-       dislikedIDs: true,
-       disliked: true,
+       ...userWithoutPasswordAndPosts,
       },
      });
 

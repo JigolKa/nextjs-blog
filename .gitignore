@@ -8,3 +8,4 @@ tsconfig.tsbuildinfo
 .svn
 # Local Netlify folder
 .netlify
+/pages/api/test.ts

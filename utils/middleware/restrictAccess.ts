@@ -5,6 +5,7 @@ import decodeToken, {
 import prisma from "../../prisma/instance";
 import { Middleware } from "next-api-route-middleware";
 import { NextApiRequestWithMiddlewareObject } from "../..";
+import { userWithoutPassword } from "../api/db/user";
 
 const restrictAccess = (
  methods: string[]
@@ -26,6 +27,9 @@ const restrictAccess = (
     const user = await prisma.user.findFirst({
      where: {
       userId: decoded.data.userId,
+     },
+     select: {
+      ...userWithoutPassword,
      },
     });
 

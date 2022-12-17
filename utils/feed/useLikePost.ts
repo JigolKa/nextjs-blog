@@ -1,4 +1,4 @@
-import { Post, Topic, User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import { ActionType } from "../../";
 import useStore from "../../state/store";
 
 export default function useLikePost(
- _post: Post & { author: User; topics: Topic[] },
+ _post: Post & { author: User },
  // eslint-disable-next-line
  callback?: (post: FullPost) => any
 ) {

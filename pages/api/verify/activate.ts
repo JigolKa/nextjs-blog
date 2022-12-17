@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/instance";
+import { userWithoutPassword } from "../../../utils/api/db/user";
 import sendMail from "../../../utils/api/mail";
 import config from "../../../utils/config";
 
@@ -91,6 +92,9 @@ export default async function handler(
     },
     data: {
      activated: true,
+    },
+    select: {
+     ...userWithoutPassword,
     },
    });
 

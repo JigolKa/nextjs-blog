@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../prisma/instance";
-import { userWithoutPassword } from "../../../../utils/api/db/post";
+import { userWithoutPassword } from "../../../../utils/api/db/user";
 
 export default async function handler(
  req: NextApiRequest,

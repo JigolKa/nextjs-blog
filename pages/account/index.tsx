@@ -1,14 +1,26 @@
-import { createStyles, Modal } from "@mantine/core";
+import { createStyles } from "@mantine/core";
 import { useRouter } from "next/router";
 import { createRef, MutableRefObject, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import useRefresh from "../../utils/authentication/useRefresh";
 import Head from "next/head";
-import NotActivated from "../../components/Account/NotActivated";
-import InformationsForm from "../../components/Account/Forms/InformationsForm";
-import PasswordForm from "../../components/Account/Forms/PasswordForm";
-import DeletionForm from "../../components/Account/Forms/DeletionForm";
 import useStore from "../../state/store";
+import dynamic from "next/dynamic";
+
+const NotActivated = dynamic(
+ () => import("../../components/Account/NotActivated")
+);
+const InformationsForm = dynamic(
+ () => import("../../components/Account/Forms/InformationsForm")
+);
+const PasswordForm = dynamic(
+ () => import("../../components/Account/Forms/PasswordForm")
+);
+const DeletionForm = dynamic(
+ () => import("../../components/Account/Forms/DeletionForm")
+);
+
+const Modal = dynamic(() => import("@mantine/core").then((mod) => mod.Modal));
 
 const useStyles = createStyles((theme) => ({
  form: {

@@ -1,6 +1,9 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Container from "./Container";
-import Header from "./Home/Header";
+const Header = dynamic(() => import("./Home/Header"), {
+ ssr: false,
+});
 
 export interface LayoutProps {
  children: JSX.Element;

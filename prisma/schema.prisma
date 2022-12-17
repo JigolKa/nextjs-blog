@@ -36,23 +36,16 @@ model Post {
   images        String[]
   video         String?
   quotedWebsite String?
-  city          String
-  region        String
-  regionName    String
-  country       String
-  lat           Float
-  lon           Float
   timezone      String
+  topics        String[]
   slug          String    @unique
   likedByIDs    String[]  @db.ObjectId
   likedBy       User[]    @relation(name: "likedPosts", fields: [likedByIDs], references: [userId])
   dislikedByIDs String[]  @db.ObjectId
   dislikedBy    User[]    @relation(name: "dislikedPosts", fields: [dislikedByIDs], references: [userId])
-  topicIDs      String[]  @db.ObjectId
-  topics        Topic[]   @relation(fields: [topicIDs], references: [topicId])
   author        User      @relation(fields: [authorId], references: [userId])
   authorId      String    @db.ObjectId
-  Comment       Comment[]
+  comments      Comment[]
 }
 
 model Comment {
@@ -61,14 +54,6 @@ model Comment {
   post      Post   @relation(fields: [postId], references: [postId])
   authorId  String
   postId    String
-}
-
-model Topic {
-  topicId     String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String?
-  posts       Post[]   @relation(fields: [postIDs], references: [postId])
-  postIDs     String[] @db.ObjectId
 }
 
 model Activation {

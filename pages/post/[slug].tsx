@@ -4,14 +4,16 @@ import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import { AiOutlineLink } from "react-icons/ai";
 import { FullPost } from "../..";
-import PostOverlay from "../../components/Post/PostOverlay";
 import prisma from "../../prisma/instance";
 import useLikePost from "../../utils/feed/useLikePost";
-import PostComponent from "../../components/Home/Post";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import getPosts from "../../utils/feed";
 import { serializeArray, serializeJSON } from "../../utils/json";
 import nl2br from "../../utils/strings/nl2br";
+
+const PostOverlay = dynamic(() => import("../../components/Post/PostOverlay"));
+const Post = dynamic(() => import("../../components/Home/Post"));
 
 const useStyles = createStyles((theme) => ({
  description: {
@@ -47,7 +49,7 @@ interface Props {
  feed: FullPost[];
 }
 
-const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
+const PostPage: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
  const { classes } = useStyles();
  const { likePost, liked, disliked, post } = useLikePost(_post);
 
@@ -74,7 +76,7 @@ const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
      <span className="more">More from {post.author.username}:</span>
      {otherPosts.length ? (
       otherPosts.map((p) => (
-       <PostComponent dontShowMeta dontRefreshFeed post={p} key={p.slug} />
+       <Post dontShowMeta dontRefreshFeed post={p} key={p.slug} />
       ))
      ) : (
       <h4>No others posts from {post.author.username}</h4>
@@ -90,7 +92,7 @@ const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
     <div className={classes.author}>
      <span className="more">Others posts:</span>
      {feed && feed.length ? (
-      feed.map((p) => <PostComponent dontRefreshFeed post={p} key={p.slug} />)
+      feed.map((p) => <Post dontRefreshFeed post={p} key={p.slug} />)
      ) : (
       <h4>No others posts</h4>
      )}
@@ -102,7 +104,7 @@ const Post: NextPage<Props> = ({ post: _post, otherPosts, feed }) => {
  return null;
 };
 
-export default Post;
+export default PostPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
  const { slug } = context.params as ParsedUrlQuery;
@@ -123,7 +125,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   },
   include: {
    author: true,
-   topics: true,
   },
  });
 
@@ -146,11 +147,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   },
   include: {
    author: true,
-   topics: true,
   },
  });
 
- const feed = await getPosts({ context: context }, undefined, undefined, [
+ const feed = await getPosts({ context: context }, "hot", [
   post.postId,
   ...otherPosts.map((p) => p.postId),
  ]);

@@ -1,9 +1,15 @@
 import { createStyles, Tooltip } from "@mantine/core";
-import { Post, Topic, User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef, MutableRefObject } from "react";
+import {
+ forwardRef,
+ MutableRefObject,
+ useEffect,
+ useMemo,
+ useState,
+} from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
@@ -13,12 +19,12 @@ import { Booleanish } from "../..";
 import { ellipsis } from "../../utils/css";
 import useLikePost from "../../utils/feed/useLikePost";
 import nl2br from "../../utils/strings/nl2br";
+import { getUnixTime } from "../../utils/time";
 import TransitionalButton from "./TransitionalButton";
 
 export interface PostProps {
  post: Post & {
   author: User;
-  topics: Topic[];
  };
  dontRefreshFeed?: boolean;
  dontShowMeta?: boolean;
@@ -58,6 +64,24 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[6],
     maxWidth: "100%",
    }),
+  },
+
+  ".topics": {
+   display: "flex",
+   gap: 10,
+   marginBlock: "15px 20px",
+
+   span: {
+    padding: "4px 8px",
+    borderRadius: 4,
+    background: theme.colors.gray[2],
+    color: "#000",
+    transition: "background 200ms ease",
+
+    "&:hover": {
+     background: theme.colors.gray[3],
+    },
+   },
   },
 
   ".author": {
@@ -101,19 +125,21 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
    <div className={classes.container} ref={ref as MutableRefObject<null>}>
     {!dontShowMeta && (
      <div className="flex:post">
-      <Link href={`/user/${post.author.username}`} className="author">
-       <div className="profilePicture">
-        <Image
-         quality={50}
-         sizes="100%"
-         width={24}
-         height={24}
-         src={post.author.profilePicture}
-         alt="Profile picture"
-        />
-       </div>
-       <span>{post.author.username}</span>
-      </Link>
+      {post.author && (
+       <Link href={`/user/${post.author.username}`} className="author">
+        <div className="profilePicture">
+         <Image
+          quality={50}
+          sizes="100%"
+          width={24}
+          height={24}
+          src={post.author.profilePicture}
+          alt="Profile picture"
+         />
+        </div>
+        <span>{post.author.username}</span>
+       </Link>
+      )}
       <div className={classes.dot}>•</div>
       <Tooltip
        position="top"
@@ -131,11 +157,18 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
     <div className="content">
      <Link className="fix-width" href={`/post/${post.slug}`}>
       <span className="title">{post.title}</span>
-     </Link>
-     <Link className="fix-width" href={`/post/${post.slug}`}>
       <p className="description">{nl2br(post.content)}</p>
      </Link>
     </div>
+    {post.topics.length && (
+     <div className="topics">
+      {post.topics.map((t) => (
+       <Link key={t} href={`/topic/${t}`}>
+        <span>{t}</span>
+       </Link>
+      ))}
+     </div>
+    )}
     <div className="actions">
      <TransitionalButton
       hover={{ x: "-22.5%", y: "-22.5%" }}

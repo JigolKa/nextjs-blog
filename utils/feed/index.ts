@@ -3,44 +3,32 @@ import prisma from "../../prisma/instance";
 import decodeToken, { DecodeTokenSuccess } from "../api/auth/decodeToken";
 import _ from "underscore";
 import { User } from "@prisma/client";
+import { userWithoutPassword } from "../api/db/user";
+import { fetchSortedPosts, SortingAlgorithm } from "../sorting";
 
 async function _getPostsWithoutUser(
  pass: number = 0,
  limit: number = 15,
- not?: string[]
+ sort: SortingAlgorithm = "hot",
+ notIn: string[] = []
 ) {
- return await prisma.post.findMany({
-  where: {
-   NOT: {
-    postId: {
-     in: not || undefined,
-    },
-   },
-  },
-  include: {
-   author: true,
-   likedBy: true,
-   dislikedBy: true,
-   topics: true,
-  },
-  take: limit,
-  skip: pass,
- });
+ return await fetchSortedPosts(limit, pass, sort, notIn);
 }
 
 export interface getPostsParams {
  context?: GetServerSidePropsContext;
  token?: string;
- user?: User & {
-  following: User[];
+ user?: Omit<User, "password"> & {
+  following: Omit<User, "password">[];
  };
 }
 
 export default async function getPosts(
  cookie: getPostsParams,
+ sort: SortingAlgorithm,
+ notIn: string[] = [],
  pass: number = 0,
- limit: number = 15,
- not?: string[]
+ limit: number = 15
 ) {
  const token = cookie.context
   ? cookie.context.req.cookies["token"]
@@ -48,7 +36,7 @@ export default async function getPosts(
 
  if (cookie.user) {
   if (!_.isEmpty(cookie.user.following)) {
-   return await takeFollowing(cookie.user, pass, limit, not);
+   return await takeFollowing(cookie.user, pass, limit, sort);
   }
  }
 
@@ -62,28 +50,31 @@ export default async function getPosts(
    where: {
     userId: userId,
    },
-   include: {
-    following: true,
+   select: {
+    ...userWithoutPassword,
    },
   });
 
-  if (!user) return await _getPostsWithoutUser(pass, limit, not);
+  if (!user) return await _getPostsWithoutUser(pass, limit, sort, notIn);
 
   if (!_.isEmpty(user.following)) {
-   return await takeFollowing(user, pass, limit, not);
+   return await takeFollowing(user, pass, limit, sort);
   }
 
-  return await _getPostsWithoutUser(pass, limit, not);
+  return await _getPostsWithoutUser(pass, limit, sort, notIn);
  }
 
- return await _getPostsWithoutUser(pass, limit, not);
+ return await _getPostsWithoutUser(pass, limit, sort, notIn);
 }
 
 async function takeFollowing(
- user: User & { following: User[] },
+ user: Omit<User, "password"> & {
+  following: Omit<User, "password">[];
+ },
  pass: number,
  limit: number,
- not?: string[]
+ sort: SortingAlgorithm,
+ notIn: string[] = []
 ) {
  const posts = await prisma.post.findMany({
   where: {
@@ -94,19 +85,20 @@ async function takeFollowing(
    },
    NOT: {
     postId: {
-     in: not || undefined,
+     in: notIn || undefined,
     },
    },
   },
   take: limit,
   skip: pass,
   include: {
-   author: true,
-   likedBy: true,
-   dislikedBy: true,
-   topics: true,
+   author: {
+    select: {
+     ...userWithoutPassword,
+    },
+   },
   },
  });
 
- return posts || (await _getPostsWithoutUser(pass, limit, not));
+ return posts || (await _getPostsWithoutUser(pass, limit, sort, notIn));
 }

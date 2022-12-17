@@ -1,6 +1,42 @@
 import prisma from "../../../../prisma/instance";
 import { addToArray, removeFromArray } from "../../../arrays";
-import { userWithoutPassword } from "../post";
+
+export const userWithoutPassword = {
+ userId: true,
+ username: true,
+ email: true,
+ createdAt: true,
+ permissions: true,
+ profilePicture: true,
+ posts: true,
+ followedBy: true,
+ followedByIDs: true,
+ following: true,
+ followingIDs: true,
+ activated: true,
+ likedIDs: true,
+ liked: true,
+ dislikedIDs: true,
+ disliked: true,
+};
+
+export const userWithoutPasswordAndPosts = {
+ userId: true,
+ username: true,
+ email: true,
+ createdAt: true,
+ permissions: true,
+ profilePicture: true,
+ followedBy: true,
+ followedByIDs: true,
+ following: true,
+ followingIDs: true,
+ activated: true,
+ likedIDs: true,
+ liked: true,
+ dislikedIDs: true,
+ disliked: true,
+};
 
 //? QUESTION: do request to db to grab user/post
 //? OR pass only necessary user's/post's data through post body
@@ -33,6 +69,9 @@ export async function followUser(userIdToFollow: string, sourceUserId: string) {
        )
      : addToArray(sourceUser.followingIDs, userToFollow.userId),
    },
+  },
+  select: {
+   ...userWithoutPassword,
   },
  });
 

@@ -1,3 +1,5 @@
+import truncate from "./truncate";
+
 export default function toSlug(str: string) {
  str = str.replace(/^\s+|\s+$/g, ""); // trim
  str = str.toLowerCase();
@@ -16,8 +18,10 @@ export default function toSlug(str: string) {
  return str;
 }
 
-export async function getUniqueSlug(str: string) {
- const slug = toSlug(`${str}-${Math.floor(Math.random() * 64 ** 4)}`);
+export function getUniqueSlug(str: string) {
+ const slug = toSlug(
+  `${truncate(str, 50)}-${Math.floor(Math.random() * 64 ** 4)}`
+ );
 
  return slug;
 }

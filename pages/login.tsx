@@ -3,13 +3,18 @@ import { NextPage } from "next";
 import React from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
-import { Field, FieldProps, Form, Formik } from "formik";
-import { LoginValues } from "..";
+import type { LoginValues } from "..";
 import useAuth from "../utils/authentication/useAuth";
-import Button from "../components/Button";
 import { MdEmail } from "react-icons/md";
 import Head from "next/head";
 import { loginSchema } from "../utils/validators";
+import dynamic from "next/dynamic";
+import { FieldProps } from "formik";
+
+const Button = dynamic(() => import("../components/Button"));
+const Formik = dynamic(() => import("formik").then((mod) => mod.Formik));
+const Form = dynamic(() => import("formik").then((mod) => mod.Form));
+const Field = dynamic(() => import("formik").then((mod) => mod.Field));
 
 const useStyles = createStyles((theme) => ({
  root: {
@@ -100,13 +105,13 @@ const Login: NextPage = () => {
     <div className={classes.container}>
      <h2>Login</h2>
 
-     <Formik<LoginValues>
+     <Formik
       initialValues={{
        email: "",
        password: "",
       }}
       validationSchema={loginSchema}
-      onSubmit={async (values) => login(values)}
+      onSubmit={async (values) => login(values as LoginValues)}
      >
       <Form className={classes.form}>
        <Field name="email">

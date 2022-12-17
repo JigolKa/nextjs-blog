@@ -39,3 +39,18 @@ export function exclude<T, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
 export function excludeArray<T, K extends keyof T>(arr: Array<T>, keys: K[]) {
  return arr.map((v) => exclude(v, keys));
 }
+
+export function removeKeys<T>(
+ obj: T,
+ keys: (keyof T)[]
+): Omit<T, typeof keys[number]> {
+ var out = { ...obj };
+
+ for (let i = 0; i < keys.length; i++) {
+  const key = keys[i];
+
+  delete out[key];
+ }
+
+ return out as Omit<T, typeof keys[number]>;
+}

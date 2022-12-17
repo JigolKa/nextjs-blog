@@ -37,12 +37,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
      },
     });
 
-    const deletion = await prisma.user.delete({
-     where: {
-      userId: userId as string,
-     },
-    });
-    return res.status(200).json(deletion);
+    return res.status(200).json(
+     await prisma.user.delete({
+      where: {
+       userId: userId as string,
+      },
+     })
+    );
    }
 
    return res.status(403).json({ error: "Bad password" });

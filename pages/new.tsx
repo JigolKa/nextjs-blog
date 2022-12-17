@@ -1,16 +1,21 @@
-import { createStyles, Input, Textarea } from "@mantine/core";
+import { createStyles, Input, MultiSelect, Textarea } from "@mantine/core";
 import axios from "axios";
-import { Field, FieldProps, Form, Formik } from "formik";
+import { FieldProps } from "formik";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import Button from "../components/Button";
 import useStore from "../state/store";
 import setAuthorization from "../utils/api/auth/setAuthorization";
 import cookies from "../utils/cookies";
+
+const Button = dynamic(() => import("../components/Button"));
+const Formik = dynamic(() => import("formik").then((mod) => mod.Formik));
+const Form = dynamic(() => import("formik").then((mod) => mod.Form));
+const Field = dynamic(() => import("formik").then((mod) => mod.Field));
 
 const useStyles = createStyles(() => ({
  form: {
@@ -37,8 +42,15 @@ export default function New() {
  const { user } = useStore();
  const [loading, setLoading] = useState(false);
  const router = useRouter();
+ const [topics, setTopics] = useState<{ value: string; label: string }[]>([]);
+ const [topicsList, setTopicsList] = useState<string[]>([]);
 
- const create = async ({ description, title }: PostValues) => {
+ const create = async (
+  { description, title }: PostValues,
+  topics: string[]
+ ) => {
+  if (!user) return;
+
   setLoading(true);
 
   try {
@@ -47,7 +59,8 @@ export default function New() {
     {
      title: title,
      description: description,
-     authorId: user ? user.userId : null,
+     authorId: user.userId,
+     topics: topicsList,
     },
     setAuthorization(cookies.get("token") || "")
    );
@@ -90,13 +103,13 @@ export default function New() {
     <title>Create a post - Blog</title>
    </Head>
    <h1>Create a new post</h1>
-   <Formik<PostValues>
+   <Formik
     initialValues={{
      title: "",
      description: "",
     }}
     validationSchema={validationSchema}
-    onSubmit={async (v) => await create(v)}
+    onSubmit={async (v) => await create(v as PostValues, topicsList)}
    >
     <Form className={classes.form}>
      <Field name="title">
@@ -119,6 +132,23 @@ export default function New() {
        </Input.Wrapper>
       )}
      </Field>
+
+     <MultiSelect
+      searchable
+      limit={15}
+      label="Topics"
+      placeholder="Choose your post's topics"
+      creatable
+      data={topics}
+      value={topicsList}
+      onChange={setTopicsList}
+      getCreateLabel={(query) => `+ Add ${query}`}
+      onCreate={(query) => {
+       const item = { value: query, label: query };
+       setTopics((current) => [...current, item]);
+       return item;
+      }}
+     />
 
      <Button
       type="submit"

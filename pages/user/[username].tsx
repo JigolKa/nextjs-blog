@@ -1,25 +1,27 @@
 import { Avatar, createStyles, Tooltip } from "@mantine/core";
-import { Post, Topic, User } from "@prisma/client";
+import type { Post as PostType, User } from "@prisma/client";
 import axios from "axios";
 import { GetServerSidePropsContext, NextPage } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { useEffect, useState } from "react";
-import Button from "../../components/Button";
-import PostComponent from "../../components/Home/Post";
 import prisma from "../../prisma/instance";
 import useStore from "../../state/store";
+import { userWithoutPasswordAndPosts } from "../../utils/api/db/user";
 import { serializeJSON } from "../../utils/json";
 import membership from "../../utils/strings/membership";
 
+const Button = dynamic(() => import("../../components/Button"));
+const Post = dynamic(() => import("../../components/Home/Post"));
+
 interface Props {
  user: User & {
-  posts: (Post & {
+  posts: (PostType & {
    author: User;
-   topics: Topic[];
   })[];
   following: User[];
   followedBy: User[];
@@ -200,7 +202,7 @@ const Account: NextPage<Props> = ({ user }) => {
       <h2>Posts from {user.username}</h2>
       <div className="container">
        {user.posts.map((post) => (
-        <PostComponent dontShowMeta post={post} key={post.postId} />
+        <Post dontShowMeta post={post} key={post.postId} />
        ))}
       </div>
      </div>
@@ -231,15 +233,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   where: {
    username: username as string,
   },
-  include: {
+  select: {
    posts: {
     include: {
      author: true,
-     topics: true,
     },
    },
-   following: true,
-   followedBy: true,
+   ...userWithoutPasswordAndPosts,
   },
  });
 

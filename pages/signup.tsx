@@ -6,11 +6,15 @@ import Link from "next/link";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { SignUpValues } from "..";
 import useAuth from "../utils/authentication/useAuth";
-import Button from "../components/Button";
 import { MdAlternateEmail, MdEmail } from "react-icons/md";
 import Head from "next/head";
 import { signupSchema } from "../utils/validators";
-import PasswordStrength from "../components/Login/PasswordStrength";
+import dynamic from "next/dynamic";
+
+const PasswordStrength = dynamic(
+ () => import("../components/Login/PasswordStrength")
+);
+const Button = dynamic(() => import("../components/Button"));
 
 const useStyles = createStyles((theme) => ({
  root: {

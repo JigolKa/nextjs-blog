@@ -5,7 +5,7 @@
  "scripts": {
   "dev": "next dev",
   "build": "next build",
-  "start": "next start",
+  "start": "next start && curl https://awesome-nextjs-blog.netlify.app/api/ranking?boot=true",
   "lint": "next lint",
   "format": "npx prettier --write .",
   "prisma": "npx prisma format && npx prisma generate",
@@ -33,6 +33,7 @@
   "redux-persist": "^6.0.0",
   "redux-thunk": "^2.4.1",
   "sass": "^1.55.0",
+  "sharp": "^0.31.2",
   "underscore": "^1.13.6",
   "yup": "^0.32.11",
   "zustand": "^4.1.4"

@@ -3,9 +3,16 @@ import { use } from "next-api-route-middleware";
 import { NextApiRequestWithMiddlewareObject } from "../../..";
 import prisma from "../../../prisma/instance";
 import restrictAccess from "../../../utils/middleware/restrictAccess";
-import { userWithoutPassword } from "../../../utils/api/db/post";
+import {
+ userWithoutPassword,
+ userWithoutPasswordAndPosts,
+} from "../../../utils/api/db/user";
 
 import { getUniqueSlug } from "../../../utils/strings/toSlug";
+import sortPosts, {
+ fetchSortedPosts,
+ SortingAlgorithm,
+} from "../../../utils/sorting";
 
 async function handler(
  req: NextApiRequestWithMiddlewareObject,
@@ -15,7 +22,8 @@ async function handler(
 
  switch (req.method) {
   case "POST": {
-   const { description, title, quotedWebsite, images, video } = req.body;
+   const { description, title, quotedWebsite, images, video, topics } =
+    req.body;
 
    if (!(description || title)) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -35,12 +43,7 @@ async function handler(
      quotedWebsite: quotedWebsite || undefined,
      images: images || undefined,
      video: video || undefined,
-     city: "Denver",
-     region: "Paris",
-     regionName: "Paris Ile de France",
-     country: "France",
-     lat: 45,
-     lon: 7,
+     topics: topics || [],
      author: {
       connect: {
        userId: decoded.data.userId,
@@ -58,24 +61,22 @@ async function handler(
     },
    });
 
+   console.log(post);
+
    return res.status(200).json(post);
   }
 
   case "GET": {
-   const posts = await prisma.post.findMany({
-    include: {
-     author: {
-      select: {
-       ...userWithoutPassword,
-      },
-     },
-     likedBy: true,
-     dislikedBy: true,
-     topics: true,
-    },
-   });
+   const { skip, take, sort, notIn } = req.query;
 
-   return res.status(200).json(posts);
+   const sortedPosts = await fetchSortedPosts(
+    Number(take),
+    Number(skip),
+    sort as SortingAlgorithm,
+    Array.isArray(notIn) ? notIn : []
+   );
+
+   return res.status(200).json(sortedPosts || -1);
   }
 
   default: {

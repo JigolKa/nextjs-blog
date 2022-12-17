@@ -26,7 +26,7 @@ const useStyles = createStyles(
     width: size ? size : 40,
     height: size ? size : 40,
     borderRadius: 999,
-    background: layerBackground ? layerBackground : theme.colors.gray[1],
+    background: layerBackground ? layerBackground : theme.colors.gray[2],
     position: "absolute",
     transition: "all 300ms ease",
     transform: "translate(-1px, -1px)",

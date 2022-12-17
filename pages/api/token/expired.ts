@@ -20,6 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
      activated: true,
     },
    });
+
    const token = jwt.sign(
     {
      sub: user!.userId,

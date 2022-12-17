@@ -2,8 +2,8 @@
  "extends": ["next", "next/core-web-vitals"],
 
  "rules": {
-  "no-unused-vars": "error",
-  "no-console": "error",
+  // "no-unused-vars": "error",
+  // "no-console": "error",
   "react-hooks/exhaustive-deps": "off",
   "@typescript-eslint/camelcase": ["off"]
  },
