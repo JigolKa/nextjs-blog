@@ -1,5 +1,6 @@
 import { User, Post as PostType } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
+import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 import { FullPost } from "../..";
 import Post from "../../components/Home/Post";
@@ -14,6 +15,9 @@ interface Props {
 export default function Topic({ posts, topic }: Props) {
  return (
   <>
+   <Head>
+    <title>Posts with topic {topic} - Blog</title>
+   </Head>
    {posts.length ? (
     <>
      <h3 style={{ marginBottom: 15 }}>Posts with topic {topic}</h3>
