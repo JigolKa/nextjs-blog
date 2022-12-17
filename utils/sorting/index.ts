@@ -52,6 +52,7 @@ export default function sortPosts(
  posts: PostType[],
  algorithm: SortingAlgorithm
 ) {
+ // eslint-disable-next-line
  const algorithms: { [key in SortingAlgorithm]: PostType[] } = {
   hot: posts.sort(hot),
   new: posts.sort(

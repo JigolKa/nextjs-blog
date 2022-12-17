@@ -1,18 +1,15 @@
-import { createStyles, Select } from "@mantine/core";
+import { createStyles } from "@mantine/core";
 import axios from "axios";
 import type { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { PostsFetching } from "..";
 import PostSkeleton from "../components/Home/PostSkeleton";
 import getPosts from "../utils/feed";
 import { serializeArray } from "../utils/json";
 import { SortingAlgorithm } from "../utils/sorting";
-import { IoMdFlame } from "react-icons/io";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { MdLeaderboard } from "react-icons/md";
 
 const Post = dynamic(() => import("../components/Home/Post"));
 
@@ -84,34 +81,13 @@ const useStyles = createStyles((theme) => ({
  },
 }));
 
-const actions = [
- {
-  icon: IoMdFlame,
-  value: "hot",
-  label: "Hottest",
-  color: "red",
- },
- {
-  icon: AiOutlineClockCircle,
-  value: "new",
-  label: "Newest",
-  color: "blue",
- },
- {
-  icon: MdLeaderboard,
-  label: "Top",
-  color: "green",
-  value: "top",
- },
-];
-
 const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
- const { classes, cx } = useStyles();
+ const { classes } = useStyles();
  const [isFetching, setIsFetching] = useState(false);
  const [posts, setPosts] = useState(_posts);
  const [postsOffset, setPostsOffset] = useState(15);
- const [sort, setSort] = useState<SortingAlgorithm>("hot");
- const [hasChangedSort, setHasChangedSort] = useState(false);
+ const [sort] = useState<SortingAlgorithm>("hot");
+ const [hasChangedSort] = useState(false);
 
  useEffect(() => setPosts(_posts), [_posts]);
 
@@ -142,16 +118,6 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
   return () => window.removeEventListener("scroll", callback);
  });
 
- const changeSort = (s: SortingAlgorithm) => {
-  setHasChangedSort(true);
-  if (sort === s) {
-   setSort("hot");
-   return;
-  } else {
-   setSort(s);
-  }
- };
-
  useEffect(() => {
   if (!hasChangedSort) return;
 
@@ -162,9 +128,6 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
    setIsFetching(false);
   });
  }, [sort]);
-
- useEffect(() => console.log(posts), [posts]);
- useEffect(() => console.log(sort), [sort]);
 
  return (
   <>
@@ -212,8 +175,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   { context: context },
   (context.req.cookies["sort"] as SortingAlgorithm) || "hot"
  );
-
- console.log(posts);
 
  return {
   props: {

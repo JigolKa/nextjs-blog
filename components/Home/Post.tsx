@@ -3,13 +3,7 @@ import { Post, User } from "@prisma/client";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import {
- forwardRef,
- MutableRefObject,
- useEffect,
- useMemo,
- useState,
-} from "react";
+import { forwardRef, MutableRefObject } from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
@@ -19,7 +13,6 @@ import { Booleanish } from "../..";
 import { ellipsis } from "../../utils/css";
 import useLikePost from "../../utils/feed/useLikePost";
 import nl2br from "../../utils/strings/nl2br";
-import { getUnixTime } from "../../utils/time";
 import TransitionalButton from "./TransitionalButton";
 
 export interface PostProps {

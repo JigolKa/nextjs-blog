@@ -1,7 +1,6 @@
 import { User, Post as PostType } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
-import _ from "underscore";
 import { FullPost } from "../..";
 import Post from "../../components/Home/Post";
 import prisma from "../../prisma/instance";

@@ -45,10 +45,7 @@ export default function New() {
  const [topics, setTopics] = useState<{ value: string; label: string }[]>([]);
  const [topicsList, setTopicsList] = useState<string[]>([]);
 
- const create = async (
-  { description, title }: PostValues,
-  topics: string[]
- ) => {
+ const create = async ({ description, title }: PostValues) => {
   if (!user) return;
 
   setLoading(true);
@@ -109,7 +106,7 @@ export default function New() {
      description: "",
     }}
     validationSchema={validationSchema}
-    onSubmit={async (v) => await create(v as PostValues, topicsList)}
+    onSubmit={async (v) => await create(v as PostValues)}
    >
     <Form className={classes.form}>
      <Field name="title">

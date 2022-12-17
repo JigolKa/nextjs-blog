@@ -1,5 +1,5 @@
 import { createStyles, Divider } from "@mantine/core";
-import { Post, Topic, User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, MutableRefObject } from "react";
@@ -16,7 +16,6 @@ import TransitionalButton from "../Home/TransitionalButton";
 export interface PostOverlayProps {
  post: Post & {
   author: User;
-  topics: Topic[];
  };
  liked: boolean;
  disliked: boolean;

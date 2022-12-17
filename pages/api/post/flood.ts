@@ -9,7 +9,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
  const token = await axios.post("http://localhost:3000/api/token/generate");
 
  for (let i = 30; i < 900; i++) {
-  console.log("flooded post", i);
   await axios.post(
    "http://localhost:3000/api/post",
    {

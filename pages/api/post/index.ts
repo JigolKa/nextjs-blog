@@ -3,16 +3,10 @@ import { use } from "next-api-route-middleware";
 import { NextApiRequestWithMiddlewareObject } from "../../..";
 import prisma from "../../../prisma/instance";
 import restrictAccess from "../../../utils/middleware/restrictAccess";
-import {
- userWithoutPassword,
- userWithoutPasswordAndPosts,
-} from "../../../utils/api/db/user";
+import { userWithoutPassword } from "../../../utils/api/db/user";
 
 import { getUniqueSlug } from "../../../utils/strings/toSlug";
-import sortPosts, {
- fetchSortedPosts,
- SortingAlgorithm,
-} from "../../../utils/sorting";
+import { fetchSortedPosts, SortingAlgorithm } from "../../../utils/sorting";
 
 async function handler(
  req: NextApiRequestWithMiddlewareObject,
@@ -34,7 +28,7 @@ async function handler(
 
    const { decoded } = req.middlewareData;
 
-   const slug = await getUniqueSlug(title);
+   const slug = getUniqueSlug(title);
 
    const post = await prisma.post.create({
     data: {
@@ -60,8 +54,6 @@ async function handler(
      },
     },
    });
-
-   console.log(post);
 
    return res.status(200).json(post);
   }
