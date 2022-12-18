@@ -87,9 +87,6 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
  const [posts, setPosts] = useState(_posts);
  const [postsOffset, setPostsOffset] = useState(15);
  const [sort] = useState<SortingAlgorithm>("hot");
- const [hasChangedSort] = useState(false);
-
- useEffect(() => setPosts(_posts), [_posts]);
 
  useEffect(() => {
   const callback = () =>
@@ -117,17 +114,6 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
 
   return () => window.removeEventListener("scroll", callback);
  });
-
- useEffect(() => {
-  if (!hasChangedSort) return;
-
-  setIsFetching(true);
-
-  axios.get(`/api/post?sort=${sort}&take=15`).then((res) => {
-   if (Number(res.data) !== -1) setPosts(res.data);
-   setIsFetching(false);
-  });
- }, [sort]);
 
  return (
   <>
@@ -171,10 +157,7 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
 export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
- const posts = await getPosts(
-  { context: context },
-  (context.req.cookies["sort"] as SortingAlgorithm) || "hot"
- );
+ const posts = await getPosts({ context: context }, "hot");
 
  return {
   props: {

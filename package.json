@@ -5,7 +5,7 @@
  "scripts": {
   "dev": "next dev",
   "build": "next build",
-  "start": "next start && curl https://awesome-nextjs-blog.netlify.app/api/ranking?boot=true",
+  "start": "next start",
   "lint": "next lint",
   "format": "npx prettier --write .",
   "prisma": "npx prisma format && npx prisma generate",
