@@ -1,0 +1,11 @@
+node_modules
+trash
+.vscode
+/logs
+.next
+.env
+tsconfig.tsbuildinfo
+.svn
+# Local Netlify folder
+.netlify
+/pages/api/test.ts
