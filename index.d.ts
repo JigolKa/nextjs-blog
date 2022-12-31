@@ -1,4 +1,4 @@
-import { Post, User } from "@prisma/client";
+import { Comment, Post, User } from "@prisma/client";
 import { NextApiRequest } from "next";
 
 export interface Token {
@@ -32,9 +32,6 @@ export type ActionType = "like" | "dislike";
 export interface PostsFetching {
  posts: FullPost[];
 }
-export interface PostFetching {
- _post: string;
-}
 
 export type FullPost = Post & {
  likedBy: User[];
@@ -42,6 +39,23 @@ export type FullPost = Post & {
  dislikedBy: User[];
  topics: Topic[];
 };
+
+export type FullUser = User & {
+ comments: Comment[];
+ disliked: Post[];
+ liked: Post[];
+ following: User[];
+ followedBy: User[];
+ posts: Post[];
+};
+
+export type IdealUser = Omit<FullUserWithoutPassword, "posts"> & {
+ posts: (Post & {
+  author: User;
+ })[];
+};
+
+export type FullUserWithoutPassword = Omit<FullUser, "password">;
 
 export type Booleanish = "true" | "false";
 

@@ -1,6 +1,6 @@
 import { createStyles, Input, PasswordInput } from "@mantine/core";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Link from "next/link";
 import type { LoginValues } from "..";
@@ -10,6 +10,11 @@ import Head from "next/head";
 import { loginSchema } from "../utils/validators";
 import dynamic from "next/dynamic";
 import { FieldProps } from "formik";
+import cookies from "../utils/cookies";
+import useStore from "../state/store";
+import axios from "axios";
+import setAuthorization from "../utils/api/auth/setAuthorization";
+import { useRouter } from "next/router";
 
 const Button = dynamic(() => import("../components/Button"));
 const Formik = dynamic(() => import("formik").then((mod) => mod.Formik));
@@ -18,16 +23,9 @@ const Field = dynamic(() => import("formik").then((mod) => mod.Field));
 
 const useStyles = createStyles((theme) => ({
  container: {
-  width: "80%",
-  padding: 12,
   display: "flex",
   flexDirection: "column",
-  marginInline: "auto",
   gap: 15,
-
-  [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-   width: "85%",
-  },
 
   '> button[type="submit"]': {
    cursor: "pointer",
@@ -78,6 +76,22 @@ const useStyles = createStyles((theme) => ({
 const Login: NextPage = () => {
  const { classes } = useStyles();
  const { loading, login } = useAuth();
+ const { user, setUser } = useStore();
+ const router = useRouter();
+
+ useEffect(() => {
+  const token = cookies.get("token");
+
+  if (!user && token) {
+   axios
+    .get("/api/user", setAuthorization(token))
+    .then((res) => setUser(res.data));
+
+   router.push("/");
+  } else if (user) {
+   router.push("/");
+  }
+ }, []);
 
  return (
   <>
@@ -113,13 +127,13 @@ const Login: NextPage = () => {
       </Field>
 
       <div className={classes.recover}>
-       <Link href="/login">
+       <Link href="/signup" style={{ maxWidth: "fit-content" }}>
         <div>
-         <span>Already have an account?</span>
+         <span>Doesn&apos;t have an account yet?</span>
          <BsArrowRightShort size={22} />
         </div>
        </Link>
-       <Link href="/login">
+       <Link href="/login" style={{ maxWidth: "fit-content" }}>
         <div>
          <span>Forgot your password?</span>
          <BsArrowRightShort size={22} />

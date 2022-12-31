@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import { LoginValues, SignUpValues } from "../..";
 import cookies from "../cookies";
 import setAuthorization from "../api/auth/setAuthorization";
-import getUrlParams from "../strings/parseUrl";
 import useStore from "../../state/store";
+import { getUrlParams } from "../strings";
 
 export default function useAuth() {
  const [loading, setLoading] = useState(false);

@@ -1,3 +1,5 @@
+const removeImports = require("next-remove-imports")();
+
 // set-cookie
 const headers = [
   {
@@ -7,10 +9,6 @@ const headers = [
   {
     key: "X-XSS-Protection",
     value: "1; mode=block",
-  },
-  {
-    key: "X-Powered-By",
-    value: "Scranton",
   },
   {
     key: "Strict-Transport-Security",
@@ -24,10 +22,6 @@ const headers = [
     key: "X-Frame-Options",
     value: "DENY",
   },
-  {
-    key: "Cache-Control",
-    value: "max-age=120"
-  }
 ];
 
 /** @type {import('next').NextConfig} */
@@ -35,6 +29,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   compress: true,
+  poweredByHeader: false,
 
   // webpack: (config, { dev, isServer }) => {
   //   if (!dev && !isServer) {
@@ -64,4 +59,6 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = removeImports(nextConfig);
+
+// module.exports = nextConfig;

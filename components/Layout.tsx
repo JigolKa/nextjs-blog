@@ -26,8 +26,8 @@ export default function Layout({ children, excludedRoutes }: LayoutProps) {
    <Header />
    <Container
     marginBlock={25}
-    size="70vw"
-    excludedRoutes={["/account/activate"]}
+    size="50%"
+    excludedRoutes={["/account/activate", "/post/[slug]"]}
    >
     {children}
    </Container>

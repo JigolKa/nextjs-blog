@@ -1,4 +1,4 @@
-import { createStyles, Input, MultiSelect, Textarea } from "@mantine/core";
+import { createStyles, Input, MultiSelect } from "@mantine/core";
 import axios from "axios";
 import { FieldProps } from "formik";
 import dynamic from "next/dynamic";
@@ -11,7 +11,23 @@ import * as Yup from "yup";
 import useStore from "../state/store";
 import setAuthorization from "../utils/api/auth/setAuthorization";
 import cookies from "../utils/cookies";
+import rehypeSanitize from "rehype-sanitize";
 
+const MDEditor = dynamic(
+ () => import("@uiw/react-md-editor").then((mod) => mod.default),
+ { ssr: false }
+);
+const EditerMarkdown = dynamic(
+ () =>
+  import("@uiw/react-md-editor").then((mod) => {
+   return mod.default.Markdown;
+  }),
+ { ssr: false }
+);
+const Markdown = dynamic(
+ () => import("@uiw/react-markdown-preview").then((mod) => mod.default),
+ { ssr: false }
+);
 const Button = dynamic(() => import("../components/Button"));
 const Formik = dynamic(() => import("formik").then((mod) => mod.Formik));
 const Form = dynamic(() => import("formik").then((mod) => mod.Form));
@@ -44,6 +60,7 @@ export default function New() {
  const router = useRouter();
  const [topics, setTopics] = useState<{ value: string; label: string }[]>([]);
  const [topicsList, setTopicsList] = useState<string[]>([]);
+ const [description, setDescription] = useState(" jkecfg");
 
  const create = async ({ description, title }: PostValues) => {
   if (!user) return;
@@ -61,11 +78,9 @@ export default function New() {
     },
     setAuthorization(cookies.get("token") || "")
    );
-
    if (response.status === 200) {
     toast("Post successfully created");
     setLoading(false);
-
     router.push("/");
     return;
    }
@@ -83,9 +98,6 @@ export default function New() {
   title: Yup.string()
    .required("Title is required")
    .min(2, "At least 2 characters are required for the title"),
-  description: Yup.string()
-   .max(1024, "The description should not be bigger than 1024 characters")
-   .required("Description is required"),
  });
 
  useEffect(() => {
@@ -106,7 +118,7 @@ export default function New() {
      description: "",
     }}
     validationSchema={validationSchema}
-    onSubmit={async (v) => await create(v as PostValues)}
+    onSubmit={async (v) => await create({ ...v, description } as PostValues)}
    >
     <Form className={classes.form}>
      <Field name="title">
@@ -117,18 +129,22 @@ export default function New() {
       )}
      </Field>
 
-     <Field name="description">
-      {({ field, meta }: FieldProps) => (
-       <Input.Wrapper error={meta.touched && meta.error} label="Description">
-        <Textarea
-         minRows={3}
-         maxRows={5}
-         {...field}
-         placeholder="Enter a description"
-        />
-       </Input.Wrapper>
-      )}
-     </Field>
+     <Input.Wrapper label="Description">
+      <MDEditor
+       previewOptions={{
+        rehypePlugins: [[rehypeSanitize]],
+       }}
+       value={description}
+       onChange={setDescription as any}
+       placeholder="Type in here to create your post. **Markdown** supported."
+      >
+       <div style={{ paddingTop: 50 }}>
+        <Markdown source={description} />
+       </div>
+       <EditerMarkdown source={description} />
+      </MDEditor>
+      {/* <Textarea minRows={3} maxRows={5} placeholder="Enter a description" /> */}
+     </Input.Wrapper>
 
      <MultiSelect
       searchable

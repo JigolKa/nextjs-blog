@@ -13,7 +13,7 @@ export interface HeaderSearchProps
 const useStyles = createStyles((theme, { active }: { active: boolean }) => ({
  header: {
   width: "50vw",
-  borderRadius: active ? "15px 15px 0 0" : 999,
+  borderRadius: 999,
   border: "1px solid rgba(0,0,0,.2)",
   display: "flex",
   alignItems: "center",

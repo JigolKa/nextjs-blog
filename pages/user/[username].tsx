@@ -1,34 +1,35 @@
-import { Avatar, createStyles, Tooltip } from "@mantine/core";
+import { Avatar, createStyles, Modal, Tabs, Tooltip } from "@mantine/core";
 import type { Post as PostType, User } from "@prisma/client";
-import axios from "axios";
 import { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import prisma from "../../prisma/instance";
-import useStore from "../../state/store";
+import { useStoreSSR } from "../../state/store";
 import { userWithoutPasswordAndPosts } from "../../utils/api/db/user";
 import { serializeJSON } from "../../utils/json";
-import membership from "../../utils/strings/membership";
+import { membership } from "../../utils/strings";
+import StyledTabs from "../../components/Account/StyledTabs";
+import UserProfile from "../../components/Account/UserProfile";
+import { format } from "date-fns";
+import { FullUserWithoutPassword } from "../..";
+import { ShareModalContext } from "../../contexts/ShareModalContext";
+import Share from "../../components/Post/Share";
 
-const Button = dynamic(() => import("../../components/Button"));
 const Post = dynamic(() => import("../../components/Home/Post"));
+const Subscribe = dynamic(() => import("../../components/Account/Subscribe"));
 
 interface Props {
- user: User & {
+ user: Omit<FullUserWithoutPassword, "posts"> & {
   posts: (PostType & {
    author: User;
   })[];
-  following: User[];
-  followedBy: User[];
  };
 }
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
  container: {
   position: "relative",
 
@@ -64,65 +65,70 @@ const useStyles = createStyles(() => ({
     width: 350,
    },
   },
+ },
 
-  ".posts": {
-   h2: {
-    marginBlock: "10px 15px",
-   },
-   ".container": {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-   },
-  },
+ tabsContainer: {
+  marginTop: 15,
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+ },
+
+ emptyRelations: {
+  fontWeight: 600,
+  fontSize: 16,
+ },
+
+ joined: {
+  marginTop: 7.5,
+  display: "block",
+  fontSize: 18,
+  fontWeight: 400,
+  color: theme.colors.gray[7],
+ },
+
+ aboutTitle: {
+  fontSize: 18,
+  fontWeight: 600,
+  marginTop: 15,
+  marginBottom: 10,
+  display: "block",
+ },
+
+ aboutStatitistics: {
+  marginTop: 15,
+  marginBottom: 10,
+ },
+
+ noData: {
+  fontSize: 18,
+  fontWeight: 500,
  },
 }));
 
-const Account: NextPage<Props> = ({ user }) => {
+const Account: NextPage<Props> = ({ user: _user }) => {
  const { classes } = useStyles();
- const { user: currentUser } = useStore();
- const [isFollowed, setFollowed] = useState(false);
- const router = useRouter();
+ const { user: currentUser } = useStoreSSR((s) => s);
+ const { open, slug, setOpen, setSlug } = useContext(ShareModalContext);
 
- useEffect(() => {
-  if (currentUser && user) {
-   setFollowed(user.followedByIDs.includes(currentUser.userId));
-  }
- }, [currentUser, user]);
+ const [user, setUser] = useState(_user);
+ useEffect(() => setUser(_user), [_user]);
 
- const follow = async () => {
-  if (!user || !currentUser) {
-   router.push("/login");
-   return;
-  }
+ const sameProfile = currentUser ? currentUser.userId === user.userId : false;
+ const [activeTab, setActiveTab] = useState<string | null>("posts");
 
-  setFollowed((p) => !p);
-  await axios.post(`/api/user/${user.userId}/follow`, {
-   userId: currentUser.userId,
-  });
- };
+ useEffect(
+  () => {
+   setActiveTab("posts");
+  },
+  typeof window !== "undefined" ? [window.location.href] : undefined
+ );
 
  if (user) {
-  const buttonText = currentUser
-   ? currentUser.userId === user.userId
-     ? "Go to your account"
-     : isFollowed
-     ? "Unsubscribe"
-     : "Subscribe"
-   : "Subscribe";
-
-  const buttonVariant = currentUser
-   ? currentUser.userId === user.userId
-     ? "outline"
-     : isFollowed
-     ? "outline"
-     : "fill"
-   : "fill";
-
   return (
    <>
     <Head>
-     <title>{user.username} - Blog</title>
+     <title>{`${user.username} - Blog`}</title>
     </Head>
     <div className={classes.container}>
      <div className="account">
@@ -136,24 +142,11 @@ const Account: NextPage<Props> = ({ user }) => {
        />
       </div>
 
-      <div className="infos">
-       <h2>{user.username}</h2>
-       {currentUser ? (
-        currentUser.userId === user.userId ? (
-         <Link href="/account">
-          <Button variant={buttonVariant}>{buttonText}</Button>
-         </Link>
-        ) : (
-         <Button onClick={follow} variant={buttonVariant}>
-          {buttonText}
-         </Button>
-        )
-       ) : (
-        <Button onClick={follow} variant={buttonVariant}>
-         {buttonText}
-        </Button>
-       )}
-      </div>
+      <Subscribe user={user} currentUser={currentUser} setUser={setUser} />
+
+      <span className={classes.joined}>
+       Joined in {format(new Date(user.createdAt), "MM/yyyy")}
+      </span>
 
       <div className="relations">
        <div className="followers">
@@ -172,7 +165,11 @@ const Account: NextPage<Props> = ({ user }) => {
           </Avatar.Group>
          </Tooltip.Group>
         ) : (
-         <h4 style={{ marginTop: 10 }}>{user.username} has no followers</h4>
+         <h4 style={{ marginTop: 10 }} className={classes.emptyRelations}>
+          {sameProfile
+           ? "You have no followers"
+           : `${user.username} has no followers`}
+         </h4>
         )}
        </div>
        <div className="following">
@@ -191,22 +188,96 @@ const Account: NextPage<Props> = ({ user }) => {
           </Avatar.Group>
          </Tooltip.Group>
         ) : (
-         <h4 style={{ marginTop: 10 }}>
-          {user.username} doesn&apos;t follow anyone
+         <h4 style={{ marginTop: 10 }} className={classes.emptyRelations}>
+          {sameProfile
+           ? "You are not following anyone"
+           : `${user.username} doesn't follow anyone`}
          </h4>
         )}
        </div>
       </div>
      </div>
-     <div className="posts">
-      <h2>Posts from {user.username}</h2>
-      <div className="container">
-       {user.posts.map((post) => (
-        <Post dontShowMeta post={post} key={post.postId} />
-       ))}
-      </div>
-     </div>
+     <StyledTabs value={activeTab} onTabChange={setActiveTab}>
+      <Tabs.List>
+       <Tabs.Tab value="posts">Posts</Tabs.Tab>
+       <Tabs.Tab value="followers">Followers</Tabs.Tab>
+       <Tabs.Tab value="following">Following</Tabs.Tab>
+       <Tabs.Tab value="about">About</Tabs.Tab>
+      </Tabs.List>
+
+      <Tabs.Panel value="posts">
+       <div className={classes.tabsContainer}>
+        {user.posts.length ? (
+         user.posts.map((post) => (
+          <Post dontShowMeta post={post} key={post.postId} />
+         ))
+        ) : (
+         <span className={classes.noData}>
+          {user.username} has not published any post yet
+         </span>
+        )}
+       </div>
+      </Tabs.Panel>
+
+      <Tabs.Panel value="followers">
+       <div className={classes.tabsContainer}>
+        {user.followedBy.length ? (
+         user.followedBy.map((user) => (
+          <UserProfile user={user} key={user.userId} />
+         ))
+        ) : (
+         <span className={classes.noData}>
+          {user.username} has no followers
+         </span>
+        )}
+       </div>
+      </Tabs.Panel>
+
+      <Tabs.Panel value="following">
+       <div className={classes.tabsContainer}>
+        {user.following.length ? (
+         user.following.map((user) => (
+          <UserProfile user={user} key={user.userId} />
+         ))
+        ) : (
+         <span className={classes.noData}>
+          {user.username} doesn&apos;t follow anyone
+         </span>
+        )}
+       </div>
+      </Tabs.Panel>
+
+      <Tabs.Panel value="about">
+       <span className={classes.aboutTitle}>About {user.username}:</span>
+       <p>{user.biography ? user.biography : <i>No biography</i>}</p>
+
+       <div className={classes.aboutStatitistics}>
+        <span>
+         <b>Total posts:</b> {user.posts.length}
+        </span>
+       </div>
+       <div className={classes.aboutStatitistics}>
+        <span>
+         <b>Total comments:</b> {user.comments ? user.comments.length : 0}
+        </span>
+       </div>
+      </Tabs.Panel>
+     </StyledTabs>
     </div>
+
+    <Modal
+     opened={open}
+     onClose={() => {
+      setOpen && setOpen(false);
+      setSlug && setSlug(null);
+     }}
+     size="50%"
+     title="Share this post"
+     overlayOpacity={0.55}
+     overlayBlur={3}
+    >
+     <Share slug={slug as string} />
+    </Modal>
    </>
   );
  }

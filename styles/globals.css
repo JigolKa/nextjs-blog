@@ -14,7 +14,7 @@ a {
 }
 #__next {
  min-height: 100vh;
- overflow: hidden;
+ overflow-x: hidden;
 }
 .toast-progress-bar {
  background: #228be6 !important;
@@ -23,6 +23,14 @@ a {
 .link.no-animation {
  color: #228be6;
  position: relative;
+ max-width: fit-content;
+}
+.link.no-animation {
+ text-decoration: underline;
+}
+.link.no-animation:before {
+ content: "";
+ display: "none";
 }
 .link:before {
  content: "";
@@ -33,7 +41,7 @@ a {
  background-color: #228be6;
  width: 0;
  height: 2px;
- transition: all 400ms ease;
+ transition: all 350ms ease;
 }
 .link:hover:before {
  width: 100%;

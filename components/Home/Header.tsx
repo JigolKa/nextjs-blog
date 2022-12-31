@@ -5,7 +5,6 @@ import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { SearchContext } from "../../contexts/SearchContext";
-import Dropdown from "./Dropdown";
 import HeaderSearch from "./HeaderSearch";
 import Button from "../Button";
 import Image from "next/image";
@@ -91,13 +90,10 @@ export interface HeaderLink {
 export default function Header() {
  const { classes } = useStyles();
  const [search, setSearch] = useState("");
- const { active, setActive, dropdownRef, inputRef } = useContext(SearchContext);
+ const { setActive, inputRef } = useContext(SearchContext);
  const { user } = useStore();
  const router = useRouter();
  const { logout } = useAuth();
-
- //  const [displayedUser, setDisplayedUser] = useState<typeof user>(user);
- //  useEffect(() => setDisplayedUser(user), [user]);
 
  const links: HeaderLink[] = [
   {
@@ -114,15 +110,10 @@ export default function Header() {
 
  useEffect(() => {
   function handleClickOutside(event: MouseEvent) {
-   if (!inputRef || !dropdownRef) return;
+   if (!inputRef) return;
 
    if (inputRef.current && !(inputRef.current as any).contains(event.target)) {
-    if (
-     dropdownRef.current &&
-     !(dropdownRef.current as any).contains(event.target)
-    ) {
-     if (setActive) setActive(false);
-    }
+    if (setActive) setActive(false);
    }
   }
 
@@ -147,7 +138,7 @@ export default function Header() {
     className={classes.search}
    />
 
-   <Dropdown
+   {/* <Dropdown
     active={active}
     onHeader
     ref={dropdownRef}
@@ -184,7 +175,7 @@ export default function Header() {
       image: "https://webgate.fr/bia/QCM/apple-touch-icon.png",
      },
     ]}
-   />
+   /> */}
 
    {user ? (
     <div className={classes.userContainer}>
@@ -198,7 +189,7 @@ export default function Header() {
       ))}
      </div>
      <div className={classes.divider}></div>
-     <Link href="/account">
+     <Link href={`/user/${user.username}`}>
       <div className={classes.user}>
        <span className="username">{user.username}</span>
        <div className="picture">

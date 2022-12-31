@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FullPost } from "../..";
-import { ActionType } from "../../";
+import { ActionType } from "../..";
 import useStore from "../../state/store";
 
 export default function useLikePost(

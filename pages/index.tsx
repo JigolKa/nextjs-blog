@@ -1,15 +1,16 @@
-import { createStyles } from "@mantine/core";
+import { Button, createStyles, Modal } from "@mantine/core";
 import axios from "axios";
 import type { GetServerSidePropsContext, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { PostsFetching } from "..";
 import PostSkeleton from "../components/Home/PostSkeleton";
-import getPosts from "../utils/feed";
 import { serializeArray } from "../utils/json";
-import { SortingAlgorithm } from "../utils/sorting";
+import Share from "../components/Post/Share";
+import { ShareModalContext } from "../contexts/ShareModalContext";
+import Fetching from "../utils/fetch";
 
 const Post = dynamic(() => import("../components/Home/Post"));
 
@@ -86,12 +87,13 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
  const [isFetching, setIsFetching] = useState(false);
  const [posts, setPosts] = useState(_posts);
  const [postsOffset, setPostsOffset] = useState(15);
- const [sort] = useState<SortingAlgorithm>("hot");
+ const { open, slug, setOpen, setSlug } = useContext(ShareModalContext);
+ const [noMorePosts, setNoMorePosts] = useState(false);
 
  useEffect(() => {
   const callback = () =>
    requestAnimationFrame(() => {
-    if (posts.length < 15 || isFetching) return () => void 1;
+    if (posts.length < 15 || isFetching || noMorePosts) return () => void 1;
 
     const scrollPosition =
      document.documentElement.scrollTop + window.innerHeight;
@@ -100,13 +102,19 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
     if (scrollPosition >= documentHeight) {
      setIsFetching(true);
 
-     axios
-      .get(`/api/post?sort=${sort}&skip=${postsOffset}&take=15`)
-      .then((res) => {
-       if (Number(res.data) !== -1) setPosts((p) => [...p, ...res.data]);
-       setPostsOffset((p) => p + 15);
+     axios.get(`/api/post?skip=${postsOffset}&take=15`).then((res) => {
+      setPosts((p) => [...p, ...res.data]);
+
+      // no more posts
+      if (res.data.length < 15) {
        setIsFetching(false);
-      });
+       setNoMorePosts(true);
+       return window.removeEventListener("scroll", callback);
+      }
+
+      setPostsOffset((p) => p + res.data.length);
+      setIsFetching(false);
+     });
     }
    });
 
@@ -129,7 +137,9 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
        justifyContent: "space-between",
       }}
      >
-      <h3>Posts</h3>
+      <Button variant="subtle" size="md">
+       Latest
+      </Button>
      </div>
      <div className="posts">
       {posts && posts.length ? (
@@ -142,14 +152,29 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
         </Link>
        </h3>
       )}
-      {posts.length < 15 && (
+      {noMorePosts || posts.length < 15 ? (
        <h3 style={{ textAlign: "center" }}>No more posts to display!</h3>
-      )}
+      ) : null}
       {isFetching &&
+       !noMorePosts &&
        new Array(2).fill(0).map((_, k) => <PostSkeleton key={k} />)}
      </div>
     </div>
    </div>
+
+   <Modal
+    opened={open}
+    onClose={() => {
+     setOpen && setOpen(false);
+     setSlug && setSlug(null);
+    }}
+    size="50%"
+    title="Share this post"
+    overlayOpacity={0.55}
+    overlayBlur={3}
+   >
+    <Share slug={slug as string} />
+   </Modal>
   </>
  );
 };
@@ -157,7 +182,11 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
 export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
- const posts = await getPosts({ context: context }, "hot");
+ const posts = await new Fetching({
+  token: context.req.cookies["token"],
+ }).fetch({
+  take: 15,
+ });
 
  return {
   props: {

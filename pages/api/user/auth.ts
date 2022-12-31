@@ -3,12 +3,12 @@ import prisma from "../../../prisma/instance";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../../../utils/config";
-import { ONE_DAY, ONE_HOUR, ONE_MINUTE } from "../../../utils/time";
+import { ONE_DAY, ONE_MINUTE } from "../../../utils/time";
 
 import { getIP } from "../../../utils/ip";
 import sleep from "../../../utils/sleep";
 import NodeCache from "node-cache";
-import isBase64 from "../../../utils/strings/isBase64";
+import { isBase64 } from "../../../utils/strings";
 
 type Request = {
  requestedAt: Date;
@@ -40,7 +40,7 @@ export default async function handler(
 
    const ipCache = cache.get<any>(ip);
 
-   if (ipCache) {
+   if (ipCache && process.env.NODE_ENV === "production") {
     if (ipCache.length >= 5) {
      const lastRequestDiffMS = Math.abs(
       ipCache[ipCache.length - 5].requestedAt.getTime() - new Date().getTime()
@@ -117,7 +117,7 @@ export default async function handler(
      sub: user.userId,
      data: user,
      iat: Date.now(),
-     exp: Date.now() + ONE_HOUR * 2,
+     exp: Date.now() + ONE_DAY,
     },
     config.jwt.secret
    );

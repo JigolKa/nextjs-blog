@@ -1,6 +1,7 @@
 import create from "zustand";
 import { User } from "@prisma/client";
 import { persist } from "zustand/middleware";
+import { useState, useEffect } from "react";
 
 export interface State {
  user: User | null;
@@ -37,3 +38,19 @@ const useStore = create(
 );
 
 export default useStore;
+
+//! really ugly shit, but works
+// https://github.com/pmndrs/zustand/issues/324#issuecomment-1028416353
+type StateData = Omit<State, "setUser" | "resetUser">;
+
+const defaultState: StateData = { user: null };
+
+// eslint-disable-next-line
+export const useStoreSSR = <U>(selector: (s: StateData) => U) => {
+ const defaultValue = selector(defaultState);
+ const [value, setValue] = useState(defaultValue);
+ const zustandValue = useStore(selector);
+
+ useEffect(() => setValue(zustandValue), []);
+ return value;
+};

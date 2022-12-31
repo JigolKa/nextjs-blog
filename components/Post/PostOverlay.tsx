@@ -2,15 +2,16 @@ import { createStyles, Divider } from "@mantine/core";
 import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef, MutableRefObject } from "react";
+import { forwardRef, MutableRefObject, useContext } from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
  AiOutlineShareAlt,
 } from "react-icons/ai";
 import { Booleanish } from "../..";
-import membership from "../../utils/strings/membership";
 import { ActionType } from "../..";
+import { ShareModalContext } from "../../contexts/ShareModalContext";
+import { membership } from "../../utils/strings";
 import TransitionalButton from "../Home/TransitionalButton";
 
 export interface PostOverlayProps {
@@ -34,9 +35,10 @@ const useStyles = createStyles((theme) => ({
   display: "flex",
   gap: 10,
   alignItems: "center",
-  background: theme.colors.gray[2],
+  background: theme.colors.gray[3],
   color: "#000",
   boxShadow: theme.shadows.sm,
+  zIndex: 999999,
 
   ".icon": {
    background: "#fff",
@@ -64,11 +66,17 @@ const useStyles = createStyles((theme) => ({
    textDecoration: "underline",
   },
  },
+
+ username: {
+  fontSize: 18,
+  fontWeight: 600,
+ },
 }));
 
 const PostOverlay = forwardRef(
  ({ post, liked, disliked, likePost }: PostOverlayProps, ref) => {
   const { classes } = useStyles();
+  const { setOpen, setSlug, open } = useContext(ShareModalContext);
 
   return (
    <div className={classes.container} ref={ref as MutableRefObject<null>}>
@@ -94,7 +102,11 @@ const PostOverlay = forwardRef(
     <TransitionalButton
      gradient="linear-gradient(45deg, #44c47d 0%, #FFFB7D 100%)"
      hover={{ x: "17.5%", y: "-17.5%" }}
-     active={null}
+     active={open.toString() as Booleanish}
+     onClick={() => {
+      setOpen && setOpen((p) => !p);
+      setSlug && setSlug(post.slug);
+     }}
      className="icon"
     >
      <AiOutlineShareAlt size={20} />
@@ -110,7 +122,7 @@ const PostOverlay = forwardRef(
         alt={`${membership(post.author.username)} profile picture`}
        />
       </div>
-      <h4>{post.author.username}</h4>
+      <h4 className={classes.username}>{post.author.username}</h4>
      </div>
     </Link>
    </div>

@@ -4,9 +4,8 @@ import { NextApiRequestWithMiddlewareObject } from "../../..";
 import prisma from "../../../prisma/instance";
 import restrictAccess from "../../../utils/middleware/restrictAccess";
 import { userWithoutPassword } from "../../../utils/api/db/user";
-
-import { getUniqueSlug } from "../../../utils/strings/toSlug";
-import { fetchSortedPosts, SortingAlgorithm } from "../../../utils/sorting";
+import { getUniqueSlug } from "../../../utils/strings";
+import Fetching from "../../../utils/fetch";
 
 async function handler(
  req: NextApiRequestWithMiddlewareObject,
@@ -59,16 +58,19 @@ async function handler(
   }
 
   case "GET": {
-   const { skip, take, sort, notIn } = req.query;
+   //! API CHANGED
+   const { skip, take, /*sort,*/ postIdNotIn, userIdNotIn } = req.query;
 
-   const sortedPosts = await fetchSortedPosts(
-    Number(take),
-    Number(skip),
-    sort as SortingAlgorithm,
-    Array.isArray(notIn) ? notIn : []
+   return res.status(200).json(
+    await new Fetching({
+     token: req.cookies["token"],
+    }).fetch({
+     postIdNotIn: Array.isArray(postIdNotIn) ? postIdNotIn : [],
+     userIdNotIn: Array.isArray(userIdNotIn) ? userIdNotIn : [],
+     skip: typeof Number(skip) === "number" ? Number(skip) : 0,
+     take: typeof Number(take) === "number" ? Number(take) : 15,
+    })
    );
-
-   return res.status(200).json(sortedPosts || -1);
   }
 
   default: {

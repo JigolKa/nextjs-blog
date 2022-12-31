@@ -10,10 +10,7 @@ export function IP6to4(ip6: string | null) {
  return ip4;
 }
 
-export function parseIp6(ip6str: string) {
- const str = ip6str.toString();
-
- // Initialize
+export function parseIp6(str: string) {
  const ar = new Array();
  for (var i = 0; i < 8; i++) ar[i] = 0;
 

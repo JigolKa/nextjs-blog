@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import getUrlParams from "../../utils/strings/parseUrl";
 import { toast } from "react-toastify";
 import { createStyles } from "@mantine/core";
 import useStore from "../../state/store";
+import { getUrlParams } from "../../utils/strings";
 
 const useStyles = createStyles((theme) => ({
  verified: {
@@ -33,6 +33,7 @@ const useStyles = createStyles((theme) => ({
 
   svg: {
    width: "100vw",
+   height: "auto",
   },
  },
 }));
@@ -47,6 +48,8 @@ export default function Activate() {
  useEffect(() => {
   const params = getUrlParams(window.location.search);
 
+  if (!(params["id"] || params["userId"])) return;
+
   axios
    .delete(`/api/verify/activate?id=${params["id"]}&userId=${params["userId"]}`)
    .then((res) => {
@@ -58,12 +61,6 @@ export default function Activate() {
    })
    .catch(() => router.push("/"));
  }, []);
-
- useEffect(() => {
-  if (countdown === 0) {
-   router.push("/");
-  }
- }, [countdown]);
 
  if (response === 200) {
   return (
@@ -116,5 +113,10 @@ export default function Activate() {
     </div>
    </>
   );
+ } else {
+  if (typeof window !== "undefined") {
+   router.push("/");
+  }
+  return null;
  }
 }

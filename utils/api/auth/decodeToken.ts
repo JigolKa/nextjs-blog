@@ -16,13 +16,10 @@ export interface DecodeTokenFailure {
 
 export interface DecodeTokenProps {
  request?: NextApiRequest;
- token?: string;
+ token?: string | null;
 }
 
-export default function decodeToken({
- request,
- token,
-}: DecodeTokenProps): DecodeTokenSuccess | DecodeTokenFailure {
+export default function decodeToken({ request, token }: DecodeTokenProps) {
  if (token) {
   return decode(token);
  }
@@ -38,7 +35,7 @@ export default function decodeToken({
      // see documentation
      status: 437,
      error: "Token malformed",
-    };
+    } as DecodeTokenFailure;
    }
 
    return decode(token[1]);
@@ -48,17 +45,17 @@ export default function decodeToken({
    // see documentation
    status: 403,
    error: "Authorization header missing",
-  };
+  } as DecodeTokenFailure;
  }
 
  return {
   // see documentation
   status: 403,
   error: "No token/request provided",
- };
+ } as DecodeTokenFailure;
 }
 
-function decode(token: string): DecodeTokenFailure | DecodeTokenSuccess {
+function decode(token: string) {
  try {
   const decoded = jwt.verify(token, config.jwt.secret) as Token;
 
@@ -78,6 +75,6 @@ function decode(token: string): DecodeTokenFailure | DecodeTokenSuccess {
   return {
    status: 400,
    error: e,
-  };
+  } as DecodeTokenFailure;
  }
 }

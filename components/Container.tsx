@@ -12,12 +12,17 @@ const useStyles = createStyles(
    marginInline: "auto",
    marginBlock: marginBlock ? marginBlock : 10,
 
-   [`@media screen and (max-width: ${theme.breakpoints.md}px)`]: {
-    maxWidth: "85vw",
+   [`@media screen and (max-width: ${theme.breakpoints.xl}px)`]: {
+    minWidth: "70vw",
    },
-
+   [`@media screen and (max-width: ${theme.breakpoints.lg}px)`]: {
+    minWidth: "80vw",
+   },
+   [`@media screen and (max-width: ${theme.breakpoints.md}px)`]: {
+    minWidth: "85vw",
+   },
    [`@media screen and (max-width: ${theme.breakpoints.sm}px)`]: {
-    maxWidth: "90vw",
+    minWidth: "90vw",
    },
   },
  })

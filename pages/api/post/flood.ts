@@ -5,17 +5,15 @@ import setAuthorization from "../../../utils/api/auth/setAuthorization";
 import debugMethod from "../../../utils/middleware/debugMethod";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
- res.end();
+ const count = req.body.count ? Number(req.body.count) : 50;
+ res.send(`Flooding ${count} posts`);
  const token = await axios.post("http://localhost:3000/api/token/generate");
 
- for (let i = 30; i < 900; i++) {
+ for (let i = 0; i < count; i++) {
   await axios.post(
    "http://localhost:3000/api/post",
    {
-    description: new Array(i)
-     .fill(0)
-     .map(() => "lorem ipsum, ")
-     .join(","),
+    description: "# LOREM IPSUM",
     title: `Flood n°${i}`,
    },
    setAuthorization(token.data)

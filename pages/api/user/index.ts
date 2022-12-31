@@ -13,7 +13,7 @@ import {
  userWithoutPassword,
  userWithoutPasswordAndPosts,
 } from "../../../utils/api/db/user";
-import isBase64 from "../../../utils/strings/isBase64";
+import { isBase64 } from "../../../utils/strings";
 
 export default async function handler(
  req: NextApiRequest,
@@ -30,7 +30,7 @@ export default async function handler(
    }
 
    if (!isBase64(password)) {
-    return res.status(400).json({ error: "Password not base64 encoded" });
+    return res.status(400).json({ error: "Data not properly encoded" });
    }
 
    const _password = Buffer.from(password, "base64").toString("ascii");

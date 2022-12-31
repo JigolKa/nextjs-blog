@@ -3,7 +3,7 @@ import { Post, User } from "@prisma/client";
 import { format, formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { forwardRef, MutableRefObject } from "react";
+import { forwardRef, MutableRefObject, useContext } from "react";
 import {
  AiOutlineDislike,
  AiOutlineLike,
@@ -11,15 +11,16 @@ import {
 } from "react-icons/ai";
 import { Booleanish } from "../..";
 import { ellipsis } from "../../utils/css";
-import useLikePost from "../../utils/feed/useLikePost";
-import nl2br from "../../utils/strings/nl2br";
+import useLikePost from "../../utils/fetch/useLikePost";
 import TransitionalButton from "./TransitionalButton";
+import removeMarkdown from "markdown-to-text";
+import Topics from "../Post/Topics";
+import { ShareModalContext } from "../../contexts/ShareModalContext";
 
 export interface PostProps {
  post: Post & {
   author: User;
  };
- dontRefreshFeed?: boolean;
  dontShowMeta?: boolean;
 }
 
@@ -28,16 +29,7 @@ const useStyles = createStyles((theme) => ({
   width: "100%",
   padding: 12,
   background: theme.fn.lighten(theme.colors.gray[1], 0.3),
-  boxShadow: theme.shadows.xs,
   borderRadius: 4,
-  transition: "all 200ms ease",
-  transform: "scale(1)",
-
-  "&:hover": {
-   boxShadow: theme.shadows.sm,
-   transform: "scale(1.01)",
-   background: theme.fn.lighten(theme.colors.gray[1], 0.45),
-  },
 
   "> .actions": {
    display: "flex",
@@ -47,9 +39,15 @@ const useStyles = createStyles((theme) => ({
   },
 
   "> .content": {
+   "&:hover": {
+    "*": {
+     color: theme.colors.blue[6],
+    },
+   },
+
    ".title": ellipsis(1, {
     fontWeight: 600,
-    fontSize: 22,
+    fontSize: 24,
     marginBottom: 5,
     maxWidth: "max-content",
    }),
@@ -59,24 +57,6 @@ const useStyles = createStyles((theme) => ({
    }),
   },
 
-  ".topics": {
-   display: "flex",
-   gap: 10,
-   marginBlock: "15px 20px",
-
-   span: {
-    padding: "4px 8px",
-    borderRadius: 4,
-    background: theme.colors.gray[2],
-    color: "#000",
-    transition: "background 200ms ease",
-
-    "&:hover": {
-     background: theme.colors.gray[3],
-    },
-   },
-  },
-
   ".author": {
    display: "flex",
    alignItems: "center",
@@ -84,7 +64,7 @@ const useStyles = createStyles((theme) => ({
    position: "relative",
 
    span: {
-    color: theme.colors.gray[6],
+    color: theme.colors.gray[7],
     fontSize: 15,
    },
 
@@ -112,27 +92,26 @@ const useStyles = createStyles((theme) => ({
 const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
  const { classes } = useStyles();
  const { likePost, liked, disliked, post } = useLikePost(_post);
+ const { setOpen, setSlug } = useContext(ShareModalContext);
 
  if (post) {
   return (
    <div className={classes.container} ref={ref as MutableRefObject<null>}>
     {!dontShowMeta && (
-     <div className="flex:post">
-      {post.author && (
-       <Link href={`/user/${post.author.username}`} className="author">
-        <div className="profilePicture">
-         <Image
-          quality={50}
-          sizes="100%"
-          width={24}
-          height={24}
-          src={post.author.profilePicture}
-          alt="Profile picture"
-         />
-        </div>
-        <span>{post.author.username}</span>
-       </Link>
-      )}
+     <div className="flex:post" style={{ marginBottom: 7 }}>
+      <Link href={`/user/${post.author.username}`} className="author">
+       <div className="profilePicture">
+        <Image
+         quality={50}
+         sizes="100%"
+         width={24}
+         height={24}
+         src={post.author.profilePicture}
+         alt="Profile picture"
+        />
+       </div>
+       <span>{post.author.username}</span>
+      </Link>
       <div className={classes.dot}>•</div>
       <Tooltip
        position="top"
@@ -150,18 +129,12 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
     <div className="content">
      <Link className="fix-width" href={`/post/${post.slug}`}>
       <span className="title">{post.title}</span>
-      <p className="description">{nl2br(post.content)}</p>
+      <p className="description">{removeMarkdown(post.content)}</p>
      </Link>
     </div>
-    {post.topics.length && (
-     <div className="topics">
-      {post.topics.map((t) => (
-       <Link key={t} href={`/topic/${t}`}>
-        <span>{t}</span>
-       </Link>
-      ))}
-     </div>
-    )}
+    {post.topics.length ? (
+     <Topics topics={post.topics} style={{ marginTop: 10 }} />
+    ) : null}
     <div className="actions">
      <TransitionalButton
       hover={{ x: "-22.5%", y: "-22.5%" }}
@@ -183,6 +156,10 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
      <TransitionalButton
       gradient="linear-gradient(45deg, #44c47d 0%, #FFFB7D 100%)"
       hover={{ x: "22.5%", y: "-22.5%" }}
+      onClick={() => {
+       setOpen && setOpen((p) => !p);
+       setSlug && setSlug(post.slug);
+      }}
       active={null}
      >
       <AiOutlineShareAlt size={20} />

@@ -18,16 +18,9 @@ const Button = dynamic(() => import("../components/Button"));
 
 const useStyles = createStyles((theme) => ({
  container: {
-  width: "80%",
-  padding: 12,
   display: "flex",
   flexDirection: "column",
-  marginInline: "auto",
   gap: 15,
-
-  [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-   width: "85%",
-  },
 
   '> button[type="submit"]': {
    cursor: "pointer",
@@ -145,15 +138,9 @@ const Signup: NextPage = () => {
         )}
        </Field>
        <div className={classes.recover}>
-        <Link href="/login">
+        <Link href="/login" style={{ maxWidth: "fit-content" }}>
          <div>
           <span>Already have an account?</span>
-          <BsArrowRightShort size={22} />
-         </div>
-        </Link>
-        <Link href="/login">
-         <div>
-          <span>Forgot your password?</span>
           <BsArrowRightShort size={22} />
          </div>
         </Link>
