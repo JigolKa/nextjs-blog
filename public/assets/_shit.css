@@ -1,0 +1,17 @@
+html {
+  overflow-x: hidden !important;
+}
+
+head {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background: #f00;
+}
+
+body {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background: #ccc;
+}
