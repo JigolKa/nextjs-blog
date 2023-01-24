@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head><link rel="stylesheet" href="https://www.pierre-giraud.com/wp-content/cache/minify/d3208.default.include.55f4e2.css" media="all" />
+<style>img.lazy{min-height:1px}</style><link rel="preload" href="https://www.pierre-giraud.com/wp-content/plugins/w3-total-cache/pub/js/lazyload.min.js" as="script">
+        <meta charset="UTF-8">
+        <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- This site is optimized with the Yoast SEO plugin v19.14 - https://yoast.com/wordpress/plugins/seo/ -->
+        <title>Définitions et usages du HTML et du CSS - Pierre Giraud</title>
+        <link rel="canonical" href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Définitions et usages du HTML et du CSS - Pierre Giraud" />
+        <meta property="og:description" content="Nous allons dans cette leçon poser une première définition du HTML et du CSS et comprendre plus précisément quel va être leur rôle dans la création d’un site Internet. On va ainsi expliquer ce qu’on peut faire et ce qu’on ne peut pas faire avec chacun de ces deux langages. &nbsp; Le HTML : langage ... Lire plus" />
+        <meta property="og:url" content="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/" />
+        <meta property="og:site_name" content="Pierre Giraud" />
+        <meta property="article:publisher" content="https://www.facebook.com/pierregird" />
+        <meta property="article:modified_time" content="2019-11-30T19:13:13+00:00" />
+        <meta property="og:image" content="https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@PierreGird" />
+        <meta name="twitter:label1" content="Durée de lecture estimée" />
+        <meta name="twitter:data1" content="8 minutes" />
+        <script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/","url":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/","name":"Définitions et usages du HTML et du CSS - Pierre Giraud","isPartOf":{"@id":"https://www.pierre-giraud.com/#website"},"primaryImageOfPage":{"@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/#primaryimage"},"image":{"@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/#primaryimage"},"thumbnailUrl":"https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png","datePublished":"2019-08-19T22:23:37+00:00","dateModified":"2019-11-30T19:13:13+00:00","breadcrumb":{"@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/#breadcrumb"},"inLanguage":"fr-FR","potentialAction":[{"@type":"ReadAction","target":["https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/"]}]},{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/#primaryimage","url":"https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png","contentUrl":"https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png","width":700,"height":300,"caption":"Le HTML est un langage de balisage"},{"@type":"BreadcrumbList","@id":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.pierre-giraud.com/"},{"@type":"ListItem","position":2,"name":"Apprendre à coder en HTML et CSS | Cours complet (2020)","item":"https://www.pierre-giraud.com/html-css-apprendre-coder-cours/"},{"@type":"ListItem","position":3,"name":"Définitions et usages du HTML et du CSS"}]},{"@type":"WebSite","@id":"https://www.pierre-giraud.com/#website","url":"https://www.pierre-giraud.com/","name":"Pierre Giraud","description":"Cours et tutoriels HTML, CSS, JavaScript, PHP - Apprendre à coder","publisher":{"@id":"https://www.pierre-giraud.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.pierre-giraud.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fr-FR"},{"@type":"Organization","@id":"https://www.pierre-giraud.com/#organization","name":"Pierre Giraud","url":"https://www.pierre-giraud.com/","logo":{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://www.pierre-giraud.com/#/schema/logo/image/","url":"https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1.png","contentUrl":"https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1.png","width":512,"height":512,"caption":"Pierre Giraud"},"image":{"@id":"https://www.pierre-giraud.com/#/schema/logo/image/"},"sameAs":["https://www.youtube.com/pierregiraudcom","https://www.facebook.com/pierregird","https://twitter.com/PierreGird"]}]}</script>
+        <!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//pagead2.googlesyndication.com' />
+<link rel="alternate" type="application/rss+xml" title="Pierre Giraud &raquo; Flux" href="https://www.pierre-giraud.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Pierre Giraud &raquo; Flux des commentaires" href="https://www.pierre-giraud.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Pierre Giraud &raquo; Définitions et usages du HTML et du CSS Flux des commentaires" href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/feed/" />
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.pierre-giraud.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style>
+img.wp-smiley,
+img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 0.07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+}
+</style>
+
+<link rel='stylesheet' id='wc-blocks-vendors-style-css' href='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css?ver=9.1.5' media='all' />
+<link rel='stylesheet' id='wc-blocks-style-css' href='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css?ver=9.1.5' media='all' />
+<link rel='stylesheet' id='classic-theme-styles-css' href='https://www.pierre-giraud.com/wp-includes/css/classic-themes.min.css?ver=1' media='all' />
+<style id='global-styles-inline-css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--contrast: var(--contrast);--wp--preset--color--contrast-2: var(--contrast-2);--wp--preset--color--contrast-3: var(--contrast-3);--wp--preset--color--base: var(--base);--wp--preset--color--base-2: var(--base-2);--wp--preset--color--base-3: var(--base-3);--wp--preset--color--accent: var(--accent);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+<link rel='stylesheet' id='cookie-law-info-css' href='https://www.pierre-giraud.com/wp-content/plugins/cookie-law-info/legacy/public/css/cookie-law-info-public.css?ver=3.0.8' media='all' />
+<link rel='stylesheet' id='cookie-law-info-gdpr-css' href='https://www.pierre-giraud.com/wp-content/plugins/cookie-law-info/legacy/public/css/cookie-law-info-gdpr.css?ver=3.0.8' media='all' />
+<link rel='stylesheet' id='woocommerce-layout-css' href='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css?ver=7.3.0' media='all' />
+<link rel='stylesheet' id='woocommerce-smallscreen-css' href='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css?ver=7.3.0' media='only screen and (max-width: 768px)' />
+<link rel='stylesheet' id='woocommerce-general-css' href='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/css/woocommerce.css?ver=7.3.0' media='all' />
+<style id='woocommerce-inline-inline-css'>
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+
+<link rel='stylesheet' id='generate-comments-css' href='https://www.pierre-giraud.com/wp-content/themes/generatepress/assets/css/components/comments.min.css?ver=3.2.4' media='all' />
+
+<style id='generate-style-inline-css'>
+.is-right-sidebar{width:25%;}.is-left-sidebar{width:30%;}.site-content .content-area{width:100%;}@media (max-width: 768px){.main-navigation .menu-toggle,.sidebar-nav-mobile:not(#sticky-placeholder){display:block;}.main-navigation ul,.gen-sidebar-nav,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav > ul,.has-inline-mobile-toggle #site-navigation .inside-navigation > *:not(.navigation-search):not(.main-nav){display:none;}.nav-align-right .inside-navigation,.nav-align-center .inside-navigation{justify-content:space-between;}.has-inline-mobile-toggle .mobile-menu-control-wrapper{display:flex;flex-wrap:wrap;}.has-inline-mobile-toggle .inside-header{flex-direction:row;text-align:left;flex-wrap:wrap;}.has-inline-mobile-toggle .header-widget,.has-inline-mobile-toggle #site-navigation{flex-basis:100%;}.nav-float-left .has-inline-mobile-toggle #site-navigation{order:10;}}
+.dynamic-author-image-rounded{border-radius:100%;}.dynamic-featured-image, .dynamic-author-image{vertical-align:middle;}.one-container.blog .dynamic-content-template:not(:last-child), .one-container.archive .dynamic-content-template:not(:last-child){padding-bottom:0px;}.dynamic-entry-excerpt > p:last-child{margin-bottom:0px;}
+</style>
+
+<link rel='stylesheet' id='popup-maker-site-css' href='//www.pierre-giraud.com/wp-content/uploads/pum/pum-site-styles.css?generated=1670184544&#038;ver=1.17.1' media='all' />
+
+
+<link rel='stylesheet' id='generate-blog-columns-css' href='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/blog/functions/css/columns.min.css?ver=2.2.1' media='all' />
+
+<link rel='stylesheet' id='generate-secondary-nav-css' href='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/secondary-nav/functions/css/main.min.css?ver=2.2.1' media='all' />
+<style id='generate-secondary-nav-inline-css'>
+.secondary-navigation{background-color:#ffffff;}.secondary-nav-below-header .secondary-navigation .inside-navigation.grid-container, .secondary-nav-above-header .secondary-navigation .inside-navigation.grid-container{padding:0px 20px 0px 20px;}.secondary-navigation .main-nav ul li a,.secondary-navigation .menu-toggle,.secondary-menu-bar-items .menu-bar-item > a{color:#444444;line-height:30px;}.secondary-navigation .secondary-menu-bar-items{color:#444444;}button.secondary-menu-toggle:hover,button.secondary-menu-toggle:focus{color:#444444;}.widget-area .secondary-navigation{margin-bottom:20px;}.secondary-navigation ul ul{background-color:#303030;top:auto;}.secondary-navigation .main-nav ul ul li a{color:#ffffff;}.secondary-navigation .main-nav ul li:not([class*="current-menu-"]):hover > a, .secondary-navigation .main-nav ul li:not([class*="current-menu-"]):focus > a, .secondary-navigation .main-nav ul li.sfHover:not([class*="current-menu-"]) > a, .secondary-menu-bar-items .menu-bar-item:hover > a{color:#00bc7e;background-color:#303030;}.secondary-navigation .main-nav ul ul li:not([class*="current-menu-"]):hover > a,.secondary-navigation .main-nav ul ul li:not([class*="current-menu-"]):focus > a,.secondary-navigation .main-nav ul ul li.sfHover:not([class*="current-menu-"]) > a{color:#ffffff;background-color:#474747;}.secondary-navigation .main-nav ul li[class*="current-menu-"] > a{color:#222222;background-color:#ffffff;}.secondary-navigation .main-nav ul ul li[class*="current-menu-"] > a{color:#ffffff;background-color:#474747;}@media (max-width: 768px) {.secondary-menu-bar-items .menu-bar-item:hover > a{background: none;color: #444444;}}
+</style>
+<link rel='stylesheet' id='generate-secondary-nav-mobile-css' href='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/secondary-nav/functions/css/main-mobile.min.css?ver=2.2.1' media='all' />
+<link rel='stylesheet' id='generate-woocommerce-css' href='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/woocommerce/functions/css/woocommerce.min.css?ver=2.2.1' media='all' />
+<style id='generate-woocommerce-inline-css'>
+.woocommerce ul.products li.product .woocommerce-LoopProduct-link h2, .woocommerce ul.products li.product .woocommerce-loop-category__title{font-weight:normal;text-transform:none;font-size:17px;}.woocommerce .up-sells ul.products li.product .woocommerce-LoopProduct-link h2, .woocommerce .cross-sells ul.products li.product .woocommerce-LoopProduct-link h2, .woocommerce .related ul.products li.product .woocommerce-LoopProduct-link h2{font-size:17px;}.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button{color:#ffffff;background-color:#666666;font-weight:normal;text-transform:none;}.woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover{color:#ffffff;background-color:#3f3f3f;}.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .woocommerce #respond input#submit.alt.disabled, .woocommerce #respond input#submit.alt.disabled:hover, .woocommerce #respond input#submit.alt:disabled, .woocommerce #respond input#submit.alt:disabled:hover, .woocommerce #respond input#submit.alt:disabled[disabled], .woocommerce #respond input#submit.alt:disabled[disabled]:hover, .woocommerce a.button.alt.disabled, .woocommerce a.button.alt.disabled:hover, .woocommerce a.button.alt:disabled, .woocommerce a.button.alt:disabled:hover, .woocommerce a.button.alt:disabled[disabled], .woocommerce a.button.alt:disabled[disabled]:hover, .woocommerce button.button.alt.disabled, .woocommerce button.button.alt.disabled:hover, .woocommerce button.button.alt:disabled, .woocommerce button.button.alt:disabled:hover, .woocommerce button.button.alt:disabled[disabled], .woocommerce button.button.alt:disabled[disabled]:hover, .woocommerce input.button.alt.disabled, .woocommerce input.button.alt.disabled:hover, .woocommerce input.button.alt:disabled, .woocommerce input.button.alt:disabled:hover, .woocommerce input.button.alt:disabled[disabled], .woocommerce input.button.alt:disabled[disabled]:hover{color:#ffffff;background-color:#1e73be;}.woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover{color:#ffffff;background-color:#377fbf;}.woocommerce .star-rating span:before, .woocommerce p.stars:hover a::before{color:#ffa200;}.woocommerce span.onsale{background-color:#222222;color:#ffffff;}.woocommerce ul.products li.product .price, .woocommerce div.product p.price{color:#222222;}.woocommerce div.product .woocommerce-tabs ul.tabs li a{color:#222222;}.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover, .woocommerce div.product .woocommerce-tabs ul.tabs li.active a{color:#1e73be;}.woocommerce-message{background-color:#1abc9c;color:#ffffff;}div.woocommerce-message a.button, div.woocommerce-message a.button:focus, div.woocommerce-message a.button:hover, div.woocommerce-message a, div.woocommerce-message a:focus, div.woocommerce-message a:hover{color:#ffffff;}.woocommerce-info{background-color:#1e73be;color:#ffffff;}div.woocommerce-info a.button, div.woocommerce-info a.button:focus, div.woocommerce-info a.button:hover, div.woocommerce-info a, div.woocommerce-info a:focus, div.woocommerce-info a:hover{color:#ffffff;}.woocommerce-error{background-color:#e8626d;color:#ffffff;}div.woocommerce-error a.button, div.woocommerce-error a.button:focus, div.woocommerce-error a.button:hover, div.woocommerce-error a, div.woocommerce-error a:focus, div.woocommerce-error a:hover{color:#ffffff;}.woocommerce-product-details__short-description{color:#333333;}#wc-mini-cart{background-color:#ffffff;color:#000000;}#wc-mini-cart a:not(.button), #wc-mini-cart a.remove{color:#000000;}#wc-mini-cart .button{color:#ffffff;}#wc-mini-cart .button:hover, #wc-mini-cart .button:focus, #wc-mini-cart .button:active{color:#ffffff;}.woocommerce #content div.product div.images, .woocommerce div.product div.images, .woocommerce-page #content div.product div.images, .woocommerce-page div.product div.images{width:30%;}.add-to-cart-panel{background-color:#ffffff;color:#000000;}.add-to-cart-panel a:not(.button){color:#000000;}.woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content{background-color:#dddddd;}.woocommerce .widget_price_filter .ui-slider .ui-slider-range, .woocommerce .widget_price_filter .ui-slider .ui-slider-handle{background-color:#666666;}.wc-columns-container .products, .woocommerce .related ul.products, .woocommerce .up-sells ul.products{grid-gap:20px;}@media (max-width: 1024px){.woocommerce .wc-columns-container.wc-tablet-columns-2 .products{-ms-grid-columns:(1fr)[2];grid-template-columns:repeat(2, 1fr);}.wc-related-upsell-tablet-columns-2 .related ul.products, .wc-related-upsell-tablet-columns-2 .up-sells ul.products{-ms-grid-columns:(1fr)[2];grid-template-columns:repeat(2, 1fr);}}@media (max-width:768px){.add-to-cart-panel .continue-shopping{background-color:#ffffff;}.woocommerce #content div.product div.images,.woocommerce div.product div.images,.woocommerce-page #content div.product div.images,.woocommerce-page div.product div.images{width:100%;}}@media (max-width: 768px){nav.toggled .main-nav li.wc-menu-item{display:none !important;}.mobile-bar-items.wc-mobile-cart-items{z-index:1;}}
+</style>
+<link rel='stylesheet' id='generate-woocommerce-mobile-css' href='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/woocommerce/functions/css/woocommerce-mobile.min.css?ver=2.2.1' media='(max-width:768px)' />
+
+<script src='https://www.pierre-giraud.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>
+<script src='https://www.pierre-giraud.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script id='cookie-law-info-js-extra'>
+var Cli_Data = {"nn_cookie_ids":[],"cookielist":[],"non_necessary_cookies":[],"ccpaEnabled":"","ccpaRegionBased":"","ccpaBarEnabled":"","strictlyEnabled":["necessary","obligatoire"],"ccpaType":"gdpr","js_blocking":"","custom_integration":"","triggerDomRefresh":"","secure_cookies":""};
+var cli_cookiebar_settings = {"animate_speed_hide":"500","animate_speed_show":"500","background":"#FFF","border":"#b1a6a6c2","border_on":"","button_1_button_colour":"#000","button_1_button_hover":"#000000","button_1_link_colour":"#fff","button_1_as_button":"1","button_1_new_win":"","button_2_button_colour":"#333","button_2_button_hover":"#292929","button_2_link_colour":"#444","button_2_as_button":"","button_2_hidebar":"","button_3_button_colour":"#000","button_3_button_hover":"#000000","button_3_link_colour":"#fff","button_3_as_button":"1","button_3_new_win":"","button_4_button_colour":"#000","button_4_button_hover":"#000000","button_4_link_colour":"#62a329","button_4_as_button":"","button_7_button_colour":"#61a229","button_7_button_hover":"#4e8221","button_7_link_colour":"#fff","button_7_as_button":"1","button_7_new_win":"","font_family":"inherit","header_fix":"","notify_animate_hide":"1","notify_animate_show":"","notify_div_id":"#cookie-law-info-bar","notify_position_horizontal":"right","notify_position_vertical":"bottom","scroll_close":"","scroll_close_reload":"","accept_close_reload":"","reject_close_reload":"","showagain_tab":"1","showagain_background":"#fff","showagain_border":"#000","showagain_div_id":"#cookie-law-info-again","showagain_x_position":"100px","text":"#000","show_once_yn":"","show_once":"10000","logging_on":"","as_popup":"","popup_overlay":"1","bar_heading_text":"","cookie_bar_as":"banner","popup_showagain_position":"bottom-right","widget_position":"left"};
+var log_object = {"ajax_url":"https:\/\/www.pierre-giraud.com\/wp-admin\/admin-ajax.php"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/cookie-law-info/legacy/public/js/cookie-law-info-public.js?ver=3.0.8' id='cookie-law-info-js'></script>
+
+<!-- Extrait Google Analytics ajouté par Site Kit -->
+<script src='https://www.googletagmanager.com/gtag/js?id=UA-50358536-3' id='google_gtagjs-js' async></script>
+<script id='google_gtagjs-js-after'>
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["www.pierre-giraud.com"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-50358536-3", {"anonymize_ip":true});
+</script>
+
+<!-- Arrêter l&#039;extrait Google Analytics ajouté par Site Kit -->
+<link rel="https://api.w.org/" href="https://www.pierre-giraud.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.pierre-giraud.com/wp-json/wp/v2/pages/10553" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.pierre-giraud.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.pierre-giraud.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.1.1" />
+<meta name="generator" content="WooCommerce 7.3.0" />
+<link rel='shortlink' href='https://www.pierre-giraud.com/?p=10553' />
+<link rel="alternate" type="application/json+oembed" href="https://www.pierre-giraud.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.pierre-giraud.com%2Fhtml-css-apprendre-coder-cours%2Fdefinition-utilisation%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.pierre-giraud.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.pierre-giraud.com%2Fhtml-css-apprendre-coder-cours%2Fdefinition-utilisation%2F&#038;format=xml" />
+<meta name="generator" content="Site Kit by Google 1.92.0" />   <noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+
+<!-- Extrait Google AdSense ajouté par Site Kit -->
+<meta name="google-adsense-platform-account" content="ca-host-pub-2644536267352236">
+<meta name="google-adsense-platform-domain" content="sitekit.withgoogle.com">
+<!-- Arrêter l&#039;extrait Google AdSense ajouté par Site Kit -->
+
+<!-- Extrait Google AdSense ajouté par Site Kit -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8384266137058067&amp;host=ca-host-pub-2644536267352236" crossorigin="anonymous"></script>
+
+<!-- Arrêter l&#039;extrait Google AdSense ajouté par Site Kit -->
+<link rel="icon" href="https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.pierre-giraud.com/wp-content/uploads/2020/04/cropped-logo512-pierre-giraud3-1-270x270.png" />
+                <style id="wp-custom-css">
+                        /*GENERAL*/
+.site-logo .header-image, .logo-pg{width: 50px;}
+.pied-conteneur{padding: 10px 0px; background-color: #2b3459e3 !important;}
+.pied-conteneur p{margin-bottom: 0px;}
+.pied-conteneur p, .pied-conteneur a{font-size: 12px; color: white;}
+.ligne1{display: flex;flex-wrap: wrap;align-items: center;justify-content: space-evenly;}
+.ligne2 p{text-align: center;}
+.EnlighterJSWrapper{text-align:left}
+
+/*ACCUEIL*/
+.page-id-11489, .page-id-11489 .site-content{padding:0px;}
+.section1-home, .section2-home, .section3-home{
+        margin-bottom: 20px;
+        padding: 20px 0px;
+}
+.section-texte span{
+        border-bottom: 4px solid #00bc7e;
+}
+.section-texte h2, .section-texte p{
+        text-align: center;
+}
+.home-cta{
+        text-align: center;
+        margin-top: 10px;
+}
+.home-cta a{
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px;
+        font-size: 24px;
+        color: #fff;
+        background-color: #2b345a;
+        border-radius: 10px;
+}
+.home-cta a:hover{
+        background-color: #465592;
+        box-shadow: 0px 2px 5px grey;
+}
+.section1-illustration, .section2-illustration, .section3-illustration{
+        display:flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+}
+.section1-home a, .section2-home a{
+        flex: 1 1 100px;
+        text-align: center;
+}
+.section3-home a{
+        flex: 1 1 auto;
+        text-align: center;
+}
+.section1-illustration img{
+        width: 50px;
+        margin: 20px;
+}
+.section2-illustration img{
+        width: 100px;
+        margin: 20px;
+}
+.section3-illustration img{
+        width: 150px;
+        margin: 20px;
+}
+.section4-home{
+        display: none;
+}
+.section2-home{
+        background-image: url("https://www.pierre-giraud.com/wp-content/uploads/2020/05/code.jpg");
+        border-top-right-radius: 20% 4%;
+        border-bottom-left-radius: 20% 4%;
+        padding: 20px 0px;
+}
+.section2-home .section-texte, .section2-home .section2-articles{
+        text-align: center;
+        color: white;
+}
+.section2-articles{
+        display: flex;
+        flex-flow: row wrap;
+        width: 90%;
+        margin: 0 auto;
+        justify-content: center;
+}
+.section2-articles a{
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        background-color: #FFFFFF33;
+        border-radius: 5px;
+        margin: 10px;
+        flex: 1 1 200px;
+}
+.section2-articles a:hover{
+        background-color: #DDDDDD;
+        color: black;
+        box-shadow: 0px 0px 3px 0px rgba(26, 26, 26, 0.75);
+}
+
+@media screen and (min-width: 720px){
+        .home-cta a{font-size: 32px;}
+        .section2-home{
+                border-top-right-radius: 25% 5%;
+                border-bottom-left-radius: 25% 5%;
+        }
+        .section2-illustration img{
+                width: 120px;
+                margin: 40px 20px;
+        }
+        .section3-illustration img{
+                width: 180px;
+                margin: 40px 20px;
+                box-shadow: 5px 5px 5px #5a3713;
+        }
+}
+@media screen and (min-width: 992px){
+        .section2-home{
+                border-top-right-radius: 50% 10%;
+                border-bottom-left-radius: 50% 10%;
+        }
+        .section2-illustration img{
+                width: 150px;
+                margin: 40px 20px;
+        }
+        .section3-illustration img{
+                width: 250px;
+                margin: 40px 20px;
+        }
+}
+
+/*PAGES COURS HOME ET ARTICLES HOME*/
+.accueil, .dplg{display: grid;grid-template-columns: 100%;justify-content:space-evenly;}
+@media screen and (min-width: 780px){.accueil, .dplg{grid-template-columns:repeat(2, 50%);gap: 6px;}}
+@media screen and (min-width: 992px){.accueil, .dplg{grid-template-columns:repeat(3, 30%);gap: 12px;}}
+@media screen and (min-width: 1200px){.accueil, .dplg{grid-template-columns:repeat(4, 25%);gap: 16px;}}
+.cours, .listing-item{background: #232731;margin-bottom:20px;}
+.cours:hover, .listing-item:hover{box-shadow: 0px 0px 5px 1px;}
+.cours img, .listing-item a img{width:100%;}
+.cours h3, .listing-item .title{font-size: 16px;margin-bottom: 10px;}
+.cours h3 a, .listing-item .title{color: #fff;}
+.cours:hover h3 a, .listing-item:hover .title{color:#0099CC;}
+.listing-item{text-align:center;}
+
+
+/*COURS*/
+.pcrs{display:grid;grid-template-columns:1fr 3fr;grid-gap:16px;text-align:justify;}
+.somr{font-size: 14px}
+.somr ul{list-style-type:none;margin: 0px;border-radius:5px;border:1px solid #f0f0f0}
+.somr ol{list-style-position:inside;margin:0px}
+.somr ol>li{border-top:1px solid #f0f0f0}
+.somr ol li, .somr h2, .somr h3{padding:10px}
+.somr h2{background-color: #0d618a;margin-bottom: 0px;color: #fff;}
+.som h2 a:visited{color:#fff;}
+.somr h2 a{display:block;width:100%;color:#fff;}
+.somr h2 a:hover{color: #fff}
+.somr h3{margin-bottom:0px;background-color:#fafafa;color:#0d618a;font-size:15px}
+.somr a:hover{color:#0d618a}
+@media screen and (max-width: 780px){.pcrs{display: block} .somr{display: none}}
+.contenu{max-width:700px;margin:0 auto}
+.contenu h2{color:#333;border-bottom:2px solid #0d618a}
+.contenu code{color:#dc1a1a;background-color:#f9f2f4;border-radius:4px;font-family:inherit}
+.contenu{text-align:justify}
+.contenu img{border:1px solid #333}
+.contenu a{text-decoration: underline;text-decoration-color: #0d618a}
+.contenu a:hover{color: #0d618a}
+.pcsv{display:grid;grid-template-columns:1fr 1fr;font-size:13px;text-decoration:underline}
+.pct{text-align:left}
+.svt{text-align:right}
+.page .entry-title{text-align:left}
+
+/*ARTICLES*/
+.category .site-main{display: grid;grid-template-columns: repeat(4, 1fr);gap: 16px}
+.category .site-main .page-header{grid-column: 1/5}
+.grille, .grille2lp, .grille2pr{display: grid;grid-template-columns: 100%;margin: 0 auto;max-width: 1280px;text-align:justify}
+.grille2lp nav{background: linear-gradient(to bottom, #eaeaea66 0px, #fbfbfb66 100%);border-radius: 5px;padding-left: 10px;position: sticky;top: 0px;max-width: 300px}
+.grille2lp nav li{margin-bottom:10px}
+.grille2lp nav a{color: #333;text-decoration:none}
+.grille2pr aside{background-color: #eaeaea66;max-width: 350px;padding:10px}
+.asidep{position:sticky;top:20px;}
+.post .entry-title{text-align:center;background: #0d618a;color: #fff;border-radius: 5px;padding: 10px 0px;}
+.post h2{color:#333;border-bottom:1px solid #0d618a}
+.post code{color: #c7254e;background-color: #f9f2f4;border-radius: 4px;font-family:inherit}
+.post img{border:1px solid #333}
+.post a{text-decoration: underline;color: #0d618a}
+.post a:hover{color:#0d618a}
+.dplg .listing-item .title{text-align:center;}
+.resume{background: linear-gradient(to right,#ffbe02a1 0px,#fd606aba 100%);padding:10px}
+@media screen and (min-width: 780px){
+        .grille, .grille2lp, .grille2pr{column-gap: 16px}
+        .grille2lp{grid-template-columns: 1fr 4fr;}
+        .grille2lp nav{grid-column: 1/2;grid-row:1/2}
+        .grille2lp .ctn2lp{grid-column: 2/3;grid-row:1/2}
+        .grille2pr{grid-template-columns: 4fr 1fr;}
+}
+.tuto-video{text-align: center;}
+
+/*Articles référence avec tableau*/
+#span-italic span{font-style: italic; font-size:small}
+.fpwd{background-color:rgb(203, 98, 77)}
+.wd{background-color : rgb(230, 110, 51)}
+.cr{background-color: rgb(207, 213, 16)}
+.pr{background-color:rgb(114, 172, 53)}
+.rec{background-color: rgb(48, 156, 64)}
+.ref .tablec{overflow-x: auto}
+.ref th::after{content:"▼"; font-size: 12px}
+.ref h2{margin-bottom:5px}
+.ref dl{display: grid;grid-template-columns: 25% 75%}
+.ref dt span{color: white;border-radius: 4px;padding: 0px 2px;font-style: normal;font-size:small}
+
+
+/*Nouvelle version*/
+.site-header{
+        border-bottom: 2px solid #f4f4f4
+}
+.post{
+        padding: 0px 40px;
+}
+.inside-left-sidebar{
+        position: sticky;
+        top: 60px;
+}
+.secondary-navigation a{
+        display: inline;
+}
+.inside-navigation{
+        position: relative
+}
+.inside-navigation ol{
+        counter-reset: item;
+}
+.sommaire{overflow-y: scroll;overflow-x: hidden;max-height: 100vh;font-size: 0.9em;padding: 0px 5px 0px 0px;}
+.sommaire, .sommaire.interne{margin: 0 0 1.5em 0.5em;}
+.sommaire .partie{padding-top: 30px;color: #434445;font-weight: 500;}
+.sommaire .partie::before{content: "";}
+.sommaire .partie span{display: block;border-top: 1px solid #ebebeb;padding: 20px 0px 10px 0px; color: #00bc7e}
+.sommaire .interne li{display: block;line-height: 1.8em;color: #434445}
+.sommaire .interne li::marker{color: #434445;}
+.sommaire li::before{content: counters(item, ".") " ";counter-increment: item;color: #434445;font-family: Menlo;font-size: 0.7em;}
+.sommaire .vertli{
+        border-right: 5px solid #00bc7e;
+}
+.sommaire .vertli::before{color: #00bc7e}
+.sommaire .verta{
+        color: #00bc7e;
+        font-weight: 500;
+}
+.sommaire a{color: #434445;font-weight: 300;}
+.sommaire a:hover{color: #00bc7e;}              </style>
+                </head>
+
+<body class="page-template-default page page-id-10553 page-child parent-pageid-10549 wp-custom-logo wp-embed-responsive theme-generatepress post-image-aligned-center secondary-nav-left-sidebar secondary-nav-aligned-left sticky-menu-fade sticky-enabled desktop-sticky-menu woocommerce-no-js no-sidebar nav-float-right one-container header-aligned-left dropdown-hover" itemtype="https://schema.org/WebPage" itemscope>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><a class="screen-reader-text skip-link" href="#content" title="Aller au contenu">Aller au contenu</a>              <header class="site-header has-inline-mobile-toggle" id="masthead" aria-label="Site"  itemtype="https://schema.org/WPHeader" itemscope>
+                        <div class="inside-header grid-container">
+                                <div class="site-logo">
+                                        <a href="https://www.pierre-giraud.com/" rel="home">
+                                                <img  class="header-image is-logo-image lazy" alt="Pierre Giraud" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2020/10/cropped-logo.png" width="64" height="64" />
+                                        </a>
+                                </div>  <nav class="main-navigation mobile-menu-control-wrapper" id="mobile-menu-control-wrapper" aria-label="Mobile Toggle">
+                <div class="menu-bar-items"><span class="menu-bar-item wc-menu-item  ">
+                                        <a href="https://www.pierre-giraud.com/panier/" class="cart-contents shopping-cart " title="Voir votre panier"><span class="number-of-items no-items">0</span><span class="amount"></span></a>
+                                </span></div>           <button data-nav="site-navigation" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                        <span class="screen-reader-text">Menu</span>            </button>
+        </nav>
+                        <nav class="wc-menu-cart-activated main-navigation has-menu-bar-items sub-menu-right" id="site-navigation" aria-label="Primary"  itemtype="https://schema.org/SiteNavigationElement" itemscope>
+                        <div class="inside-navigation grid-container">
+                                                                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                                        <span class="screen-reader-text">Menu</span>                            </button>
+                                <div id="primary-menu" class="main-nav"><ul id="menu-main-menu" class=" menu sf-menu"><li id="menu-item-11497" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-11497"><a href="https://www.pierre-giraud.com/cours/">Les cours<span role="presentation" class="dropdown-menu-toggle"></span></a>
+<ul class="sub-menu">
+        <li id="menu-item-9828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9828"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/">HTML et CSS</a></li>
+        <li id="menu-item-9832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9832"><a href="https://www.pierre-giraud.com/javascript-apprendre-coder-cours/">JavaScript</a></li>
+        <li id="menu-item-9831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9831"><a href="https://www.pierre-giraud.com/php-mysql-apprendre-coder-cours/">PHP et MySQL</a></li>
+        <li id="menu-item-9830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9830"><a href="https://www.pierre-giraud.com/python-apprendre-programmer-cours/">Python</a></li>
+        <li id="menu-item-9829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9829"><a href="https://www.pierre-giraud.com/bootstrap-apprendre-cours/">Bootstrap 4</a></li>
+        <li id="menu-item-9827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9827"><a href="https://www.pierre-giraud.com/jquery-apprendre-cours/">jQuery</a></li>
+        <li id="menu-item-11492" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11492"><a href="https://www.pierre-giraud.com/shell-bash/">Shell Bash</a></li>
+        <li id="menu-item-12117" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12117"><a href="https://www.pierre-giraud.com/sass-apprendre-cours-complet/">Sass</a></li>
+        <li id="menu-item-14037" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14037"><a href="https://www.pierre-giraud.com/git-github-apprendre-cours/">Git et GitHub</a></li>
+        <li id="menu-item-14036" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14036"><a href="https://www.pierre-giraud.com/http-reseau-securite-cours/">HTTP et réseaux</a></li>
+</ul>
+</li>
+<li id="menu-item-12232" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12232"><a href="https://www.pierre-giraud.com/livres/">Les livres PDF</a></li>
+<li id="menu-item-11493" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11493"><a href="https://www.pierre-giraud.com/articles/">Les articles</a></li>
+<li id="menu-item-4999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4999"><a href="https://www.pierre-giraud.com/contact/">Contact</a></li>
+</ul></div><div class="menu-bar-items"><span class="menu-bar-item wc-menu-item  ">
+                                        <a href="https://www.pierre-giraud.com/panier/" class="cart-contents shopping-cart " title="Voir votre panier"><span class="number-of-items no-items">0</span><span class="amount"></span></a>
+                                </span></div>                   </div>
+                </nav>
+                                        </div>
+                </header>
+
+        <div class="site grid-container container hfeed" id="page">
+                                <div class="site-content" id="content">
+
+        <div class="content-area" id="primary">
+                <main class="site-main" id="main">
+
+<article id="post-10553" class="post-10553 page type-page status-publish infinite-scroll-item" itemtype="https://schema.org/CreativeWork" itemscope>
+        <div class="inside-article">
+
+                        <header class="entry-header" aria-label="Contenu">
+                                <h1 class="entry-title" itemprop="headline">Définitions et usages du HTML et du CSS</h1</header>
+
+
+                <div class="entry-content" itemprop="text">
+                        <div class="pcrs">
+<div class="somr"><h2>Télécharger le PDF du cours</h2><br><a href="https://www.pierre-giraud.com/produit/cours-complet-html-et-css-livret-pdf-edition-2020/"><img class="lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/html-css-livre-couverture.jpg" alt="Livret PDF du cours" style="box-shadow: 0px 0px 5px 1px rgba(50,50,50,0.5)"></a><nav><ul>
+<li><h2><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/">Cours complet HTML et CSS</a></h2></li>
+<li><h3>INTRODUCTION AU COURS HTML ET CSS</h3><ol>
+<li id="html1"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/introduction/">Introduction au cours HTML et CSS</a></li>
+<li id="html2"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/definition-utilisation/">Définition et usage du HTML et du CSS</a></li>
+<li id="html3"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/evolution-langage-web/">Evolution de l'informatique et des langages Web</a></li>
+<li id="html4"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/local-preprod-production/">Travail en local et en production</a></li>
+<li id="html5"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/choix-editeur-texte/">Choix et installation d'un éditeur de texte</a></li>
+</ol></li>
+<li><h3>LES BASES DU HTML</h3><ol start="6">
+<li id="html6"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/element-balise-attribut/">Eléments, balises et attributs HTML</a></li>
+<li id="html7"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/structure-minimale-page/">Structure minimale d’une page HTML valide</a></li>
+<li id="html8"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/enregistrement-affichage-page/">Enregistrement et affichage d’une page HTML</a></li>
+<li id="html9"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/indentation-commentaire-html/">L’indentation et les commentaires en HTML</a></li>
+<li id="html10"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/titre-paragraphe/">Les titres et les paragraphes en HTML</a></li>
+<li id="html11"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/espace-retour-ligne/">Les espaces et retours à la ligne en HTML</a></li>
+<li id="html12"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/strong-em-mark/">Définir le niveau d’importance des contenus en HTML</a></li>
+<li id="html13"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/liste-ul-ol-dl/">Créer des listes en HTML</a></li>
+<li id="html14"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/lien-interne-externe-ancre/">Créer des liens en HTML</a></li>
+<li id="html15"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/envoi-mail-telechargement-fichier/">Envoi de mails et téléchargement de fichiers en HTML</a></li>
+<li id="html16"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/compatibilite-support-validation-code/">Compatibilité, support et validation du code HTML et CSS</a></li>
+</ol></li>
+<li><h3>LES BASES DU CSS</h3><ol start="17">
+<li id="html17"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/selecteur-propriete/">Sélecteurs et propriétés CSS</a></li>
+<li id="html18"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/ou-ecrire-code-css/">Où écrire le code CSS ?</a></li>
+<li id="html19"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/indentation-commentaire-css/">Commentaires et indentation en CSS</a></li>
+<li id="html20"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/selecteur-simple-combinateur/">Sélecteurs CSS simples et combinateurs</a></li>
+<li id="html21"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/class-id/">Les attributs HTML class et id et les sélecteurs CSS associés</a></li>
+<li id="html22"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/cascade-heritage/">Ordre d’application (cascade) et héritage des règles en CSS</a></li>
+<li id="html23"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/div-span/">Les éléments HTML div et span (conteneurs génériques)</a></li>
+<li id="html24"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/block-inline/">Les niveaux ou “types” d’éléments HTML block et inline</a></li>
+<li id="html25"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/long-short-hand/">Notations complètes “long hand” et raccourcies “short hand’ CSS</a></li>
+</ol></li>
+<li><h3>MISE EN FORME DE TEXTES EN CSS</h3><ol start="26">
+<li id="html26"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/font-family-google/">La propriété CSS font-family et les Google Fonts</a></li>
+<li id="html27"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/font-size-weight-style/">Les autres propriétés CSS liées à la police</a></li>
+<li id="html28"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/text-align-transform-decoration-indent-shadow/">Les propriétés CSS liées au texte</a></li>
+<li id="html29"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/line-height-letter-word-spacing/">Gérer la taille des interlignes et des espaces dans les textes en CSS</a></li>
+<li id="html30"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/color-opacity/">Gérer la couleur et l’opacité des textes</a></li>
+</ol></li>
+<li><h3>LE MODELE DES BOITES</h3><ol start="31">
+<li id="html31"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/modele-boite/">Le modèle des boites</a></li>
+<li id="html32"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/width-height/">Largeur (width) et hauteur (height) de la boite de contenu des éléments HTML</a></li>
+<li id="html33"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/marge-interne-padding/">Gestion des marges internes ou padding en CSS</a></li>
+<li id="html34"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/bordure-border-width-style-color/">Gestion des bordures en CSS</a></li>
+<li id="html35"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/marge-externe-margin/">Gestion des marges externes (margin) en CSS</a></li>
+<li id="html36"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/box-sizing/">La propriété CSS box-sizing</a></li>
+<li id="html37"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/bordure-arrondie-border-radius/">Créer des bordures arrondies en CSS</a></li>
+</ol></li>
+<li><h3>POSITION ET AFFICHAGE DES ELEMENTS</h3><ol start="38">
+<li id="html38"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/display/">La propriété CSS display</a></li>
+<li id="html39"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/position/">La propriété CSS position</a></li>
+<li id="html40"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/float/">La propriété CSS float</a></li>
+<li id="html41"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/conflit-display-position-float/">Gestion des conflits entre display, position et float</a></li>
+</ol>
+</li>
+<li><h3>CREATION DE TABLEAUX HTML</h3><ol start="42">
+<li id="html42"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/tableau-table/">Créer des tableaux en HTML</a></li>
+<li id="html43"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/thead-th-tbody-tfoot/">Structurer un tableau HTML</a></li>
+<li id="html44"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/border-collapse-spacing/">Mettre en forme un tableau HTML avec du CSS</a></li>
+</ol></li>
+<li><h3>INSERTION DE MEDIAS EN HTML</h3><ol start="45">
+<li id="html45"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/image-img/">Insérer des images dans des pages HTML</a></li>
+<li id="html46"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/musique-audio/">Insérer de la musique avec l’élément HTML audio</a></li>
+<li id="html47"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/video/">Insérer des vidéos avec l’élément HTML video</a></li>
+<li id="html48"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/iframe/">L’élément HTML iframe</a></li>
+</ol></li>
+<li><h3>FOND, DEGRADES ET OMBRES CSS</h3><ol start="49">
+<li id="html49"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/couleur-fond-background-color/">Gérer la couleur de fond des éléments HTML</a></li>
+<li id="html50"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/image-fond-background/">Ajouter des images en fond des éléments HTML</a></li>
+<li id="html51"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/degrade-lineaire-linear-gradient/">Création de dégradés linéaires en CSS</a></li>
+<li id="html52"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/degrade-radial-gradient/">Création de dégradés radiaux en CSS</a></li>
+<li id="html53"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/ombre-box-shadow/">Ajouter des ombres aux éléments en CSS</a></li>
+</ol></li>
+<li><h3>SELECTEURS CSS COMPLEXES</h3><ol start="54">
+<li id="html54"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/selecteur-attribut/">Les sélecteurs CSS d’attributs</a></li>
+<li id="html55"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/pseudo-classe/">Les pseudo-classes CSS</a></li>
+<li id="html56"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/pseudo-element/">Les pseudo-éléments CSS</a></li>
+<li id="html57"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-menu-horizontal-sticky/">EXERCICE – Création d’un menu horizontal sticky en HTML et CSS</a></li>
+<li id="html58"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-menu-deroulant/">EXERCICE – Création d’un menu déroulant en HTML et CSS</a></li>
+</ol></li>
+<li><h3>FORMULAIRES HTML</h3><ol start="59">
+<li id="html59"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/formulaire-form/">Présentation des formulaires HTML</a></li>
+<li id="html60"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/form-input-label-textarea-select">Les éléments des formulaires</a></li>
+<li id="html61"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/attribut-formulaire/">Attributs des formulaires et sécurité</a></li>
+</ol></li>
+<li><h3>TRANSITIONS, ANIMATIONS ET TRANSFORMATIONS CSS</h3><ol start="62">
+<li id="html62"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/transition/">Créer des transitions en CSS</a></li>
+<li id="html63"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/animation/">Créer des animations en CSS</a></li>
+<li id="html64"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/transformation-transform/">Créer des transformations en CSS</a></li>
+<li id="html65"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-diaporama/">EXERCICE – Créer un diaporama en HTML et CSS</a></li>
+</ol></li>
+<li><h3>MODELE DES BOITES FLEXIBLES - FLEXBOX CSS</h3><ol start="66">
+<li id="html66"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/flexbox-modele-boite-flexible/">Introduction au modèle des boites flexibles ou flexbox</a></li>
+<li id="html67"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/flexbox-direction/">Gérer la direction des éléments flexibles ou flex items</a></li>
+<li id="html68"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/flexbox-alignement/">Gérer l’alignement des éléments flexibles</a></li>
+<li id="html69"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/flexbox-taille-flex/">Gérer la taille et la flexibilité des éléments flexibles</a></li>
+<li id="html70"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/utilisation-limite-flexbox/">Cas d’utilisation et limites du flexbox</a></li>
+<li id="html71"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-menu-flexbox/">EXERCICE – Création d’un menu HTML et CSS en utilisant le flexbox</a></li>
+</ol></li>
+<li><h3>RESPONSIVE DESIGN CSS</h3><ol start="72">
+<li id="html72"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/introduction-responsive-design">Introduction au responsive design</a></li>
+<li id="html73"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/meta-viewport">La balise meta viewport</a></li>
+<li id="html74"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/media-queries-responsive-design">Créer un design responsive avec les media queries</a></li>
+<li id="html75"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/images-responsive">Images responsive</a></li>
+<li id="html76"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-menu-deroulant-responsive">EXERCICE - Création d'un menu déroulant responsive HTML et CSS</a></li>
+</ol></li>
+<li><h3>SEMANTIQUE ET ELEMENTS HTML STRUCTURANTS</h3><ol start="77">
+<li id="html77"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/semantique-elements-structurants">Sémantique et éléments structurants du HTML</a></li>
+<li id="html78"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creation-page-cv-responsive">EXERCICE - Création d'un site de CV responsive en HTML et CSS</a></li>
+</ol></li>
+<li><h3>MODELE DES GRILLES CSS</h3><ol start="79">
+<li id="html79"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/introduction-grille-grid">Introduction au modèle des grilles CSS</a></li>
+<li id="html80"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/creer-grille-piste-grid">Créer une grille et définir des pistes de grille</a></li>
+<li id="html81"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/positionner-elements-grille">Positionner des éléments dans une grille</a></li>
+<li id="html82"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/aligner-espacer-elements-grille">Aligner et espacer des éléments dans une grille</a></li>
+<li id="html83"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/page-colonne-flexbox-grille">EXERCICE – Création d’une page à 3 colonnes contenant des éléments flexibles</a></li>
+</ol></li>
+<li><h3>EVOLUTION ET FUTUR DU CSS</h3><ol start="84">
+<li id="html84"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/evolution-langage-programmation">Le CSS, un quasi langage de programmation</a></li>
+<li id="html85"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/fonction">Les fonctions CSS</a></li>
+<li id="html86"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/propriete-personnalisee-variable">Les propriétés personnalisées ou variables CSS</a></li>
+<li id="html87"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/regle-arobase">Les règles arobase CSS</a></li>
+<li id="html88"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/imbrication-heritage-etendu">Imbrication et héritage étendu</a></li>
+</ol></li>
+<li><h3>CONCLUSION DU COURS</h3><ol start="89">
+<li id="html89"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/conclusion">Conclusion du cours HTML et CSS</a></li>
+</ol></li>
+</ul></nav></div>
+<div class="contenu">
+Nous allons dans cette leçon poser une première définition du HTML et du CSS et comprendre plus précisément quel va être leur rôle dans la création d’un site Internet.</p>
+<p>On va ainsi expliquer ce qu’on peut faire et ce qu’on ne peut pas faire avec chacun de ces deux langages.</p>
+<p>&nbsp;</p>
+<h2>Le HTML : langage de balisage</h2>
+<p>Le HTML est un langage qui a été créé en 1991. Les sigles « HTML » sont l’abréviation de « HyperText Markup Language » ou « langage de balisage hypertexte » en français.</p>
+<p>Le HTML est donc un langage de balisage, c’est-à-dire un langage qui va nous permettre de définir les différents contenus d’une page.</p>
+<p>Pourquoi est-il si important de définir les différents contenus d’une page ? Pour répondre à cette question, il va avant tout falloir que vous compreniez ce qu’est un site internet et ce qu’il se passe lorsque vous essayez d’accéder à un site internet.</p>
+<p>Ici, je vais essayer de rester le plus simple possible. Tout d’abord, qu’est-ce qu’un site internet ? Un site internet est un ensemble de fichiers de code et de medias (images, videos, etc.) liés entre eux et disponibles à tout moment via le web.</p>
+<p>Pour que les différentes ressources constituant un site internet soient toujours accessibles, on les héberge généralement sur un serveur d’un hébergeur professionnel comme OVH par exemple.</p>
+<p>Un serveur est un ordinateur plus ou moins comme les nôtres et qui stocke les différentes ressources d’un ou de plusieurs site internet. Les seules différences entre un serveur et nos ordinateurs est qu’un serveur est généralement beaucoup plus puissant que nos ordinateurs, qu’il est (normalement) toujours connecté à Internet et qu’il va posséder quelques logiciels supplémentaires lui permettant d’exécuter certains codes.</p>
+<p>Notez ici qu’on appelle ces ordinateurs des « serveurs » car leur seul et unique rôle va être de « servir » (au sens de « fournir ») des pages dès que quelqu’un va le leur demander.</p>
+<p>Comment accède-t-on à une page d’un site internet ? Pour répondre à cette deuxième question, je vais m’aider d’un exemple. Imaginons que l’on souhaite accéder à la page d’accueil de mon site. Pour cela, on va taper <code>www.pierre-giraud.com</code> dans la barre de notre navigateur.</p>
+<p>Lorsqu’on demande à accéder à une page d’un site internet, nous sommes ce qu’on appelle des « clients ».</p>
+<p>Notre navigateur va contacter le serveur sur lequel est hébergée la page à laquelle on souhaite accéder et lui demander de renvoyer les différents éléments de la page : la page sous forme de code HTML et potentiellement les différents médias intégrés dans la page (ce qu’il se passe est en pratique bien évidemment plus complexe mais encore une fois je simplifie volontairement ici).</p>
+<p>Le navigateur va donc recevoir ces différents éléments et les afficher. Cependant, comment fait-il pour savoir ce qu’il doit afficher ? Il va bien évidemment utiliser le code HTML. En effet, le navigateur comprend bien les différentes balises HTML (le HTML utilise ce qu’on appelle des « balises » pour définir les contenus) et va donc « comprendre » de quoi est constituée notre page et ce qu’il doit afficher.</p>
+<p>Le rôle du HTML est donc crucial puisqu’il va être notre langage privilégié pour indiquer aux navigateurs ce quoi est constituée chaque page et ce qu’ils doivent afficher. Grâce au HTML, on va par exemple pourvoir indiquer que tel contenu est un texte qui n’est qu’un paragraphe, que tel autre contenu est un texte qui est un titre de niveau 1 dans notre page, que tel autre contenu est une liste, un lien, etc.</p>
+<p>En plus de cela, le HTML va également nous permettre d’insérer différents médias (images, vidéos, etc.) dans nos pages web en indiquant au navigateur  » à cette place-là dans ma page, je veux que s’affiche cette image « . Notez que dans ce cas précis, pour que le navigateur affiche la bonne image, on va lui fournir l’adresse de l’image dans le code HTML.</p>
+<p><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20300'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png" alt="Le HTML est un langage de balisage" width="700" height="300" class="alignnone size-full wp-image-7008 lazy" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique-300x129.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/html-balisage-contenu-semantique-400x171.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p><img decoding="async" class="alignnone size-full wp-image-7009 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20300'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-html-balisage-contenu-semantique.png" alt="Le HTML définit la structure d'une page web" width="700" height="300" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-html-balisage-contenu-semantique.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-html-balisage-contenu-semantique-300x129.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-html-balisage-contenu-semantique-400x171.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p>&nbsp;</p>
+<h2>Le CSS : langage de styles</h2>
+<p>Le CSS a été créé en 1996, soit 5 ans après le HTML. Les sigles « CSS » sont l’abréviation de « Cascading StyleSheets » ou « feuilles de styles en cascade » en français.</p>
+<p>Le CSS vient résoudre un problème bien différent du HTML : en effet, le HTML sert à définir les différents éléments d’une page, à leur donner du sens. Le CSS, lui, va servir à mettre en forme les différents contenus définis par le HTML en leur appliquant des styles.</p>
+<p>Le HTML va donc créer la structure des pages tandis que le CSS va nous permettre de modifier l’apparence des contenus de la page. On va ainsi par exemple pouvoir définir la taille, la couleur ou l’alignement de certains contenus HTML et notamment en l’occurrence de certains textes dans notre page.</p>
+<p>Pour styliser le contenu lié à un élément HTML en CSS, nous allons pouvoir le cibler en nous basant sur l’élément HTML en question ou en utilisant d’autres procédés que nous verrons plus tard dans ce cours.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-7006 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20190'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/css-modification-styles-html.png" alt="Le CSS modifie l'apparence du code HTML" width="700" height="190" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/css-modification-styles-html.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/css-modification-styles-html-300x81.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/css-modification-styles-html-400x109.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p><img decoding="async" class="alignnone size-full wp-image-7007 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20275'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-css-modification-styles-html.png" alt="Résultat modification apparence HTML avec le CSS" width="700" height="275" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-css-modification-styles-html.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-css-modification-styles-html-300x118.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-css-modification-styles-html-400x157.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p>&nbsp;</p>
+<h2>A retenir : n’utilisez pas le HTML pour mettre en forme vos contenus !</h2>
+<p>Voilà une chose que je vais vous répéter encore et encore au fil de ces premiers chapitres : vous ne devez jamais utiliser le HTML pour faire le travail du CSS.</p>
+<p>En effet, si vous affichez la page en HTML créée ci-dessus dans votre navigateur sans y ajouter de CSS, vous pouvez remarquer que le contenu qui a été déclaré comme étant un titre s’affiche en grand et en gras, tandis que la taille du texte de notre paragraphe est plus petite et la police moins grasse.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-7002 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20320'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/code-html-sans-css.png" alt="Du code HTML non stylisé" width="700" height="320" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/code-html-sans-css.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/code-html-sans-css-300x137.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/code-html-sans-css-400x183.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p><img decoding="async" class="alignnone size-full wp-image-7003 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20350'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-code-html-sans-css.png" alt="Résultat visuel code HTML non stylisé" width="700" height="350" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-code-html-sans-css.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-code-html-sans-css-300x150.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-code-html-sans-css-400x200.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p>Certains débutants en déduisent donc « pour mettre un texte en grand et en gras, il suffit d’utiliser une balise représentant un titre en HTML ». Sortez-vous cela immédiatement de la tête !</p>
+<p>Le HTML est un langage qui a été créé pour structurer des pages et pour donner du sens au contenu. Le principe même du HTML est d’indiquer aux navigateurs que tel contenu est un texte qui doit être considéré comme un titre tandis que tel autre contenu est un texte qui doit être considéré comme un simple paragraphe et etc.</p>
+<p>Si votre navigateur affiche par défaut les contenus textuels que vous avez déclaré comme des titres en HTML en grand et en gras et à l’inverse les paragraphes en plus petit c’est justement parce que chaque navigateur possède sa propre feuille de styles (c’est-à-dire son propre code CSS) qui sera utilisé si aucun code CSS n’a été précisé de notre côté.</p>
+<p>Je répète ici car cela me semble très important : chaque navigateur a une feuille de style dans laquelle sont définis des styles pour chaque contenu HTML qui seront appliqués par défaut si aucun autre code CSS n’est fourni. Cela permet d’apporter une mise en forme minimale au contenu dans les cas rares où les styles CSS ne seraient pas définis ou si notre code CSS ne peut pas être chargé.</p>
+<p>En fournissant nos styles CSS pour les différents contenus de notre page, nous allons donc pouvoir définir l’apparence de ceux-ci puisque les styles que nous allons fournir vont être considérés comme prioritaires par rapport à ceux du navigateur.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-7004 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%2090'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/ajout-css-code-html.png" alt="Sélection et style d'une élément HTML en CSS" width="700" height="90" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/ajout-css-code-html.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/ajout-css-code-html-300x39.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/ajout-css-code-html-400x51.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p><img decoding="async" class="alignnone size-full wp-image-7005 lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20340'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-ajout-css-code-html.png" alt="Résultat visuel ajout code CSS au HTML" width="700" height="340" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-ajout-css-code-html.png 700w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-ajout-css-code-html-300x146.png 300w, https://www.pierre-giraud.com/wp-content/uploads/2019/05/resultat-ajout-css-code-html-400x194.png 400w" data-sizes="(max-width: 700px) 100vw, 700px" /></p>
+<p>N’essayez pas forcément de comprendre comment fonctionne le code ci-dessus, ce n’est pas le but ici. La seule chose que vous devez comprendre est qu’on applique ici des styles CSS à notre premier contenu HTML placé entre les balises <code>&lt;h2&gt;</code> et <code>&lt;/h2&gt;</code> (qui servent à définir un titre de niveau 2) mais pas au deuxième.</p>
+<p>Pour notre premier titre de niveau 2, on indique qu’on veut une taille de texte de 16px et une couleur de texte orange et c’est donc ce que va afficher le navigateur. Comme on n’indique aucun style pour le deuxième titre de niveau 2, le navigateur va charger ses styles par défaut.</p>
+<p>Note : Chaque version de chaque navigateur possède sa propre feuille de style, et c’est la raison pour laquelle une même page peut être rendue différemment d’un navigateur à un autre ou même d’une version d’un navigateur à une autre version de ce même navigateur ! Cependant, aujourd’hui, un véritable effort d’harmonisation a été fait et la plupart des navigateurs utilisent plus ou moins les mêmes styles par défaut.</p>
+<p>En bref, retenez que vous ne devez jamais utiliser le HTML pour modifier l’apparence d’un contenu car cela est le rôle du CSS. Si vous faussez le tout en déclarant par exemple des titres qui n’en sont pas, vous pervertissez le rôle du HTML et cela va impacter fortement la qualité de votre page web, sa validité et votre référencement global.</p>
+<div class="pcsv">
+<div class="pct"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/introduction/">Précédent<br /></a></div>
+<div class="svt"><a href="https://www.pierre-giraud.com/html-css-apprendre-coder-cours/evolution-langage-web/">Suivant<br /></a></div>
+</p></div>
+</p></div>
+</p></div>
+<p><script>
+    document.getElementById("html2").style.fontWeight = "bold";
+    document.getElementById("html2").style.borderRight = "5px solid #f1c40f";
+</script></p>
+                </div>
+
+                        </div>
+</article>
+
+                        <div class="comments-area">
+                                <div id="comments">
+
+                <div id="respond" class="comment-respond">
+                <h3 id="reply-title" class="comment-reply-title">Laisser un commentaire <small><a rel="nofollow" id="cancel-comment-reply-link" href="/html-css-apprendre-coder-cours/definition-utilisation/#respond" style="display:none;">Annuler la réponse</a></small></h3><p class="must-log-in">Vous devez <a href="https://www.pierre-giraud.com/wp-login.php?redirect_to=https%3A%2F%2Fwww.pierre-giraud.com%2Fhtml-css-apprendre-coder-cours%2Fdefinition-utilisation%2F">vous connecter</a> pour publier un commentaire.</p> </div><!-- #respond -->
+
+</div><!-- #comments -->
+                        </div>
+
+                                        </main>
+        </div>
+
+                </div>
+        <div class="pied-conteneur">
+                        <div class="ligne1">
+                        <a href="https://www.pierre-giraud.com"><img class="logo-pg lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2020/04/logo512-pierre-giraud3.png" alt="Logo Pierre Giraud" width="512" height="512" class="alignnone size-full wp-image-14735 lazy" /></a>
+            <a href="https://www.pierre-giraud.com/wp-login.php">Connexion</a>
+                        <a href="https://www.pierre-giraud.com/politique-de-confidentialite/">Confidentialité</a>
+                        <a href="https://www.pierre-giraud.com/cgv/">CGV</a>
+                        <a href="https://www.pierre-giraud.com/sitemap_index.xml">Sitemap</a>
+
+                        <a href="https://www.facebook.com/pierregird/" target="_blank"><noscript><img
+                        class="lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src=https://www.pierre-giraud.com/wp-content/uploads/2019/09/facebook-pierre-giraud.png alt="Facebook Pierre Giraud"></noscript><img class=" ls-is-cached lazyloaded lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/facebook-pierre-giraud.png" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/facebook-pierre-giraud.png" alt="Facebook Pierre Giraud"></a>
+                        <a href="https://twitter.com/pierregird" target="_blank"><noscript><img
+                        class="lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src=https://www.pierre-giraud.com/wp-content/uploads/2019/12/twitter-pierre-giraud.png alt="Twitter Pierre Giraud"></noscript><img class=" ls-is-cached lazyloaded lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/12/twitter-pierre-giraud.png" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/12/twitter-pierre-giraud.png" alt="Twitter Pierre Giraud"></a>
+                        <a href="https://www.youtube.com/pierregiraudcom" target="_blank"><noscript><img
+                        class="lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src=https://www.pierre-giraud.com/wp-content/uploads/2019/09/youtube-pierre-giraud.png alt="Youtube Pierre Giraud"></noscript><img class=" ls-is-cached lazyloaded lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/youtube-pierre-giraud.png" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/youtube-pierre-giraud.png" alt="Youtube Pierre Giraud"></a>
+                        <a href="https://www.linkedin.com/company/pierre-giraud/" target="_blank"><noscript><img
+                        class="lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src=https://www.pierre-giraud.com/wp-content/uploads/2019/09/linkedin-pierre-giraud.png alt="Linkedin Pierre Giraud"></noscript><img class=" ls-is-cached lazyloaded lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/linkedin-pierre-giraud.png" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/09/linkedin-pierre-giraud.png" alt="Linkedin Pierre Giraud"></a>
+                        </div>
+
+                        <div class="ligne2">
+                                <p>© Pierre Giraud - Toute reproduction interdite - <a href="https://www.pierre-giraud.com/mentions-legales/">Mentions légales</a></p>
+                        </div>
+                </div>
+        <!--googleoff: all--><div id="cookie-law-info-bar" data-nosnippet="true"><span>Ce site utilise des cookies pour vous fournir la meilleure expérience de navigation possible. En continuant sur ce site, vous acceptez l'utilisation des cookies. <a role='button' class="cli_settings_button" style="margin:5px 20px 5px 20px">Réglages</a><a role='button' data-cli_action="accept" id="cookie_action_close_header" class="medium cli-plugin-button cli-plugin-main-button cookie_action_close_header cli_action_button wt-cli-accept-btn" style="margin:5px">ACCEPTER</a></span></div><div id="cookie-law-info-again" data-nosnippet="true"><span id="cookie_hdr_showagain">Privacy &amp; Cookies Policy</span></div><div class="cli-modal" data-nosnippet="true" id="cliSettingsPopup" tabindex="-1" role="dialog" aria-labelledby="cliSettingsPopup" aria-hidden="true">
+  <div class="cli-modal-dialog" role="document">
+        <div class="cli-modal-content cli-bar-popup">
+                  <button type="button" class="cli-modal-close" id="cliModalClose">
+                        <svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"></path><path d="M0 0h24v24h-24z" fill="none"></path></svg>
+                        <span class="wt-cli-sr-only">Fermer</span>
+                  </button>
+                  <div class="cli-modal-body">
+                        <div class="cli-container-fluid cli-tab-container">
+        <div class="cli-row">
+                <div class="cli-col-12 cli-align-items-stretch cli-px-0">
+                        <div class="cli-privacy-overview">
+                                <h4>Confidentialité</h4>                                <div class="cli-privacy-content">
+                                        <div class="cli-privacy-content-text">Ce site utilise des cookies pour améliorer votre expérience de navigation. Parmi ces cookies, les cookies classés comme nécessaires sont stockés dans votre navigateur car ils sont aussi essentiels au fonctionnement des fonctionnalités de base du site. Nous utilisons également des cookies tiers qui nous aident à analyser et à comprendre comment vous utilisez ce site. Ces cookies ne seront stockés dans votre navigateur qu'avec votre consentement. Vous avez également la possibilité de désactiver ces cookies. Toutefois, la désactivation de certains de ces cookies peut avoir une incidence sur votre expérience de navigation.</div>
+                                </div>
+                                <a class="cli-privacy-readmore" aria-label="Voir plus" role="button" data-readmore-text="Voir plus" data-readless-text="Voir moins"></a>                        </div>
+                </div>
+                <div class="cli-col-12 cli-align-items-stretch cli-px-0 cli-tab-section-container">
+                                                                                                <div class="cli-tab-section">
+                                                <div class="cli-tab-header">
+                                                        <a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="necessary" data-toggle="cli-toggle-tab">
+                                                                Necessary                                              </a>
+                                                                                                                       <div class="wt-cli-necessary-checkbox">
+                                                                        <input type="checkbox" class="cli-user-preference-checkbox"  id="wt-cli-checkbox-necessary" data-id="checkbox-necessary" checked="checked"  />
+                                                                        <label class="form-check-label" for="wt-cli-checkbox-necessary">Necessary</label>
+                                                                </div>
+                                                                <span class="cli-necessary-caption">Toujours activé</span>
+                                                                                                        </div>
+                                                <div class="cli-tab-content">
+                                                        <div class="cli-tab-pane cli-fade" data-id="necessary">
+                                                                <div class="wt-cli-cookie-description">
+                                                                        Certains cookies sont nécessaires au bon fonctionnement du site. Cette catégorie n'inclue que les cookies qui garantissent les fonctionnalités de base et les fonctionnalités de sécurité du site Web. Ces cookies ne stockent aucune information personnelle.                                 </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                                                                                                       </div>
+        </div>
+</div>
+                  </div>
+                  <div class="cli-modal-footer">
+                        <div class="wt-cli-element cli-container-fluid cli-tab-container">
+                                <div class="cli-row">
+                                        <div class="cli-col-12 cli-align-items-stretch cli-px-0">
+                                                <div class="cli-tab-footer wt-cli-privacy-overview-actions">
+
+                                                                                                                       <a id="wt-cli-privacy-save-btn" role="button" tabindex="0" data-cli-action="accept" class="wt-cli-privacy-btn cli_setting_save_button wt-cli-privacy-accept-btn cli-btn">Enregistrer &amp; appliquer</a>
+                                                                                                        </div>
+
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+  </div>
+</div>
+<div class="cli-modal-backdrop cli-fade cli-settings-overlay"></div>
+<div class="cli-modal-backdrop cli-fade cli-popupbar-overlay"></div>
+<!--googleon: all--><div id="pum-13946" class="pum pum-overlay pum-theme-13941 pum-theme-enterprise-blue popmake-overlay pum-click-to-close auto_open click_open" data-popmake="{&quot;id&quot;:13946,&quot;slug&quot;:&quot;livret-pdf-html-css&quot;,&quot;theme_id&quot;:13941,&quot;cookies&quot;:[{&quot;event&quot;:&quot;on_popup_close&quot;,&quot;settings&quot;:{&quot;name&quot;:&quot;pum-13946&quot;,&quot;key&quot;:&quot;&quot;,&quot;session&quot;:false,&quot;time&quot;:&quot;1 month&quot;,&quot;path&quot;:&quot;1&quot;}}],&quot;triggers&quot;:[{&quot;type&quot;:&quot;auto_open&quot;,&quot;settings&quot;:{&quot;delay&quot;:10000,&quot;cookie_name&quot;:[&quot;pum-13946&quot;]}},{&quot;type&quot;:&quot;click_open&quot;,&quot;settings&quot;:{&quot;extra_selectors&quot;:&quot;&quot;,&quot;cookie_name&quot;:null}}],&quot;mobile_disabled&quot;:null,&quot;tablet_disabled&quot;:null,&quot;meta&quot;:{&quot;display&quot;:{&quot;stackable&quot;:false,&quot;overlay_disabled&quot;:false,&quot;scrollable_content&quot;:false,&quot;disable_reposition&quot;:false,&quot;size&quot;:&quot;medium&quot;,&quot;responsive_min_width&quot;:&quot;0%&quot;,&quot;responsive_min_width_unit&quot;:false,&quot;responsive_max_width&quot;:&quot;100%&quot;,&quot;responsive_max_width_unit&quot;:false,&quot;custom_width&quot;:&quot;640px&quot;,&quot;custom_width_unit&quot;:false,&quot;custom_height&quot;:&quot;380px&quot;,&quot;custom_height_unit&quot;:false,&quot;custom_height_auto&quot;:false,&quot;location&quot;:&quot;center top&quot;,&quot;position_from_trigger&quot;:false,&quot;position_top&quot;:&quot;100&quot;,&quot;position_left&quot;:&quot;0&quot;,&quot;position_bottom&quot;:&quot;0&quot;,&quot;position_right&quot;:&quot;0&quot;,&quot;position_fixed&quot;:false,&quot;animation_type&quot;:&quot;fade&quot;,&quot;animation_speed&quot;:&quot;350&quot;,&quot;animation_origin&quot;:&quot;center top&quot;,&quot;overlay_zindex&quot;:false,&quot;zindex&quot;:&quot;1999999999&quot;},&quot;close&quot;:{&quot;text&quot;:&quot;&quot;,&quot;button_delay&quot;:&quot;0&quot;,&quot;overlay_click&quot;:&quot;1&quot;,&quot;esc_press&quot;:false,&quot;f4_press&quot;:false},&quot;click_open&quot;:[]}}" role="dialog" aria-hidden="true"
+                                                                        aria-labelledby="pum_popup_title_13946">
+
+        <div id="popmake-13946" class="pum-container popmake theme-13941 pum-responsive pum-responsive-medium responsive size-medium">
+
+
+
+                                                        <div id="pum_popup_title_13946" class="pum-title popmake-title">
+                                Téléchargez le livret PDF du cours !                    </div>
+
+
+
+
+                                <div class="pum-content popmake-content" tabindex="0">
+                        <div style="display:grid; grid-template-columns: 40% 60%; gap: 20px; justify-items: center">
+<div style="font-size: 18px; margin-top : 40px; line-height: 30px">
+Le livret PDF de mon cours complet HTML et CSS est disponible pour une lecture n&rsquo;importe où et à n&rsquo;importe quel moment. Pour vous le procurer, <a href="https://www.pierre-giraud.com/produit/cours-complet-html-et-css-livret-pdf-edition-2020/" style="color: #f1c40f;text-decoration: underline">cliquez ici</a>.<br />
+Les revenus des PDF me permettent de vous proposer de nouveaux cours gratuits. Merci par avance et bonne lecture !
+</div>
+<div>
+<a href="https://www.pierre-giraud.com/produit/cours-complet-html-et-css-livret-pdf-edition-2020/"><img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20566'%3E%3C/svg%3E" data-src="https://www.pierre-giraud.com/wp-content/uploads/2019/12/html-css-livre.jpg" alt="Couverture du livre HTML et CSS de Pierre Giraud" width="400" height="566" class="alignnone size-full wp-image-13470 lazy" style="box-shadow: 0px 0px 5px 1px #777" data-srcset="https://www.pierre-giraud.com/wp-content/uploads/2019/12/html-css-livre.jpg 400w, https://www.pierre-giraud.com/wp-content/uploads/2019/12/html-css-livre-212x300.jpg 212w, https://www.pierre-giraud.com/wp-content/uploads/2019/12/html-css-livre-300x425.jpg 300w" data-sizes="(max-width: 400px) 100vw, 400px" /></a>
+</div>
+                </div>
+
+
+
+
+                                                        <button type="button" class="pum-close popmake-close" aria-label="Fermer">
+                        ×                       </button>
+
+        </div>
+
+</div>
+<script id="generate-a11y">!function(){"use strict";if("querySelector"in document&&"addEventListener"in window){var e=document.body;e.addEventListener("mousedown",function(){e.classList.add("using-mouse")}),e.addEventListener("keydown",function(){e.classList.remove("using-mouse")})}}();</script>        <script type="text/javascript">
+                (function () {
+                        var c = document.body.className;
+                        c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+                        document.body.className = c;
+                })();
+        </script>
+        <script src='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/menu-plus/functions/js/sticky.min.js?ver=2.2.1' id='generate-sticky-js'></script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.2' id='swv-js'></script>
+<script id='contact-form-7-js-extra'>
+var wpcf7 = {"api":{"root":"https:\/\/www.pierre-giraud.com\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.2' id='contact-form-7-js'></script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.7.3.0' id='jquery-blockui-js'></script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.7.3.0' id='js-cookie-js'></script>
+<script id='woocommerce-js-extra'>
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=7.3.0' id='woocommerce-js'></script>
+<script id='wc-cart-fragments-js-extra'>
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_aedd99c9727d2c203099145fd84c3bae","fragment_name":"wc_fragments_aedd99c9727d2c203099145fd84c3bae","request_timeout":"5000"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=7.3.0' id='wc-cart-fragments-js'></script>
+<!--[if lte IE 11]>
+<script src='https://www.pierre-giraud.com/wp-content/themes/generatepress/assets/js/classList.min.js?ver=3.2.4' id='generate-classlist-js'></script>
+<![endif]-->
+<script id='generate-menu-js-extra'>
+var generatepressMenu = {"toggleOpenedSubMenus":"1","openSubMenuLabel":"Ouvrir le sous-menu","closeSubMenuLabel":"Fermer le sous-menu"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/themes/generatepress/assets/js/menu.min.js?ver=3.2.4' id='generate-menu-js'></script>
+<script id='generate-back-to-top-js-extra'>
+var generatepressBackToTop = {"smooth":"1"};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/themes/generatepress/assets/js/back-to-top.min.js?ver=3.2.4' id='generate-back-to-top-js'></script>
+<script src='https://www.pierre-giraud.com/wp-includes/js/comment-reply.min.js?ver=6.1.1' id='comment-reply-js'></script>
+<script src='https://www.pierre-giraud.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2' id='jquery-ui-core-js'></script>
+<script id='popup-maker-site-js-extra'>
+var pum_vars = {"version":"1.17.1","pm_dir_url":"https:\/\/www.pierre-giraud.com\/wp-content\/plugins\/popup-maker\/","ajaxurl":"https:\/\/www.pierre-giraud.com\/wp-admin\/admin-ajax.php","restapi":"https:\/\/www.pierre-giraud.com\/wp-json\/pum\/v1","rest_nonce":null,"default_theme":"13939","debug_mode":"","disable_tracking":"","home_url":"\/","message_position":"top","core_sub_forms_enabled":"1","popups":[],"analytics_route":"analytics","analytics_api":"https:\/\/www.pierre-giraud.com\/wp-json\/pum\/v1"};
+var pum_sub_vars = {"ajaxurl":"https:\/\/www.pierre-giraud.com\/wp-admin\/admin-ajax.php","message_position":"top"};
+var pum_popups = {"pum-13946":{"triggers":[{"type":"auto_open","settings":{"delay":10000,"cookie_name":["pum-13946"]}}],"cookies":[{"event":"on_popup_close","settings":{"name":"pum-13946","key":"","session":false,"time":"1 month","path":"1"}}],"disable_on_mobile":false,"disable_on_tablet":false,"atc_promotion":null,"explain":null,"type_section":null,"theme_id":"13941","size":"medium","responsive_min_width":"0%","responsive_max_width":"100%","custom_width":"640px","custom_height_auto":false,"custom_height":"380px","scrollable_content":false,"animation_type":"fade","animation_speed":"350","animation_origin":"center top","open_sound":"none","custom_sound":"","location":"center top","position_top":"100","position_bottom":"0","position_left":"0","position_right":"0","position_from_trigger":false,"position_fixed":false,"overlay_disabled":false,"stackable":false,"disable_reposition":false,"zindex":"1999999999","close_button_delay":"0","fi_promotion":null,"close_on_form_submission":false,"close_on_form_submission_delay":"0","close_on_overlay_click":true,"close_on_esc_press":false,"close_on_f4_press":false,"disable_form_reopen":false,"disable_accessibility":false,"theme_slug":"enterprise-blue","id":13946,"slug":"livret-pdf-html-css"}};
+</script>
+<script src='//www.pierre-giraud.com/wp-content/uploads/pum/pum-site-scripts.js?defer&#038;generated=1670184544&#038;ver=1.17.1' id='popup-maker-site-js'></script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/enlighter/cache/enlighterjs.min.js?ver=4MQFTBzYKgBNtrP' id='enlighterjs-js'></script>
+<script id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":true,"textOverflow":"break","linenumbers":true,"theme":"beyond","language":"php","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script id='generate-woocommerce-js-extra'>
+var generateWooCommerce = {"quantityButtons":"1","stickyAddToCart":"","addToCartPanel":""};
+</script>
+<script src='https://www.pierre-giraud.com/wp-content/plugins/gp-premium/woocommerce/functions/js/woocommerce.min.js?ver=2.2.1' id='generate-woocommerce-js'></script>
+    <script>window.w3tc_lazyload=1,window.lazyLoadOptions={elements_selector:".lazy",callback_loaded:function(t){var e;try{e=new CustomEvent("w3tc_lazyload_loaded",{detail:{e:t}})}catch(a){(e=document.createEvent("CustomEvent")).initCustomEvent("w3tc_lazyload_loaded",!1,!1,{e:t})}window.dispatchEvent(e)}}</script><script async src="https://www.pierre-giraud.com/wp-content/plugins/w3-total-cache/pub/js/lazyload.min.js"></script></body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Mise en cache de page à l’aide de disk: enhanced
+Chargement lent
+Mibnifié utilisant disk
+
+Served from: {{ name }} @ 2023-01-24 09:03:18 by W3 Total Cache
+-->
