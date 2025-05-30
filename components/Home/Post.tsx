@@ -137,7 +137,7 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
     ) : null}
     <div className="actions">
      <TransitionalButton
-      hover={{ x: "-22.5%", y: "-22.5%" }}
+      hover={{ x: "-15%", y: "-15%" }}
       onClick={() => likePost("like")}
       active={liked.toString() as Booleanish}
      >
@@ -145,7 +145,7 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
      </TransitionalButton>
      {post.likedByIDs.length}
      <TransitionalButton
-      hover={{ x: "15%", y: "15%" }}
+      hover={{ x: "10%", y: "10%" }}
       gradient="linear-gradient(225deg, #0093E9 0%, #20D8E7 100%)"
       active={disliked.toString() as Booleanish}
       onClick={() => likePost("dislike")}
@@ -155,7 +155,7 @@ const Post = forwardRef(({ post: _post, dontShowMeta }: PostProps, ref) => {
      {post.dislikedByIDs.length}
      <TransitionalButton
       gradient="linear-gradient(45deg, #44c47d 0%, #FFFB7D 100%)"
-      hover={{ x: "22.5%", y: "-22.5%" }}
+      hover={{ x: "10%", y: "-15%" }}
       onClick={() => {
        setOpen && setOpen((p) => !p);
        setSlug && setSlug(post.slug);

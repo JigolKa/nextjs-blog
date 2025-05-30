@@ -60,7 +60,7 @@ export default function New() {
  const router = useRouter();
  const [topics, setTopics] = useState<{ value: string; label: string }[]>([]);
  const [topicsList, setTopicsList] = useState<string[]>([]);
- const [description, setDescription] = useState(" jkecfg");
+ const [description, setDescription] = useState("");
 
  const create = async ({ description, title }: PostValues) => {
   if (!user) return;
@@ -129,7 +129,7 @@ export default function New() {
       )}
      </Field>
 
-     <Input.Wrapper label="Description">
+     <Input.Wrapper label="Text">
       <MDEditor
        previewOptions={{
         rehypePlugins: [[rehypeSanitize]],

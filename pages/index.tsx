@@ -105,8 +105,9 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
      axios.get(`/api/post?skip=${postsOffset}&take=15`).then((res) => {
       setPosts((p) => [...p, ...res.data]);
 
+      console.log(res);
       // no more posts
-      if (res.data.length < 15) {
+      if (res.data.length < 15 && res.data.length>0) {
        setIsFetching(false);
        setNoMorePosts(true);
        return window.removeEventListener("scroll", callback);
@@ -122,6 +123,7 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
 
   return () => window.removeEventListener("scroll", callback);
  });
+
 
  return (
   <>
