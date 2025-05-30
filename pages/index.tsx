@@ -105,7 +105,6 @@ const Home: NextPage<PostsFetching> = ({ posts: _posts }) => {
      axios.get(`/api/post?skip=${postsOffset}&take=15`).then((res) => {
       setPosts((p) => [...p, ...res.data]);
 
-      console.log(res);
       // no more posts
       if (res.data.length < 15 && res.data.length>0) {
        setIsFetching(false);
